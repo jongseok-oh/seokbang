@@ -40,7 +40,10 @@
     },
     "rules": {
       "no-unused-vars": "off",
-      "strict": "off"}
+      "strict": "off"},
+      "globals": {
+        "kakao":false
+      }
   },
   "browserslist": [
     "> 1%",
