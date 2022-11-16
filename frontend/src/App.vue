@@ -1,16 +1,22 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-3">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item"><router-link to="/board" class="nav-link bg-info text-white">QnA</router-link></li>
-        |
-        <li class="nav-item"><router-link to="/post/regForm" class="nav-link bg-warning text-white">글작성</router-link></li>
-      </ul>
-      <span class="bg-success badge">ver. vuex</span>
-    </nav>
+    <nav-bar></nav-bar>
     <router-view></router-view>
+    <my-footer />
   </div>
 </template>
+
+<script>
+import NavBar from "./components/layout/NavBar.vue";
+import MyFooter from "./components/layout/MyFooter.vue";
+export default {
+  name: "App",
+  components: {
+    NavBar,
+    MyFooter,
+  },
+};
+</script>
 
 <style>
 #app {
