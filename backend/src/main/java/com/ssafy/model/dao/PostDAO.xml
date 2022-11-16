@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.dao.PostDAO">
+	
+	<insert id="insert" parameterType="PostDTO" >
+		insert into post(no,userId,boardNo,title,content) values(#{no},#{userId},#{boardNo},#{title},#{content})
+	</insert>
+	
+	<select id="read" resultType="PostDTO" parameterType="Long">
+		select * from post where no = #{no}
+	</select>
+	
+	<select id="readAll" resultType="PostDTO">
+		select * from post;
+	</select>
+	
+	<update id="modify" parameterType="PostDTO">
+		update post set userId = #{userId}, boardNo = #{boardNo},title = #{title},content = #{content} where no = #{no}
+	</update>
+	
+	<delete id="delete" parameterType="Long">
+		delete from post where no = #{no}
+	</delete>
+	
+	<select id="readAllbyBoardNo" resultType="PostDTO" parameterType="Long">
+		select * from post where boardNo = #{boardNo}
+	</select>
+	
+</mapper>

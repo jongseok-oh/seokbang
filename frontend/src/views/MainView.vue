@@ -5,12 +5,14 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
                         <div class="text-center text-white">
-                            <h1 class="mb-3" >Where is My Home</h1>
+                            <h1 class="mb-3" id = "subject">Where is My Home</h1>
                             <div class="row">
                                 <div class="col">
                                     <input class="form-control form-control-lg" type="text" placeholder="검색하기"/>
                                 </div>
-                                <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                                <div class="col-auto"><button class="btn btn-primary btn-lg">
+                                    <i class="bi bi-search"></i> Search
+                                </button></div>
                             </div>
                         </div>
                     </div>
@@ -66,7 +68,7 @@
         background-image: url("../assets/RaffinaJ_contents_1__01.webp");
         background-size: cover;
     }
-    h1{
+    #subject{
         margin-top: 80%;
     }
 </style>
