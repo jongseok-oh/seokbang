@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BoardView from '@/views/BoardView.vue'
 import PostView from '@/views/PostView.vue'
-import MainView from '@/views/Main.vue'
+import MainView from '@/views/MainView.vue'
+import DealInfoView from '@/views/DealInfoView.vue'
 
 Vue.use(VueRouter)
 
@@ -11,6 +12,12 @@ const routes = [
     path: '/',
     name : 'main',
     component: MainView,
+  },
+  {
+    path: '/dealinfo',
+    name: 'dealinfo',
+    component: DealInfoView,
+    
   },
   {
     path: '/board',
