@@ -6,19 +6,17 @@
       </router-link>
       <ul class="navbar-nav me-auto">
         <li class="nav-item mx-2"><router-link to="/dealinfo" class="nav-link">실거래가</router-link></li>
-        <li class="nav-item mx-2"><router-link to="/post/regForm" class="nav-link">매물</router-link></li>
+        <li class="nav-item mx-2"><router-link to="/houseitem" class="nav-link">매물</router-link></li>
       </ul>
     </div>
-    <div class="d-flex profile-dropdown">
-      <div class="dropdown">
-        <a href="javascript:void(0);" role="button" data-bs-toggle="dropdown" >
-          <img src="@/assets/noProfile.png" alt="프로필 이미지" id="dropdownImg">
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end shadow border-0 m-0 p-3">
-          <li><router-link class="dropdown-item py-2 rounded" to="/myaccount/profile"><i class="fa fa-user me-3"></i>마이 페이지</router-link></li>
-          <li><a class="dropdown-item py-2 rounded"><i class="fa fa-info-circle me-3"></i>로그아웃</a></li>
-        </ul>
-      </div>
+
+    <div class="dropdown">
+      <b-dropdown id="dropdown-1" dropleft class="m-2">
+        <b-dropdown-item>관심 매물</b-dropdown-item>
+        <b-dropdown-divider></b-dropdown-divider>
+        <b-dropdown-item>회원 정보 수정</b-dropdown-item>
+        <b-dropdown-item>로그아웃</b-dropdown-item>
+      </b-dropdown>
     </div>
   </nav>
 
