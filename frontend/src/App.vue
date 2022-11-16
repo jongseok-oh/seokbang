@@ -26,12 +26,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-a.router-link-exact-active {
-  color: #89bfef;
-}
-
-a.router-link-exact-active:hover {
-  text-decoration: none;
-}
 </style>
