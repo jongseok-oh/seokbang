@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.dao.UserAreaDAO">
+	
+	<insert id="registerUserArea" parameterType="UserArea" >
+		insert into userarea(userId,dongCode) values(#{userId}, #{dongCode})	
+	</insert>
+	
+	<select id="getUserAreaListByUserId" resultType="UserArea" parameterType="String">
+		select userId, dongCode from userarea where userId = #{userId}
+	</select>
+	
+	<delete id="remove" parameterType="UserArea">
+		delete from userarea where userId = #{userId} and dongCode=#{dongCode}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
