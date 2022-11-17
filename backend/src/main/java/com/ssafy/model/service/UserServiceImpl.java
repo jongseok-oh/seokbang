@@ -1,37 +1,49 @@
 package com.ssafy.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.model.dao.UserDAO;
-import com.ssafy.model.dto.User;
+import com.ssafy.model.dao.UserInfoDAO;
+import com.ssafy.model.dto.UserInfo;
 
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
-	private UserDAO userDao;
+	private UserInfoDAO userInfoDao;
 	
 	@Override
-	public boolean registerUser(User user){
-		return userDao.insertUser(user) > 0;
+	public boolean registerUser(UserInfo user){
+		return userInfoDao.insertUser(user) > 0;
 	}
 	@Override
-	public String login(String userId,String passWord){
+	public UserInfo login(String userId,String password){
 		Map<String, String> m = new HashMap<>();
 		m.put("userId", userId);
-		m.put("passWord", passWord);
-		return userDao.login(m);
-		
+		m.put("password", password);
+		return userInfoDao.login(m);
 	}
 	@Override
-	public boolean modifyUser(User user){
-		return userDao.updateUser(user) > 0;
+	public boolean modifyUser(UserInfo user){
+		return userInfoDao.updateUser(user) > 0;
 	}
 	@Override
 	public boolean deleteUser(String userId){
-		return userDao.deleteUser(userId) > 0;
+		return userInfoDao.deleteUser(userId) > 0;
+	}
+	
+	
+	@Override
+	public UserInfo readUser(Long no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<UserInfo> readUserAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

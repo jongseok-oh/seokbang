@@ -1,15 +1,20 @@
 package com.ssafy.model.service;
 
-import com.ssafy.model.dto.User;
+import java.util.List;
+
+import com.ssafy.model.dto.UserInfo;
 
 public interface UserService {
 
-	boolean registerUser(User user);
+	boolean registerUser(UserInfo user);
 
-	String login(String userId, String passWord);
+	UserInfo login(String userId, String passWord);
 
-	boolean modifyUser(User user);
+	boolean modifyUser(UserInfo user);
 
 	boolean deleteUser(String userId);
-
+	
+	UserInfo readUser(Long no);
+	
+	List<UserInfo> readUserAll();
 }

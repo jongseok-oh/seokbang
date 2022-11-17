@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.dao.UserInfoDAO">
+	
+	<insert id="insertUser" parameterType="UserInfo" >
+		insert into userinfo(userId,password,userName,phoneNumber, birthYear,
+		birthMonth, birthDay, gender, joinDate, admin)
+		values(#{userId}, #{password}, #{userName}, #{phoneNumber}, #{birthYear},
+		#{birthMonth},#{birthDay}, #{gender}, #{joinDate}, #{admin})
+	</insert>
+	
+	<select id="login" resultType="UserInfo" parameterType="map">
+		select * from userinfo where userId = #{userId} and passWord = #{passWord}
+	</select>
+	
+	<update id="updateUser" parameterType="UserInfo">
+		update userinfo set passWord=#{passWord}, userName = #{userName}, phoneNumber = #{phoneNumber},
+		birthYear=#{birthYear}, birthMonth=#{birthMonth}, birthDay=#{birthDay}, gender=#{gender}
+		where no = #{no}
+	</update>
+	
+	<delete id="deleteUser" parameterType="Long">
+		delete from userinfo where no = #{no}
+	</delete>
+	
+	<select id="readUser" parameterType = "Long" resultType = "UserInfo">
+		select * from userinfo where no = #{no}
+	</select>
+	
+	<select id="readUserAll" resultType = "UserInfo">
+		select * from userinfo
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
