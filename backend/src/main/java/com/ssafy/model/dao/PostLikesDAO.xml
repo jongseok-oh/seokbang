@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.dao.PostLikesDAO">
+	
+	<insert id="insertPostLikes" parameterType="PostLikes" >
+		insert into postlikes(userNo,postNo) values(#{userNo},#{postNo})
+	</insert>
+	
+	<delete id="deletePostLikes" parameterType="PostLikes">
+		delete from postlikes where userNo = #{userNo} and postNo = #{postNo}
+	</delete>
+	
+	<select id="getPostLike" resultType="PostLikes" parameterType="PostLikes">
+		select * from postlikes where userNo = #{userNo} and postNo = #{postNo}
+	</select>
+	
+	<select id="getPostLikesConunt" resultType="int" parameterType="Long">
+		select count(*) from postlikes where postNo = #{postNo}
+	</select>
+	
+</mapper>

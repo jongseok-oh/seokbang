@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.dao.RepleLikesDAO">
+	
+	<insert id="insertRepleLikes" parameterType="RepleLikes" >
+		insert into replelikes(userNo,repleNo) values(#{userNo},#{repleNo})
+	</insert>
+	
+	<delete id="deleteRepleLikes" parameterType="RepleLikes">
+		delete from replelikes where userNo = #{userNo} and repleNo = #{repleNo}
+	</delete>
+	
+	<select id="getRepleLike" resultType="RepleLikes" parameterType="RepleLikes">
+		select * from replelikes where userNo = #{userNo} and repleNo = #{repleNo}
+	</select>
+	
+	<select id="getRepleLikesConunt" resultType="int" parameterType="Long">
+		select count(*) from replelikes where repleNo = #{repleNo}
+	</select>
+	
+</mapper>

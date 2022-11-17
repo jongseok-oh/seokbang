@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDTO {
-	Long no;
-	String userId;
-	Long boardNo;
-	String title;
-	String content;
+public class PostLikes {
+	private Long no;
+	private Long userNo;
+	private Long postNo;
 }
