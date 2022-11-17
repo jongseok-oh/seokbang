@@ -2,15 +2,18 @@ package com.ssafy.model.service;
 
 import java.util.List;
 
-import com.ssafy.model.dto.PostDTO;
+import com.ssafy.model.dto.Post;
 
 public interface PostService {
-	boolean insert(PostDTO dto);
-	PostDTO read(Long id);
-	List<PostDTO> readAll();
+	boolean insertPost(Post post);
+
+	List<Post> getPosts(String gugunCode);
 	
-	boolean modify(PostDTO dtd);
-	boolean delete(Long id);
+	Post getPost(Long no);
 	
-	List<PostDTO> readAllbyBoardNo(Long boardNo);
+	boolean modifyPost(Post post);
+	
+	boolean deletePost(Long no);
+	
+	boolean hit(Long no);
 }

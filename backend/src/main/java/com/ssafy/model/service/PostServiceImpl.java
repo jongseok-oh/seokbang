@@ -7,43 +7,44 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.model.dao.PostDAO;
-import com.ssafy.model.dto.PostDTO;
+import com.ssafy.model.dto.Post;
 
 @Transactional
 @Service
 public class PostServiceImpl implements PostService {
 	
 	@Autowired
-	private PostDAO postdao;
+	private PostDAO postDao;
 	
 	@Override
-	public boolean insert(PostDTO dto) {
-		return postdao.insert(dto) >0;
+	public boolean insertPost(Post post) {
+		return postDao.insertPost(post) > 0;
 	}
 
 	@Override
-	public PostDTO read(Long id) {
-		return postdao.read(id);
+	public List<Post> getPosts(String gugunCode) {
+		return postDao.getPosts(gugunCode);
 	}
 
 	@Override
-	public List<PostDTO> readAll() {
-		return postdao.readAll();
+	public Post getPost(Long no) {
+		return postDao.getPost(no);
 	}
 
 	@Override
-	public boolean modify(PostDTO dtd) {
-		return postdao.modify(dtd) >0;
+	public boolean modifyPost(Post post) {
+		return postDao.modifyPost(post) > 0;
 	}
 
 	@Override
-	public boolean delete(Long id) {
-		return postdao.delete(id) >0;
+	public boolean deletePost(Long no) {
+		return postDao.deletePost(no) > 0;
 	}
 
 	@Override
-	public List<PostDTO> readAllbyBoardNo(Long boardNo) {
-		return postdao.readAllbyBoardNo(boardNo);
+	public boolean hit(Long no) {
+		return postDao.hit(no) > 0;
 	}
+
 
 }

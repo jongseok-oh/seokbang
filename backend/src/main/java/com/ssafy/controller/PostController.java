@@ -1,7 +1,8 @@
 package com.ssafy.controller;
 
-import java.net.URI;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,68 +15,83 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.model.dto.BoardDTO;
-import com.ssafy.model.dto.PostDTO;
+import com.ssafy.model.dto.Post;
+import com.ssafy.model.dto.PostLikes;
+import com.ssafy.model.service.PostLikesService;
 import com.ssafy.model.service.PostService;
-
-import lombok.extern.slf4j.Slf4j;
 
 @RequestMapping("/api/posts")
 @RestController
-@Slf4j
 public class PostController {
 	
 	@Autowired
 	private PostService postService;
 	
-	@GetMapping
-	public ResponseEntity<?> getPostAll(){
-		List<PostDTO> list = postService.readAll();
-		return ResponseEntity.ok(list);
+	@Autowired
+	private PostLikesService postLikesService;
+	
+	@PostMapping
+	public ResponseEntity<?> registPost(@RequestBody Post post) {
+		boolean res = postService.insertPost(post);
+
+		if(res)
+			return ResponseEntity.ok(post);
+		else
+			return ResponseEntity.internalServerError().build();
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getPostOne(@PathVariable Long id){
-		PostDTO post = postService.read(id);
-		if(post == null) return ResponseEntity.noContent().build();
+	@GetMapping("/{gugunCode}")
+	public ResponseEntity<?> getPostListByGugunCode(@PathVariable String gugunCode) {
+		List<Post> posts = postService.getPosts(gugunCode);
+		return ResponseEntity.ok(posts);
+	}
+	
+	@GetMapping("/detail/{no}")
+	public ResponseEntity<?> getPostByPostNo(@PathVariable Long no) {
+		Post post = postService.getPost(no);
 		return ResponseEntity.ok(post);
 	}
 	
-	@GetMapping("/board/{boardNo}")
-	public ResponseEntity<?> getPostByBoardNo(@PathVariable Long boardNo){
-		List<PostDTO> list = postService.readAllbyBoardNo(boardNo);
-		return ResponseEntity.ok(list);
-	}
-	
-	@PostMapping
-	public ResponseEntity<?> createPost(@RequestBody PostDTO dto){
-		boolean res = postService.insert(dto);
-		if(res) {
-			return ResponseEntity.created(URI.create("api/post")).build();
-		}else {
-			return ResponseEntity.internalServerError().build();
-		}
-	}
-	
 	@PutMapping
-	public ResponseEntity<?> modifyPost(@RequestBody PostDTO dto){
-		boolean res = postService.modify(dto);
-		if(res) {
-			return ResponseEntity.ok(dto);
-		}else {
+	private ResponseEntity<?> modifyPost(@RequestBody Post post){
+		boolean res = postService.modifyPost(post);
+		
+		if(res)
+			return ResponseEntity.ok(post);
+		else
 			return ResponseEntity.internalServerError().build();
-		}
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletePost(@PathVariable Long id){
-		boolean res = postService.delete(id);
-		if(res) {
+	@DeleteMapping("/{no}")
+	private ResponseEntity<?> removePost(@PathVariable Long no){
+		boolean res = postService.deletePost(no);
+		
+		if(res)
 			return ResponseEntity.noContent().build();
-		}else {
-			return ResponseEntity.notFound().build();
-		}
+		else
+			return ResponseEntity.internalServerError().build();
 	}
 	
+	@PutMapping("/{no}")
+	private ResponseEntity<?> hitPost(@PathVariable Long no){
+		boolean res = postService.hit(no);
+		
+		if(res)
+			return ResponseEntity.ok().build();
+		else
+			return ResponseEntity.internalServerError().build();
+	}
 	
+	@PostMapping("/like/{postNo}")
+	private ResponseEntity<?> likePost(HttpSession session, @PathVariable Long postNo){ 
+		PostLikes postLikes = new PostLikes();
+		postLikes.setPostNo(postNo);
+		postLikes.setUserNo((UserInfo) session.getAttribute("user").getNo());
+		
+		boolean res = postLikesService.insertPostLike(postLikes);
+		if(res)
+			return ResponseEntity.ok().build();
+		else
+			return ResponseEntity.internalServerError().build();
+	}
 }

@@ -4,16 +4,19 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ssafy.model.dto.PostDTO;
+import com.ssafy.model.dto.Post;
 
 @Mapper
 public interface PostDAO {
-	int insert(PostDTO dto);
-	PostDTO read(Long id);
-	List<PostDTO> readAll();
+	int insertPost(Post post);
+
+	List<Post> getPosts(String gugunCode);
 	
-	int modify(PostDTO dtd);
-	int delete(Long id);
+	Post getPost(Long no);
 	
-	List<PostDTO> readAllbyBoardNo(Long boardNo);
+	int modifyPost(Post post);
+	
+	int deletePost(Long no);
+	
+	int hit(Long no);
 }

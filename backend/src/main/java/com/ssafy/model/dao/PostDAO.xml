@@ -3,28 +3,28 @@
 
 <mapper namespace="com.ssafy.model.dao.PostDAO">
 	
-	<insert id="insert" parameterType="PostDTO" >
-		insert into post(no,userId,boardNo,title,content) values(#{no},#{userId},#{boardNo},#{title},#{content})
+	<insert id="insertPost" parameterType="Post" >
+		insert into post(userNo,gugunCode,title,content,hit,postDate) values(#{userNo},#{gugunCode},#{title},#{content},#{hit},#{postDate})
 	</insert>
 	
-	<select id="read" resultType="PostDTO" parameterType="Long">
-		select * from post where no = #{no}
+	<select id="getPosts" resultType="Post" parameterType="String">
+		select * from post where gugunCode like #{gugunCode}
 	</select>
 	
-	<select id="readAll" resultType="PostDTO">
-		select * from post;
+	<select id="getPost" resultType="Post" parameterType="Long">
+		select * from post where no = #{no};
 	</select>
 	
-	<update id="modify" parameterType="PostDTO">
-		update post set userId = #{userId}, boardNo = #{boardNo},title = #{title},content = #{content} where no = #{no}
+	<update id="modifyPost" parameterType="Post">
+		update post set title = #{title}, content = #{content}, postDate = #{postDate} where no = #{no}
 	</update>
 	
-	<delete id="delete" parameterType="Long">
+	<delete id="deletePost" parameterType="Long">
 		delete from post where no = #{no}
 	</delete>
 	
-	<select id="readAllbyBoardNo" resultType="PostDTO" parameterType="Long">
-		select * from post where boardNo = #{boardNo}
-	</select>
+	<update id="hit" parameterType="Long">
+		update post set hit = hit + 1 where no = #{no}
+	</update>
 	
 </mapper>

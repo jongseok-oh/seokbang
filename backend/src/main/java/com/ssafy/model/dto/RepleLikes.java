@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardDTO {
-	Long no;
-	String name;
+public class RepleLikes {
+	private Long no;
+	private Long userNo;
+	private Long repleNo;
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.dao.RepleDAO">
+	
+	<insert id="insertReple" parameterType="Reple" >
+		insert into reple(postNo,userNo,content,repleDate) values(#{postNo},#{userNo},#{content},#{repleDate})
+	</insert>
+	
+	<select id="getReples" resultType="Reple" parameterType="Long">
+		select * from reple where postNo = #{postNo}
+	</select>
+	
+	<select id="getReple" resultType="Reple" parameterType="Long">
+		select * from reple where no = #{no};
+	</select>
+	
+	<update id="modifyReple" parameterType="Reple">
+		update reple set content = #{content}, repleDate = #{repleDate} where no = #{no}
+	</update>
+	
+	<delete id="deleteReple" parameterType="Long">
+		delete from reple where no = #{no}
+	</delete>
+	
+</mapper>
