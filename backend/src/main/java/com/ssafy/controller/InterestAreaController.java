@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.InterestArea;
+import com.ssafy.model.dto.UserInfo;
 import com.ssafy.model.service.InterestAreaServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +30,9 @@ public class InterestAreaController{
 	@DeleteMapping("/{dongCode}")
 	private ResponseEntity<?> gwansimDelete(HttpSession session, @PathVariable String dongCode){
 		
-		String userId = (String) session.getAttribute("userId");
+		UserInfo user = (UserInfo) session.getAttribute("user");
 		
-		
-		boolean res = areaService.deleteUserArea(userId, dongCode);
+		boolean res = areaService.deleteUserArea(user.getNo(), dongCode);
 		if(res) {
 			log.info("area delete sucess");
 			return ResponseEntity.noContent().build();
@@ -45,11 +45,11 @@ public class InterestAreaController{
 	
 	@PostMapping("/{dongCode}")
 	private ResponseEntity<?> gwansimRegist(HttpSession session, @PathVariable String dongCode){
-		String userId = (String) session.getAttribute("userId");
-		log.info(userId);
+		UserInfo user = (UserInfo) session.getAttribute("user");
+		log.info(user.toString());
 		log.info("gwansimRegist dongCode = " + dongCode);
 		
-		boolean res = areaService.registerUserArea(new InterestArea(userId,dongCode));
+		boolean res = areaService.registerUserArea(new InterestArea(user.getNo(),dongCode));
 		
 		if(res) {
 			log.info("area insert sucess");
@@ -63,9 +63,9 @@ public class InterestAreaController{
 	
 	@GetMapping
 	private ResponseEntity<?> getUserAreaListByUserId(HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
-		log.info("userId : "+userId);
-		List<InterestArea> userareas = areaService.getUserAreaListByUserId(userId);
+		UserInfo user = (UserInfo) session.getAttribute("user");
+		log.info("userId : "+user);
+		List<InterestArea> userareas = areaService.getUserAreaListByUserNo(user.getNo());
 		
 		if(!userareas.isEmpty())
 			return ResponseEntity.ok(userareas);

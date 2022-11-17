@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.model.dto.BaseAddress;
 import com.ssafy.model.service.LocationService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @RequestMapping("/api/locations")
 @RestController
 public class LocationController{

@@ -1,6 +1,6 @@
 package com.ssafy.controller;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -92,4 +92,13 @@ public class UserController{
 		}
 	}
 	
+	@GetMapping
+	private ResponseEntity<?> readAllUser(HttpSession session){
+		UserInfo user =(UserInfo) session.getAttribute("user");
+		if(user.getAdmin()) {
+			List<UserInfo> list = userService.readUserAll();
+			return ResponseEntity.ok(list);
+		}
+		else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	}
 }
