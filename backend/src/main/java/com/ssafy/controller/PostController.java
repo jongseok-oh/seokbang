@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.Post;
 import com.ssafy.model.dto.PostLikes;
+import com.ssafy.model.dto.UserInfo;
 import com.ssafy.model.service.PostLikesService;
 import com.ssafy.model.service.PostService;
 
@@ -86,7 +87,7 @@ public class PostController {
 	private ResponseEntity<?> likePost(HttpSession session, @PathVariable Long postNo){ 
 		PostLikes postLikes = new PostLikes();
 		postLikes.setPostNo(postNo);
-		postLikes.setUserNo((UserInfo) session.getAttribute("user").getNo());
+		postLikes.setUserNo(((UserInfo)session.getAttribute("user")).getNo());
 		
 		boolean res = postLikesService.insertPostLike(postLikes);
 		if(res)
