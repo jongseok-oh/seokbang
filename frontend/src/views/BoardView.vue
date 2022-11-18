@@ -1,16 +1,16 @@
 <template>
   <div id="houseitemview">
-    <my-map></my-map>
+    <post-list></post-list>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import MyMap from "@/components/MyMap.vue";
+import PostList from "@/components/PostList.vue";
 
 export default {
   components: {
-    MyMap,
+    PostList,
   },
 };
 </script>
