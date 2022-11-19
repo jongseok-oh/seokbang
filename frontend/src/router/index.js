@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import BoardView from '@/views/BoardView.vue'
 import MainView from '@/views/MainView.vue'
 import DealInfoView from '@/views/DealInfoView.vue'
+import PostList from '@/components/PostList.vue'
+import PostWriteForm from '@/components/PostWriteForm.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +24,19 @@ const routes = [
     path: '/board',
     name: 'board',
     component: BoardView,
+
+    children: [
+      {
+        path: '/',
+        name: 'postlist',
+        component: PostList
+      },
+      {
+        path: '/postwriteform',
+        name: 'postwriteform',
+        component: PostWriteForm
+      }
+    ]
   }
 ]
 

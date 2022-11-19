@@ -3,7 +3,7 @@
     <h2 class="">강남구 게시판</h2>
     <hr/>
     
-    <b-button variant="dark" :pressed="true" size="sm">전체글</b-button>
+    <b-button variant="outline-dark" pressed size="sm">전체글</b-button>
     <b-button variant="outline-dark" size="sm">개념글</b-button>
     <b-button variant="outline-dark" size="sm">공지</b-button>
     <hr/>
@@ -32,9 +32,10 @@
         </tbody>
     </table>
 
-    <b-button variant="dark" :pressed="true" size="sm">전체글</b-button>
+
+    <b-button variant="outline-dark" pressed size="sm">전체글</b-button>
     <b-button variant="outline-dark" size="sm">개념글</b-button>
-    <b-button variant="outline-dark" size="sm">글쓰기</b-button>
+    <b-button variant="outline-dark float-end" @click="moveWriteForm" size="sm">글쓰기</b-button>
 
     <b-pagination
         v-model="currentPage"
@@ -49,12 +50,13 @@
 
 <script>
 import Constant from "@/common/Constant.js";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {
             perPage: 3,
             currentPage: 1,
+            gugunCode: "1111000000",
         };
     },
   computed: {
@@ -64,7 +66,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions([Constant.GET_POSTS]),
+    getPosts() {
+      this.$store.dispatch(Constant.GET_POSTS, this.gugunCode).then(() => {
+        console.log(`get posts success`);
+      });
+    },
+    moveWriteForm() {
+      this.$router.push({name : "postwriteform"});
+    },
   },
   created() {
     this.getPosts();
@@ -73,9 +82,4 @@ export default {
 </script>
 
 <style scoped>
-
-#board {
-    margin: 40px;
-}
-
 </style>
