@@ -1,5 +1,5 @@
 <template>
-  <div id="houseitemview">
+  <div id="boardview">
     <post-list></post-list>
     <router-view></router-view>
   </div>
@@ -15,4 +15,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#boardview {
+  text-align: left;
+}
+</style>
