@@ -46,6 +46,7 @@ export default {
     },
     search(dongCode) {
       this.getcenterloc(dongCode);
+      this.movemap();
       axios
         .get(`/api/aparts/${dongCode}`)
         .then((res) => {

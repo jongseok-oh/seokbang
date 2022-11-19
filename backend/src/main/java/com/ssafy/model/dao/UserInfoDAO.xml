@@ -5,9 +5,9 @@
 	
 	<insert id="insertUser" parameterType="UserInfo" >
 		insert into userinfo(userId,password,userName,phoneNumber, birthYear,
-		birthMonth, birthDay, gender, joinDate, admin)
+		birthMonth, birthDay, gender, joinDate)
 		values(#{userId}, #{password}, #{userName}, #{phoneNumber}, #{birthYear},
-		#{birthMonth},#{birthDay}, #{gender}, #{joinDate}, #{admin})
+		#{birthMonth},#{birthDay}, #{gender}, #{joinDate})
 	</insert>
 	
 	<select id="login" resultType="UserInfo" parameterType="map">
