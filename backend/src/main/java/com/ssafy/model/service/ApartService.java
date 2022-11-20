@@ -6,7 +6,7 @@ import com.ssafy.model.dto.HouseDeal;
 import com.ssafy.model.dto.HouseInfo;
 
 public interface ApartService {
-	public List<HouseInfo> getHouseInfoListByDongCode(String dongCode);
+	public List<HouseInfo> getHouseInfoListByGugunCode(String gugunCode);
 	
 	public List<HouseDeal> getHouseDealListByAptCode(int aptCode);
 }

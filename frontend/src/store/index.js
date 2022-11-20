@@ -1,14 +1,18 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Constant from '@/common/Constant.js'
+import Vue from "vue";
+import Vuex from "vuex";
+import Constant from "@/common/Constant.js";
 import restApi from "@/util/http-common.js";
+import houseStore from "@/store/modules/houseStore";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    houseStore,
+  },
   state: {
     posts: [],
-    userNo : 1,
+    userNo: 1,
   },
   getters: {
     posts(state) {
@@ -16,7 +20,7 @@ export default new Vuex.Store({
     },
     userNo(state) {
       return state.userNo;
-    }
+    },
   },
   mutations: {
     [Constant.SET_POSTS](state, payload) {
@@ -24,7 +28,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    [Constant.GET_POSTS](context, payload){
+    [Constant.GET_POSTS](context, payload) {
       return restApi.get(`/api/posts/${payload}`).then(({ data }) => {
         context.commit(Constant.SET_POSTS, data);
       });
@@ -35,5 +39,5 @@ export default new Vuex.Store({
         console.log(`store action ${Constant.REGIST_POST}`);
       });
     },
-  }
-})
+  },
+});

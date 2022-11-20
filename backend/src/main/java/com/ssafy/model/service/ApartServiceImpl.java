@@ -18,8 +18,9 @@ public class ApartServiceImpl implements ApartService {
 	@Autowired
 	private HouseDealDAO houseDealDao;
 	
-	public List<HouseInfo> getHouseInfoListByDongCode(String dongCode){
-		return houseInfoDao.getHouseInfoByDongCode(dongCode);
+	public List<HouseInfo> getHouseInfoListByGugunCode(String gugunCode){
+		String gugunCodeSub = gugunCode.substring(0, 5);
+		return houseInfoDao.getHouseInfoByGugunCode(gugunCodeSub);
 	}
 	
 	public List<HouseDeal> getHouseDealListByAptCode(int aptCode){

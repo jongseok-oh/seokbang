@@ -24,9 +24,9 @@ public class ApartController{
 	@Autowired
 	private ApartService apartService;
 	
-	@GetMapping("{dongCode}")
-	public ResponseEntity<?> getHouseinfoListByDongCode(@PathVariable String dongCode) {
-		List<HouseInfo> houseinfos = apartService.getHouseInfoListByDongCode(dongCode);
+	@GetMapping()
+	public ResponseEntity<?> getHouseinfoListByDongCode(@RequestParam String gugunCode) {
+		List<HouseInfo> houseinfos = apartService.getHouseInfoListByGugunCode(gugunCode);
 		log.info("houseList ok");
 		return ResponseEntity.ok(houseinfos);
 	}

@@ -9,5 +9,5 @@ import com.ssafy.model.dto.HouseInfo;
 @Mapper
 public interface HouseInfoDAO {
 	
-	List<HouseInfo> getHouseInfoByDongCode(String dongCode);
+	List<HouseInfo> getHouseInfoByGugunCode(String gugunCodeSub);
 }

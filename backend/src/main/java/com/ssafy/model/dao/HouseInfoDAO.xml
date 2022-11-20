@@ -3,8 +3,8 @@
 
 <mapper namespace="com.ssafy.model.dao.HouseInfoDAO">
 	
-	<select id="getHouseInfoByDongCode" resultType="HouseInfo" parameterType="String">
-		select * from houseinfo where dongCode = #{dongcode}
+	<select id="getHouseInfoByGugunCode" resultType="HouseInfo" parameterType="String">
+		select * from houseinfo where dongCode like concat(#{gugunCodeSub},'%')
 	</select>
 	
 </mapper>
