@@ -7,6 +7,7 @@ const houseStore = {
     guguns: [{ value: null, text: "선택하세요" }],
     houses: [],
     deals: [],
+    aptName:""
   },
   getters: {},
   mutations: {
@@ -32,16 +33,18 @@ const houseStore = {
     },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
-      console.log(state.houses);
+      //console.log(state.houses);
     },
     SET_DEAL_HOUSE_LIST(state, deals) {
-      deals.forEach((deal) => {
-        state.deals.push(deal);
-      });
+      state.deals = deals;
+      console.log(state.deals);
     },
-    SET_APT_CODE(state, aptCode) {
-      state.aptCode = aptCode;
+    CLEAR_DEAL_HOUSE_LIST(state) {
+      state.deals = [];
     },
+    SET_APT_NAME(state, aptName) {
+      state.aptName = aptName;
+    }
   },
   actions: {
     getSido: ({ commit }) => {
@@ -81,10 +84,11 @@ const houseStore = {
         }
       );
     },
-    getHouseDealsList: ({ commit }, aptCode) => {
+    getHouseDealList: ({ commit }, aptObj) => {
       const params = {
-        aptCode: aptCode,
+        aptCode: aptObj["aptCode"],
       };
+      commit("SET_APT_NAME", aptObj["aptName"]);
       houseDealList(
         params,
         ({ data }) => {

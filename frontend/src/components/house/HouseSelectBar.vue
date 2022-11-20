@@ -1,11 +1,13 @@
 <template>
   <b-row class="mt-4 mb-4 text-center">
-    <b-col class="sm-3">
+    <b-col>지역 선택</b-col>
+    <b-col>
       <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
     </b-col>
-    <b-col class="sm-3">
+    <b-col>
       <b-form-select v-model="gugunCode" :options="guguns" @change="searchApt"></b-form-select>
     </b-col>
+    <b-col cols="6"></b-col>
   </b-row>
 </template>
 

@@ -1,15 +1,22 @@
 <template>
-  <b-row class="m-2">
-    <b-col cols="2" class="text-center align-self-center" />
-    <b-col cols="10" class="align-self-center"> [{{ deal.일련번호 }}] {{ house.아파트 }} </b-col>
-  </b-row>
+    <b-row class="m-2">
+        <b-card>
+            <b-row>거래금액 : {{deal.dealAmount}}만원</b-row>
+            <b-row>면적 : {{Math.ceil(deal.area*1000)/1000}}</b-row>
+            <b-row>층 : {{deal.floor}}</b-row>
+            <b-row>거래일자 : {{deal.dealYear}}. {{deal.dealMonth}}. {{deal.dealDay}}</b-row>
+        </b-card>
+    </b-row>
 </template>
 
 <script>
 export default {
-  name: "HouseListItem",
-  data() {
-    return {};
-  },
+    name: "HouseListItem",
+    data() {
+        return {};
+    },
+    props: {
+        deal: Object,
+    },
 };
 </script>

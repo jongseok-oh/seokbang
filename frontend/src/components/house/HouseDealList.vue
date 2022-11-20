@@ -1,6 +1,10 @@
 <template>
     <b-container v-if="deals && deals.length != 0" class="bv-example-row mt-3">
-      <house-list-item v-for="(deal, index) in deals" :key="index" :deal="deal"/>
+        <h3 class = "mb-3">{{aptName + " 거래 내역"}}</h3>
+        <div class = "mb-3"
+        style="overflow-y:auto; height : 80vh; white-space:nowrap;">
+            <house-deal-list-item v-for="(deal, index) in deals" :key="index" :deal="deal"/>
+        </div>
     </b-container>
     <b-container v-else class="bv-example-row mt-3">
       <b-row>
@@ -10,7 +14,7 @@
   </template>
   
   <script>
-  import HouseDealsListItem from "@/components/house/HouseDealsListItem.vue";
+  import HouseDealListItem from "@/components/house/HouseDealsListItem.vue";
   import { mapState } from "vuex";
   
   const houseStore = "houseStore";
@@ -18,16 +22,13 @@
   export default {
     name: "HouseList",
     components: {
-      HouseDealsListItem,
+      HouseDealListItem,
     },
     data() {
-      return {};
+        return {};
     },
     computed: {
-      ...mapState(houseStore, ["deals"]),
-      // houses() {
-      //   return this.$store.state.houses;
-      // },
+        ...mapState(houseStore, ["deals", "aptName"]),
     },
   };
   </script>

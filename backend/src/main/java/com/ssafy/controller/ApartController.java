@@ -31,9 +31,10 @@ public class ApartController{
 		return ResponseEntity.ok(houseinfos);
 	}
 	
-	@GetMapping("/deals/{aptCode}")
-	public ResponseEntity<?> getHouseDealListByAptCode(@PathVariable int aptCode) {
+	@GetMapping("/deals")
+	public ResponseEntity<?> getHouseDealListByAptCode(@RequestParam int aptCode) {
 		List<HouseDeal> houseDeals = apartService.getHouseDealListByAptCode(aptCode);
+		log.info("houseDealList ok");
 		return ResponseEntity.ok(houseDeals);
 	}
 }

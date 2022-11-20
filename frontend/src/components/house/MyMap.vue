@@ -1,18 +1,16 @@
 <template>
   <div>
-    <div id="map" style="width: 100%; height: 90vh"></div>
+    <div id="map" class = "mb-3" style="width: 100%; height: 90vh"></div>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions ,mapMutations } from "vuex";
 
-let mapLevel = 5;
+let mapLevel = 6;
 let houseStore = "houseStore";
 
 export default {
-  ...mapMutations(houseStore, ["SET_DETAIL_HOUSE"]),
-  ...mapActions(houseStore,[""])
   data() {
     return {
       map: "",
@@ -20,6 +18,7 @@ export default {
       markers:[],
       lat: "",
       lng: "",
+      aptObj:null
     };
   },
   computed: {
@@ -32,9 +31,16 @@ export default {
       this.removeMarker();
       this.movemap();
       this.addMarker();
+      this.CLEAR_DEAL_HOUSE_LIST();
+    },
+    aptObj() {
+      //console.log(this.aptObj);
+      this.getHouseDealList(this.aptObj);
     }
   },
   methods: {
+    ...mapMutations(houseStore, ["SET_DETAIL_HOUSE", "SET_APT_CODE","CLEAR_DEAL_HOUSE_LIST"]),
+    ...mapActions(houseStore,["getHouseDealList"]),
     initMap() {
       //console.log("initmap start");
       if(this.mapContainer == null)
@@ -46,6 +52,7 @@ export default {
       };
       this.map = new kakao.maps.Map(this.mapContainer, mapOption);
       //console.log("initmap end");
+      this.CLEAR_DEAL_HOUSE_LIST();
     },
     calcenterloc() {
       //console.log("calc center start");
@@ -79,15 +86,17 @@ export default {
       this.markers.forEach(m => m.setMap(null));
       this.markers = [];
     },
-    makeClickListener() {
-      
+    makeClickListener(aptObj) {
+      return ()=> {
+        this.aptObj = aptObj;
+        //console.log(this.aptObj);
+      }
     },
     addMarker() {
       //console.log("addMarker start");
       for (let i = 0; i < this.houses.length; i++) {
         let marker = new kakao.maps.Marker({
-          position: new kakao.maps.LatLng(this.houses[i]["lat"], this.houses[i]["lng"]),
-          title: this.houses[i]["aptCode"],
+          position: new kakao.maps.LatLng(this.houses[i]["lat"], this.houses[i]["lng"])
         });
 
         let infowindow = new kakao.maps.InfoWindow({
@@ -103,7 +112,11 @@ export default {
           this.makeOverListener(this.map, marker, infowindow)
         );
         kakao.maps.event.addListener(marker, "mouseout", this.makeOutListener(infowindow));
-        kakao.maps.event.addListener(marker, 'click', makeClickListener(marker, data[i]["aptName"]));
+        let aptObj = {
+          aptCode: this.houses[i]["aptCode"],
+          aptName: this.houses[i]["aptName"]
+        }
+        kakao.maps.event.addListener(marker, 'click', this.makeClickListener(aptObj));
         this.markers.push(marker);
         marker.setMap(this.map);
       }
