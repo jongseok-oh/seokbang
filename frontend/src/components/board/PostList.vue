@@ -22,7 +22,7 @@
             <td colspan="4">등록된 글 정보가 없습니다.</td>
         </tr>
         <template v-else>
-            <tr v-for="(post) in posts" :key="post.no">
+            <tr v-for="(post) in posts" :key="post.no" @click="movePostDetail(post.no)">
             <td>{{ post.userNo }}</td>
             <td>{{ post.title }}</td>
             <td>{{ post.hit }}</td>
@@ -31,7 +31,6 @@
         </template>
         </tbody>
     </table>
-
 
     <b-button variant="outline-dark" pressed size="sm">전체글</b-button>
     <b-button variant="outline-dark" size="sm">개념글</b-button>
@@ -54,7 +53,7 @@ import { mapGetters } from "vuex";
 export default {
     data() {
         return {
-            perPage: 3,
+            perPage: 10,
             currentPage: 1,
             gugunCode: "1111000000",
         };
@@ -62,13 +61,19 @@ export default {
   computed: {
     ...mapGetters(["posts"]),
     rows() {
-        return this.posts.length;
+      return this.posts.length;
     },
   },
   methods: {
     getPosts() {
       this.$store.dispatch(Constant.GET_POSTS, this.gugunCode).then(() => {
         console.log(`get posts success`);
+      });
+    },
+    movePostDetail(no){
+      this.$router.replace({
+        name: "postdetail",
+        params: { postNo: no },
       });
     },
     moveWriteForm() {

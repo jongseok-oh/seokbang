@@ -1,5 +1,5 @@
 <template>
-  <div class="container m-3" id="postwriteform">
+  <div class="container" id="postwriteform">
     <b-form-input v-model="post.title" placeholder="제목"></b-form-input>
     <b-form-textarea 
       v-model="post.content"

@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import BoardView from '@/views/BoardView.vue'
 import MainView from '@/views/MainView.vue'
 import DealInfoView from '@/views/DealInfoView.vue'
-import PostList from '@/components/PostList.vue'
-import PostWriteForm from '@/components/PostWriteForm.vue'
+import PostList from '@/components/board/PostList.vue'
+import PostDetail from '@/components/board/PostDetail.vue'
+import PostWriteForm from '@/components/board/PostWriteForm.vue'
 
 Vue.use(VueRouter)
 
@@ -32,10 +33,15 @@ const routes = [
         component: PostList
       },
       {
+        path: '/postdetail',
+        name: 'postdetail',
+        component: PostDetail
+      },
+      {
         path: '/postwriteform',
         name: 'postwriteform',
         component: PostWriteForm
-      }
+      },
     ]
   }
 ]

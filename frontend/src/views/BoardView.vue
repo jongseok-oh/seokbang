@@ -14,7 +14,7 @@ export default {
 
 <style>
 #boardview {
-  text-align: justify;
+  text-align: left;
   margin: 40px;
 }
 </style>

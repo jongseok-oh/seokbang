@@ -12,11 +12,15 @@ export default new Vuex.Store({
   },
   state: {
     posts: [],
+    post: {},
     userNo: 1,
   },
   getters: {
     posts(state) {
       return state.posts;
+    },
+    post(state) {
+      return state.post;
     },
     userNo(state) {
       return state.userNo;
@@ -26,11 +30,19 @@ export default new Vuex.Store({
     [Constant.SET_POSTS](state, payload) {
       state.posts = payload;
     },
+    [Constant.SET_POST](state, payload) {
+      state.post = payload;
+    },
   },
   actions: {
     [Constant.GET_POSTS](context, payload) {
       return restApi.get(`/api/posts/${payload}`).then(({ data }) => {
         context.commit(Constant.SET_POSTS, data);
+      });
+    },
+    [Constant.GET_POST](context, payload) {
+      return restApi.get(`/api/posts/detail/${payload}`).then(({ data }) => {
+        context.commit(Constant.SET_POST, data);
       });
     },
     [Constant.REGIST_POST](context, payload) {
