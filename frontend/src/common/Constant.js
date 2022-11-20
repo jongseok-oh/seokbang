@@ -5,6 +5,7 @@ export default Object.freeze({
     GET_POST: "getPost",
     GET_USER_NO: "getUserNo",
     SET_POST: "setPost",
+    SET_POST_NO: "setPostNo",
     MODIFY_POST: "modifyPost",
     REMOVE_POST: "removePost",
 });
