@@ -9,4 +9,8 @@ public interface ApartService {
 	public List<HouseInfo> getHouseInfoListByGugunCode(String gugunCode);
 	
 	public List<HouseDeal> getHouseDealListByAptCode(int aptCode);
+	
+	public List<HouseDeal> getHouseDealListByAptCodeByPageNo(int aptCode, int pageNo);
+	
+	public int getPageCntByAptCode(int aptCode);
 }
