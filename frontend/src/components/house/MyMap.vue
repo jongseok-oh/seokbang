@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import { mapState, mapActions ,mapMutations } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
+import apiInstance from "@/api/index.js";
 
 let mapLevel = 6;
 let houseStore = "houseStore";
