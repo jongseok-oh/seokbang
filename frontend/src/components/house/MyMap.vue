@@ -6,7 +6,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-import apiInstance from "@/api/index.js";
+import { apiInstance } from "@/api/index.js";
 
 let mapLevel = 6;
 let houseStore = "houseStore";
@@ -23,16 +23,18 @@ export default {
     };
   },
   computed: {
-    ...mapState(houseStore, ["houses"]),
+    ...mapState(houseStore, ["houses", "gugunCode"]),
   },
   watch: {
     houses() {
       //console.log("houses change");
-      this.calcenterloc();
       this.removeMarker();
-      this.movemap();
       this.addMarker();
       this.CLEAR_DEAL_HOUSE_LIST();
+    },
+    async gugunCode() {
+      await this.getcenterloc();
+      this.movemap();
     },
     aptObj() {
       //console.log(this.aptObj);
@@ -55,17 +57,20 @@ export default {
       //console.log("initmap end");
       this.CLEAR_DEAL_HOUSE_LIST();
     },
-    calcenterloc() {
-      //console.log("calc center start");
-      let latSum = 0, lngSum = 0;
-      this.houses.forEach(loc => {
-        latSum += Number(loc["lat"]);
-        lngSum += Number(loc["lng"]);
-      });
-      this.lat = latSum / this.houses.length;
-      this.lng = lngSum / this.houses.length;
-      //console.log("lat = " + this.lat + " lng = " + this.lng);
-      //console.log("calc center end");
+    async getcenterloc() {
+      let api = apiInstance();
+      await api.get("/api/locations/coordinate", {
+        params: {
+          gugunCode: this.gugunCode
+        }
+      })
+        .then(({ data }) => {
+        this.lat = data["lat"];
+        this.lng = data["lng"];
+        //console.log("중심 좌표가져오기 성공");
+      }).catch(() => {
+        console.log("지도 중심 좌표 에러");
+      })
     },
     movemap() {
       //console.log("movemap start");

@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.model.dao.BaseAddressDAO;
+import com.ssafy.model.dao.GugunAddressDAO;
 import com.ssafy.model.dao.GugunCodeDAO;
 import com.ssafy.model.dao.SidoCodeDAO;
-import com.ssafy.model.dto.BaseAddress;
+import com.ssafy.model.dto.GugunAddress;
 import com.ssafy.model.dto.GugunCode;
 import com.ssafy.model.dto.SidoCode;
 
@@ -24,11 +25,12 @@ public class LocationServiceImpl implements LocationService {
 	@Autowired
 	private GugunCodeDAO gugunCodeDAO;
 	
-	private LocationServiceImpl() {
-	}
+	@Autowired
+	private GugunAddressDAO gugunAddressDAO; 
+
 	@Override
-	public BaseAddress getBaseAddressByDongCode(String dongCode) {
-		return baseAddressDAO.getBaseAddressByDongCode(dongCode);
+	public GugunAddress getGugunAddressByGugunCode(String gugunCode) {
+		return gugunAddressDAO.getGugunAddressByGugunCode(gugunCode);
 	}
 	@Override
 	public List<SidoCode> getSidoCodeAll() {

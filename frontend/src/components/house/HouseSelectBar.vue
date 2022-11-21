@@ -5,7 +5,7 @@
       <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
     </b-col>
     <b-col>
-      <b-form-select v-model="gugunCode" :options="guguns" @change="searchApt"></b-form-select>
+      <b-form-select v-model="tgugunCode" :options="guguns" @change="searchApt"></b-form-select>
     </b-col>
     <b-col cols="6"></b-col>
   </b-row>
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       sidoCode: null,
-      gugunCode: null,
+      tgugunCode: null
     };
   },
   computed: {
@@ -33,15 +33,18 @@ export default {
   },
   methods: {
     ...mapActions(houseStore, ["getSido", "getGugun", "getHouseList"]),
-    ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST"]),
+    ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST", "SET_GUGUN_CODE"]),
 
     gugunList() {
       this.CLEAR_GUGUN_LIST();
-      this.gugunCode = null;
+      this.tgugunCode = null;
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
-      if (this.gugunCode) this.getHouseList(this.gugunCode);
+      if (this.tgugunCode) {
+        this.SET_GUGUN_CODE(this.tgugunCode);
+        this.getHouseList(this.tgugunCode);
+      }
     },
   },
 };

@@ -5,6 +5,7 @@ const houseStore = {
   state: {
     sidos: [{ value: null, text: "선택하세요" }],
     guguns: [{ value: null, text: "선택하세요" }],
+    gugunCode:"",
     houses: [],
     deals: [],
     aptName:""
@@ -31,13 +32,16 @@ const houseStore = {
         state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
       });
     },
+    SET_GUGUN_CODE(state, gugunCode) {
+      state.gugunCode = gugunCode;
+    },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
       //console.log(state.houses);
     },
     SET_DEAL_HOUSE_LIST(state, deals) {
       state.deals = deals;
-      console.log(state.deals);
+      //console.log(state.deals);
     },
     CLEAR_DEAL_HOUSE_LIST(state) {
       state.deals = [];
