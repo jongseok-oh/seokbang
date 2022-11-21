@@ -25,7 +25,7 @@
         <b-button variant="outline-primary" @click="moveList">목록</b-button>
       </b-col>
       <b-col class="text-right">
-        <b-button variant="outline-danger float-end" size="sm" @click="deleteArticle">글삭제</b-button>
+        <b-button variant="outline-danger float-end" size="sm" @click="deletePost(post.no, moveList())">글삭제</b-button>
         <b-button variant="outline-info float-end" size="sm" @click="moveModifyArticle">글수정</b-button>
       </b-col>
     </b-row>
@@ -51,18 +51,15 @@ export default {
     },
   },
   methods: {
-    ...mapActions(boardStore, [Constant.GET_POST]),
+    ...mapActions(boardStore, [Constant.GET_POST, "deletePost"]),
     moveList(){
       this.$router.replace({name : "postlist"})
     },
     moveModifyArticle(){
-
-    },
-    deleteArticle(){
-
+      this.$router.replace({name : "postmodifyform"})
     },
   },
-  created() {
+  mounted() {
     this.getPost(this.$route.params.postNo);
   },
 };

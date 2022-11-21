@@ -6,6 +6,7 @@ import DealInfoView from '@/views/DealInfoView.vue'
 import PostList from '@/components/board/PostList.vue'
 import PostDetail from '@/components/board/PostDetail.vue'
 import PostWriteForm from '@/components/board/PostWriteForm.vue'
+import PostModifyForm from '@/components/board/PostModifyForm.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ const routes = [
         path: '/postwriteform',
         name: 'postwriteform',
         component: PostWriteForm
+      },
+      {
+        path: '/postmodifyform',
+        name: 'postmodifyform',
+        component: PostModifyForm
       },
     ]
   }
