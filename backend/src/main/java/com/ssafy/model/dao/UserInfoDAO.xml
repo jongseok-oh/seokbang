@@ -11,7 +11,7 @@
 	</insert>
 	
 	<select id="login" resultType="UserInfo" parameterType="map">
-		select * from userinfo where userId = #{userId} and passWord = #{passWord}
+		select * from userinfo where userId = #{userId} and password = #{password}
 	</select>
 	
 	<update id="updateUser" parameterType="UserInfo">

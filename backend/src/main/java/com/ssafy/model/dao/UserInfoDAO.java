@@ -11,7 +11,7 @@ import com.ssafy.model.dto.UserInfo;
 public interface UserInfoDAO {
 	int insertUser(UserInfo user);
 	
-	UserInfo login(Map<String, String> map);
+	UserInfo login(Map<String, Object> map);
 	
 	int updateUser(UserInfo user);
 	

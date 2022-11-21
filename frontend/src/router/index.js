@@ -6,6 +6,8 @@ import DealInfoView from '@/views/DealInfoView.vue'
 import PostList from '@/components/board/PostList.vue'
 import PostDetail from '@/components/board/PostDetail.vue'
 import PostWriteForm from '@/components/board/PostWriteForm.vue'
+import loginForm from '@/components/user/LoginForm.vue'
+import signupForm from '@/components/user/SignupForm.vue'
 
 Vue.use(VueRouter)
 
@@ -19,7 +21,16 @@ const routes = [
     path: '/dealinfo',
     name: 'dealinfo',
     component: DealInfoView,
-    
+  },
+  {
+    path: '/loginform',
+    name: 'loginform',
+    component: loginForm,
+  },
+  {
+    path: '/signupform',
+    name: 'signupform',
+    component: signupForm,
   },
   {
     path: '/board',

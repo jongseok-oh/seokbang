@@ -57,14 +57,19 @@ public class UserController{
 	@PostMapping("/login")
 	private ResponseEntity<?> login(HttpSession session, @RequestBody Map<String,Object> m){
 		String userId = (String) m.get("userId");
-		String passWord = (String) m.get("password");
-		log.info(userId+", "+passWord);
+		String password = (String) m.get("password");
+		log.info(userId+", "+password);
 		
-		UserInfo info = userService.login(userId, passWord);
+		UserInfo info = userService.login(m);
 
 		if(info != null) {
 			session.setAttribute("user", info);
-			return ResponseEntity.ok(info.getNo());
+			log.info(session.toString());
+			log.info("login sucess " + info.toString());
+			info.setAdmin(null);
+			info.setNo(null);
+			info.setPassword(null);
+			return ResponseEntity.ok(info);
 		}else
 			return ResponseEntity.noContent().build();
 	}
@@ -83,12 +88,12 @@ public class UserController{
 	private ResponseEntity<?> readUser(HttpSession session, @PathVariable Long no){
 		
 		UserInfo user =(UserInfo) session.getAttribute("user");
-		// 어드민이거나 로그인한 사람이면
+		// 어드민이거나 로그인한 같은 사람이면
 		if(user.getAdmin() || user.getNo() == no) {
 			UserInfo res = userService.readUser(no);
 			return ResponseEntity.ok(res);
 		}else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
 		}
 	}
 	
@@ -99,6 +104,6 @@ public class UserController{
 			List<UserInfo> list = userService.readUserAll();
 			return ResponseEntity.ok(list);
 		}
-		else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		else return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
 	}
 }

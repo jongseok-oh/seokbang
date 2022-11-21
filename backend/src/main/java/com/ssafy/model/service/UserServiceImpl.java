@@ -20,10 +20,7 @@ public class UserServiceImpl implements UserService {
 		return userInfoDao.insertUser(user) > 0;
 	}
 	@Override
-	public UserInfo login(String userId,String password){
-		Map<String, String> m = new HashMap<>();
-		m.put("userId", userId);
-		m.put("password", password);
+	public UserInfo login(Map<String, Object> m){
 		return userInfoDao.login(m);
 	}
 	@Override

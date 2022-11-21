@@ -9,21 +9,39 @@
         <li class="nav-item mx-2"><router-link to="/board" class="nav-link">지역별 게시판</router-link></li>
       </ul>
     </div>
-
-    <div class="dropdown">
-      <b-dropdown id="dropdown-1" dropleft class="m-2">
-        <b-dropdown-item>관심 매물</b-dropdown-item>
-        <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item>회원 정보 수정</b-dropdown-item>
-        <b-dropdown-item>로그아웃</b-dropdown-item>
-      </b-dropdown>
-    </div>
+    <user-drop-down/>
   </nav>
 
 </template>
 
 <script>
+import UserDropDown from "./UserDropDown.vue";
+
+export default {
+  name: 'FrontendNavBar',
+
+  components: {
+    UserDropDown
+  },
+  data() {
+    return {
+      
+    };
+  },
+
+  mounted() {
+    
+  },
+
+  methods: {
+    
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+
+</style>
 
 <style scoped>
 
@@ -43,13 +61,5 @@ ul a.router-link-exact-active {
 
 ul a:hover {
   background: grey;
-}
-
-#dropdownImg{
-  width: 35px;
-  height: 35px;
-  border: 1px solid black;
-  border-radius: 100%;
-  margin-right: 30px;
 }
 </style>
