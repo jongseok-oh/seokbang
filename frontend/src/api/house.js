@@ -3,7 +3,7 @@ import { apiInstance } from "./index.js";
 const api = apiInstance();
 
 function sidoList(success, fail) {
-  api.get(`/api/locations/sidocode`).then(success).catch(fail);
+  api.get(`/api/locations/sidocode`, { withCredentials: true }).then(success).catch(fail);
 }
 
 function gugunList(params, success, fail) {

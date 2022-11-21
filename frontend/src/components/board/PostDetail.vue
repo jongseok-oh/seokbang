@@ -22,18 +22,22 @@
     </b-row>
     <b-row class="mb-1">
       <b-col class="text-left">
-        <b-button variant="outline-primary" @click="moveList">목록</b-button>
+        <b-button variant="outline-dark mx-1" size="sm" @click="moveList">목록</b-button>
       </b-col>
       <b-col class="text-right">
-        <b-button variant="outline-danger float-end" size="sm" @click="deleteArticle">글삭제</b-button>
-        <b-button variant="outline-info float-end" size="sm" @click="moveModifyArticle">글수정</b-button>
+        <b-button variant="outline-danger float-end mx-1" size="sm" @click="deletePost(post.no, moveList())">글삭제</b-button>
+        <b-button variant="outline-primary float-end mx-1" size="sm" @click="moveModifyArticle">글수정</b-button>
+        <b-button variant="outline-danger" size="sm" @click="likeBtn">
+          <b-icon-heart color="red" v-if="!isLiked"></b-icon-heart>
+          <b-icon-heart-fill color="red" v-else></b-icon-heart-fill>
+          {{likesCnt}}
+        </b-button>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import Constant from "@/common/Constant.js";
 import { mapGetters, mapActions } from "vuex";
 
 const boardStore = "boardStore";
@@ -41,6 +45,8 @@ const boardStore = "boardStore";
 export default {
     data() {
         return {
+          isLiked : false,
+          likesCnt : 0,
         };
     },
   computed: {
@@ -51,19 +57,37 @@ export default {
     },
   },
   methods: {
-    ...mapActions(boardStore, [Constant.GET_POST]),
+    ...mapActions(boardStore, ["getPost", "deletePost", "likePost", "unlikePost"]),
     moveList(){
       this.$router.replace({name : "postlist"})
     },
     moveModifyArticle(){
-
+      this.$router.replace({name : "postmodifyform"})
     },
-    deleteArticle(){
-
+    likeBtn(){
+      if(this.isLiked){
+        this.likesCnt -= 1;
+        this.isLiked = false;
+      }
+      else{
+        this.likesCnt += 1;
+        this.isLiked = true;
+      }
     },
   },
-  created() {
-    this.getPost(this.$route.params.postNo);
+  destroyed() {
+    if(this.isLiked){
+      this.likePost(this.post.no);
+    }
+    else{
+      this.unlikePost(this.post.no);
+    }
+  },
+  async mounted() {
+    await this.getPost(this.$route.params.postNo);
+    this.likesCnt = this.post.likesCnt;
+    this.isLiked = this.post.isLiked;
+    console.log(this.post);
   },
 };
 </script>

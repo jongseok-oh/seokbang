@@ -70,7 +70,7 @@ export default {
     ...mapActions(boardStore,["getPosts","hit"]),
     movePostDetail(no){
       this.hit(no);
-      this.$router.replace({
+      this.$router.push({
         name: "postdetail",
         params: { postNo: no },
       });
@@ -79,8 +79,8 @@ export default {
       this.$router.push({name : "postwriteform"});
     },
   },
-  created() {
-    this.getPosts(this.gugunCode);
+  async mounted() {
+    await this.getPosts(this.gugunCode);
   },
 };
 </script>

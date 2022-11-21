@@ -9,6 +9,7 @@ function apiInstance() {
       "Content-Type": "application/json;charset=utf-8",
     },
   });
+  instance.defaults.withCredentials = true;
   instance.interceptors.response.use(
     function (response) {
       return response;

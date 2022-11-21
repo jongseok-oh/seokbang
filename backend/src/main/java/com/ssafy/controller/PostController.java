@@ -1,6 +1,8 @@
 package com.ssafy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.Post;
 import com.ssafy.model.dto.PostLikes;
-import com.ssafy.model.dto.UserInfo;
 import com.ssafy.model.service.PostLikesService;
 import com.ssafy.model.service.PostService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RequestMapping("/api/posts")
 @RestController
 public class PostController {
@@ -48,9 +52,21 @@ public class PostController {
 	}
 	
 	@GetMapping("/detail/{no}")
-	public ResponseEntity<?> getPostByPostNo(@PathVariable Long no) {
-		Post post = postService.getPost(no);
-		return ResponseEntity.ok(post);
+	public ResponseEntity<?> getPostByPostNo(HttpSession session, @PathVariable Long no) {
+		Map<String, Object> res = new HashMap<>();
+		
+		res.put("post", postService.getPost(no));
+		res.put("likesCnt", (Integer)postLikesService.getPostLikesCount(no));
+		
+		PostLikes postLikes = new PostLikes();
+//		postLikes.setUserNo(((UserInfo) session.getAttribute("user")).getNo());
+		postLikes.setUserNo(1L);
+		postLikes.setPostNo(no);
+		res.put("isLiked", postLikesService.getPostLike(postLikes));
+		
+		log.info("" + res.get("likesCnt"));
+		log.info("" + res.get("isLiked"));
+		return ResponseEntity.ok(res);
 	}
 	
 	@PutMapping
@@ -86,10 +102,25 @@ public class PostController {
 	@PostMapping("/like/{postNo}")
 	private ResponseEntity<?> likePost(HttpSession session, @PathVariable Long postNo){ 
 		PostLikes postLikes = new PostLikes();
+//		postLikes.setUserNo(((UserInfo)session.getAttribute("user")).getNo());
+		postLikes.setUserNo(1L);
 		postLikes.setPostNo(postNo);
-		postLikes.setUserNo(((UserInfo)session.getAttribute("user")).getNo());
 		
 		boolean res = postLikesService.insertPostLike(postLikes);
+		if(res)
+			return ResponseEntity.ok().build();
+		else
+			return ResponseEntity.internalServerError().build();
+	}
+	
+	@DeleteMapping("/like/{postNo}")
+	private ResponseEntity<?> unlikePost(HttpSession session, @PathVariable Long postNo){ 
+		PostLikes postLikes = new PostLikes();
+//		postLikes.setUserNo(((UserInfo)session.getAttribute("user")).getNo());
+		postLikes.setUserNo(1L);
+		postLikes.setPostNo(postNo);
+		
+		boolean res = postLikesService.deletePostLike(postLikes);
 		if(res)
 			return ResponseEntity.ok().build();
 		else

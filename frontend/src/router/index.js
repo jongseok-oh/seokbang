@@ -8,6 +8,7 @@ import PostDetail from '@/components/board/PostDetail.vue'
 import PostWriteForm from '@/components/board/PostWriteForm.vue'
 import loginForm from '@/components/user/LoginForm.vue'
 import signupForm from '@/components/user/SignupForm.vue'
+import PostModifyForm from '@/components/board/PostModifyForm.vue'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,11 @@ const routes = [
         path: '/postwriteform',
         name: 'postwriteform',
         component: PostWriteForm
+      },
+      {
+        path: '/postmodifyform',
+        name: 'postmodifyform',
+        component: PostModifyForm
       },
     ]
   }
