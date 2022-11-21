@@ -11,7 +11,7 @@
         <b-col><b-alert show>거래 내역이 없습니다.</b-alert></b-col>
       </b-row>
     </b-container>
-  </template>
+</template>
   
   <script>
   import HouseDealListItem from "@/components/house/HouseDealsListItem.vue";

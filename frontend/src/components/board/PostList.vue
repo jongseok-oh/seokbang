@@ -48,8 +48,10 @@
 </template>
 
 <script>
-import Constant from "@/common/Constant.js";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+
+const boardStore = "boardStore";
+
 export default {
     data() {
         return {
@@ -59,18 +61,15 @@ export default {
         };
     },
   computed: {
-    ...mapGetters(["posts"]),
+    ...mapGetters(boardStore, ["posts"]),
     rows() {
       return this.posts.length;
     },
   },
   methods: {
-    getPosts() {
-      this.$store.dispatch(Constant.GET_POSTS, this.gugunCode).then(() => {
-        console.log(`get posts success`);
-      });
-    },
+    ...mapActions(boardStore,["getPosts","hit"]),
     movePostDetail(no){
+      this.hit(no);
       this.$router.replace({
         name: "postdetail",
         params: { postNo: no },
@@ -81,7 +80,7 @@ export default {
     },
   },
   created() {
-    this.getPosts();
+    this.getPosts(this.gugunCode);
   },
 };
 </script>

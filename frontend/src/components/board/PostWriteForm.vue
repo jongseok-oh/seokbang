@@ -7,48 +7,43 @@
       rows="20"
       no-resize
       ></b-form-textarea>
-    <b-button class="float-end" @click="registPost">등록</b-button>
+    <b-button class="float-end" @click="onSubmit">등록</b-button>
   </div>
 </template>
 
 <script>
-import Constant from "@/common/Constant.js";
+import { mapActions, mapState } from 'vuex';
 export default {
     data() {
         return {
-          gugunCode : "1111000000",
-          post : {
-            userNo : this.$store.getters.userNo,
-            gugunCode : "1111000000",
-            title : '',
-            content : '',
-            hit : 0,
-            postDate : new Date(),
-          }
+          post : {}
         };
     },
   computed: {
+    ...mapState("userStore", ["userNo"]),
   },
   methods: {
-    registPost(){
-      this.$store.dispatch(Constant.REGIST_POST, this.post).then(() => {
+    ...mapActions("boardStore",["registPost"]),
+    onSubmit(){
+      this.registPost(this.post).then(() => {
         console.log(`regist post success`);
         this.clear();
         this.$router.push("/board");
       });
     },
-    clear() {
+    clear(){
       this.post = {
-            userNo : this.$store.getters.userNo,
+            userNo : this.userNo,
             gugunCode : "1111000000",
             title : '',
             content : '',
             hit : 0,
             postDate : new Date(),
           }
-    },
+    }
   },
   created() {
+    this.clear();
   },
 };
 </script>

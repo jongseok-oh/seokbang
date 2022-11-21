@@ -35,20 +35,23 @@
 <script>
 import Constant from "@/common/Constant.js";
 import { mapGetters, mapActions } from "vuex";
+
+const boardStore = "boardStore";
+
 export default {
     data() {
         return {
         };
     },
   computed: {
-    ...mapGetters(["post"]),
+    ...mapGetters(boardStore, ["post"]),
     message() {
       if (this.post.content) return this.post.content.split("\n").join("<br>");
       return "";
     },
   },
   methods: {
-    ...mapActions([Constant.GET_POST]),
+    ...mapActions(boardStore, [Constant.GET_POST]),
     moveList(){
       this.$router.replace({name : "postlist"})
     },
@@ -60,8 +63,7 @@ export default {
     },
   },
   created() {
-    this.post.no = this.$route.params.postNo;
-    this.getPost(this.post.no);
+    this.getPost(this.$route.params.postNo);
   },
 };
 </script>
