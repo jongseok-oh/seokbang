@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RepleLikes {
-	private Long no;
 	private Long userNo;
 	private Long repleNo;
 }

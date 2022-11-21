@@ -1,4 +1,3 @@
-import Constant from "@/common/Constant.js";
 import restApi from "@/util/http-common.js";
 
 const boardStore = {
@@ -16,29 +15,38 @@ const boardStore = {
     },
   },
   mutations: {
-    [Constant.SET_POSTS](state, payload) {
+    setPosts(state, payload) {
       state.posts = payload;
     },
-    [Constant.SET_POST](state, payload) {
+    setPost(state, payload) {
       state.post = payload;
+    },
+    setLikesCnt(state, payload) {
+      state.post.likesCnt = payload;
+    },
+    setIsLiked(state, payload) {
+      state.post.isLiked = payload;
     },
   },
   actions: {
-    async [Constant.GET_POSTS](context, payload) {
+    async getPosts(context, payload) {
       return await restApi.get(`/api/posts/${payload}`).then(({ data }) => {
-        context.commit(Constant.SET_POSTS, data);
+        context.commit("setPosts", data);
       });
     },
-    async [Constant.GET_POST](context, payload) {
+    async getPost(context, payload) {
       return await restApi.get(`/api/posts/detail/${payload}`).then(({ data }) => {
-        context.commit(Constant.SET_POST, data);
+        context.commit("setPost", data.post);
+        context.commit("setLikesCnt", data.likesCnt);
+        context.commit("setIsLiked", data.isLiked);
       });
     },
-    async [Constant.REGIST_POST](context, payload) {
+    async registPost(context, payload) {
       return await restApi.post(`/api/posts`, payload).then(() => {
-        console.log(`store action ${Constant.REGIST_POST}`);
+        console.log(`store action registPost`);
       });
     },
+    
     async modifyPost(context, payload) {
       return await restApi.put(`/api/posts`, payload).then(() => {
         console.log(`store action modifyPost`);
@@ -52,7 +60,18 @@ const boardStore = {
       return await restApi.put(`/api/posts/${payload}`).then(() => {
         console.log(`hit ㅋㅋ`);
       });
-    }
+    },
+    async likePost(context, payload){
+        return await restApi.post(`/api/posts/like/${payload}`).then(() => {
+          console.log(`like ㅋㅋ`);
+        });
+      },
+    async unlikePost(context, payload){
+        return await restApi.delete(`/api/posts/like/${payload}`).then(() => {
+          console.log(`unlike ㅋㅋ`);
+        });
+  
+    },
   },
 };
 

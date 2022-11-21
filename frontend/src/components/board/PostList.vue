@@ -79,8 +79,8 @@ export default {
       this.$router.push({name : "postwriteform"});
     },
   },
-  mounted() {
-    this.getPosts(this.gugunCode);
+  async mounted() {
+    await this.getPosts(this.gugunCode);
   },
 };
 </script>

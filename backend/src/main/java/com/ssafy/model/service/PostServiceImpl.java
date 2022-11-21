@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ssafy.model.dao.PostDAO;
 import com.ssafy.model.dto.Post;
 
-@Transactional(isolation = Isolation.SERIALIZABLE)
+@Transactional
 @Service
 public class PostServiceImpl implements PostService {
 	

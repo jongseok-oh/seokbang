@@ -1,6 +1,3 @@
-import Constant from "@/common/Constant.js";
-import restApi from "@/util/http-common.js";
-
 const userStore = {
   namespaced: true,
   state: {

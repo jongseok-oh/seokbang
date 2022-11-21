@@ -3,11 +3,11 @@
 
 <mapper namespace="com.ssafy.model.dao.PostLikesDAO">
 	
-	<insert id="insertPostLikes" parameterType="PostLikes" >
+	<insert id="insertPostLike" parameterType="PostLikes" >
 		insert into postlikes(userNo,postNo) values(#{userNo},#{postNo})
 	</insert>
 	
-	<delete id="deletePostLikes" parameterType="PostLikes">
+	<delete id="deletePostLike" parameterType="PostLikes">
 		delete from postlikes where userNo = #{userNo} and postNo = #{postNo}
 	</delete>
 	
@@ -15,7 +15,7 @@
 		select * from postlikes where userNo = #{userNo} and postNo = #{postNo}
 	</select>
 	
-	<select id="getPostLikesConunt" resultType="int" parameterType="Long">
+	<select id="getPostLikesCount" resultType="int" parameterType="Long">
 		select count(*) from postlikes where postNo = #{postNo}
 	</select>
 	
