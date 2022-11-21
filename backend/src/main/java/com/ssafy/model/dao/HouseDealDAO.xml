@@ -11,7 +11,7 @@
 		select count(*) from housedeal where aptCode = #{aptCode}
 	</select>
 	
-	<select id="getHouseDealByAptCode" resultType="HouseDeal" parameterType="Map">
+	<select id="getHouseDealByAptCodeLimit" resultType="HouseDeal" parameterType="Map">
 		select * from housedeal where aptCode = #{aptCode} limit #{start}, #{end}
 	</select>
 </mapper>

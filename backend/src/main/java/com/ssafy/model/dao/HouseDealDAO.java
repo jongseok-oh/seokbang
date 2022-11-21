@@ -14,5 +14,5 @@ public interface HouseDealDAO {
 	int getAptCnt(int aptCode);
 	
 	// int aptCode, int start, int end
-	List<HouseDeal> getHouseDealByAptCode(Map<String, Object> m);
+	List<HouseDeal> getHouseDealByAptCodeLimit(Map<String, Object> m);
 }

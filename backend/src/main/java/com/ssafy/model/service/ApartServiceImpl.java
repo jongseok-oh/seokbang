@@ -34,7 +34,7 @@ public class ApartServiceImpl implements ApartService {
 	
 	public int getPageCntByAptCode(int aptCode) {
 		int cnt = houseDealDao.getAptCnt(aptCode);
-		return (cnt + PER_PAGE - 1)/ PER_PAGE; 
+		return (cnt + PER_PAGE - 1)/ PER_PAGE;
 	}
 
 	@Override
@@ -49,6 +49,6 @@ public class ApartServiceImpl implements ApartService {
 		m.put("start", start);
 		m.put("end", end);
 		
-		return houseDealDao.getHouseDealByAptCode(m);
+		return houseDealDao.getHouseDealByAptCodeLimit(m);
 	}
 }
