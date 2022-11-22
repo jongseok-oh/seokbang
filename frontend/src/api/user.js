@@ -7,7 +7,7 @@ function logout(success, fail) {
 }
 
 function login(body, success, fail) {
-    api.post(`/api/users/login`, body, { withCredentials: true }).then(success).catch(fail);
+    api.post(`/api/users/login`, body).then(success).catch(fail);
 }
 
 // function houseList(params, success, fail) {

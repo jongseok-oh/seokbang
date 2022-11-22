@@ -37,6 +37,7 @@ public class PostController {
 	
 	@PostMapping
 	public ResponseEntity<?> registPost(@RequestBody Post post) {
+		log.info("regist post");
 		boolean res = postService.insertPost(post);
 
 		if(res)
