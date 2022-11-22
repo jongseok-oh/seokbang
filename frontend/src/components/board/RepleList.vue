@@ -1,0 +1,94 @@
+<template>
+  <div id="replelist" class="px-2">
+    <hr/>
+    <h5>댓글 ({{reples.length}})</h5>
+    <b-row>
+      <table class="table table-striped table-hover mx-3">
+          <tbody>
+            <tr v-if="reples.length == 0">
+                <td colspan="4">등록된 댓글 정보가 없습니다.</td>
+            </tr>
+            <template v-else>
+              <tr v-for="reple in reples" :key="reple.no">
+                <td>{{ reple.content }}</td>
+                <td>{{ reple.userNo }}</td>
+                <td>{{ reple.repleDate }}</td>
+                <td><b-button variant="outline-danger" size="sm">
+                      <b-icon-heart color="red" v-if="!reple.isLiked"></b-icon-heart>
+                      <b-icon-heart-fill color="red" v-else></b-icon-heart-fill>
+                      {{reple.likesCnt}}
+                    </b-button>
+                </td>
+                <td><b-button variant="outline-primary" inline @click="writeReple" size="sm">수정</b-button></td>
+                <td><b-button variant="outline-danger" inline @click="writeReple" size="sm">삭제</b-button></td>
+              </tr>
+            </template>
+          </tbody>
+      </table>
+      <b-col sm="11">
+        <b-form-input v-model="repleContent" placeholder="댓글 작성"></b-form-input>
+      </b-col>
+      <b-col sm="1">
+        <b-button variant="outline-dark" inline @click="writeReple" size="sm">댓글쓰기</b-button>
+      </b-col>
+    </b-row>
+  </div>
+</template>
+
+<script>
+import { mapGetters, mapActions, mapState } from "vuex";
+
+const boardStore = "boardStore";
+
+export default {
+    data() {
+        return {
+          reples: [],
+          repleContent: "",
+        };
+    },
+  computed: {
+    ...mapState("userStore", ["userNo"]),
+  },
+  methods: {
+    ...mapActions(boardStore, ["getReples", "registReple"]),
+    writeReple(){
+      this.registReple({
+        postNo : this.$route.params.postNo,
+        userNo : this.userNo,
+        content : this.repleContent,
+        repleDate : new Date()
+      })
+      this.repleContent = "";
+      this.init();
+    },
+    init(){
+      this.reples = [];
+      this.getReples(this.$route.params.postNo).then((data) => {
+        let repleList = data.data.reples;
+        let isLikedList = data.data.isLiked;
+        let likesCntList = data.data.likesCnt;
+        console.log(isLikedList);
+
+        for (let index = 0; index < repleList.length ; index++) {
+          const reple = {
+            no : repleList[index].no,
+            content : repleList[index].content,
+            userNo : repleList[index].userNo,
+            repleDate : repleList[index].repleDate,
+            likesCnt : likesCntList[index],
+            isLiked : isLikedList[index] > 0 ? true : false
+          }
+          this.reples.push(reple);
+        }
+      });
+    },
+  },
+  created() {
+    this.init();
+  },
+};
+</script>
+
+<style scoped>
+</style>

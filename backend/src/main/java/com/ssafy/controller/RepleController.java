@@ -1,9 +1,15 @@
 package com.ssafy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,14 +20,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.Reple;
+import com.ssafy.model.dto.UserInfo;
+import com.ssafy.model.service.RepleLikesService;
 import com.ssafy.model.service.RepleService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RequestMapping("/api/reples")
 @RestController
 public class RepleController {
 	
 	@Autowired
 	private RepleService repleService;
+
+	@Autowired
+	private RepleLikesService repleLikesService;
 	
 	@PostMapping
 	public ResponseEntity<?> registReple(@RequestBody Reple reple) {
@@ -34,10 +48,22 @@ public class RepleController {
 	}
 	
 	@GetMapping("/{postNo}")
-	public ResponseEntity<?> getRepleListByPostNo(@PathVariable Long postNo) {
+	public ResponseEntity<?> getRepleListByPostNo(HttpSession session, @PathVariable Long postNo) {
+		log.warn("원!!");
+		List<Integer> likesCnt = repleLikesService.getRepleLikesCount(postNo);
 		List<Reple> reples = repleService.getReples(postNo);
 		
-		return ResponseEntity.ok(reples);
+		Map<String, Long> params = new HashMap<>();
+		params.put("userNo", ((UserInfo)session.getAttribute("user")).getNo());
+		params.put("postNo", postNo);
+		List<Integer> isLiked = repleLikesService.getRepleIsLiked(params);
+		
+		Map<String, Object> res = new HashMap<>();
+		res.put("reples", reples);
+		res.put("isLiked", isLiked);
+		res.put("likesCnt", likesCnt);
+		log.info("야야야");
+		return ResponseEntity.ok(res);
 	}
 	
 	@GetMapping("/detail/{no}")

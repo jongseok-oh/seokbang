@@ -1,6 +1,6 @@
 package com.ssafy.model.dto;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +16,5 @@ public class Post {
 	private String title;
 	private String content;
 	private int hit;
-	private Date postDate;
+	private Timestamp postDate;
 }

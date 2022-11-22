@@ -1,5 +1,7 @@
 package com.ssafy.model.dto;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,5 +14,5 @@ public class Reple {
 	private Long postNo;
 	private Long userNo;
 	private String content;
-	private String repleDate;
+	private Timestamp repleDate;
 }

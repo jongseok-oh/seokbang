@@ -1,5 +1,8 @@
 package com.ssafy.model.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.ssafy.model.dto.RepleLikes;
 
 public interface RepleLikesService {
@@ -7,7 +10,7 @@ public interface RepleLikesService {
 
 	boolean deleteRepleLike(RepleLikes repleLikes);
 	
-	boolean getRepleLike(RepleLikes repleLikes);
+	List<Integer> getRepleIsLiked(Map<String, Long> map);
 	
-	int getRepleLikesCount(Long repleNo);
+	List<Integer> getRepleLikesCount(Long postNo);
 }
