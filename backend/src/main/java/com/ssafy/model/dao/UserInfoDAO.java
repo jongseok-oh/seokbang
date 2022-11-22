@@ -15,9 +15,12 @@ public interface UserInfoDAO {
 	
 	int updateUser(UserInfo user);
 	
-	int deleteUser(String userId);
+	int deleteUser(Long no);
 	
 	UserInfo readUser(Long no);
 	
+	UserInfo readUserById(String userId);
+	
 	List<UserInfo> readUserAll();
+	
 }

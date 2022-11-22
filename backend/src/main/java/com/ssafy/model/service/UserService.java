@@ -13,7 +13,9 @@ public interface UserService {
 
 	boolean modifyUser(UserInfo user);
 
-	boolean deleteUser(String userId);
+	boolean deleteUser(Long no);
+	
+	boolean checkValidID(String userId);
 	
 	UserInfo readUser(Long no);
 	

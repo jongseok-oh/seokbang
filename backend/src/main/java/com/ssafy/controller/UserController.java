@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,8 +33,8 @@ public class UserController{
 	private UserService userService;
 	
 	@DeleteMapping
-	private ResponseEntity<?> delete(@RequestParam String userId){
-		boolean res = userService.deleteUser(userId);
+	private ResponseEntity<?> delete(@RequestParam Long no){
+		boolean res = userService.deleteUser(no);
 		
 		if(res)
 			return ResponseEntity.noContent().build();
@@ -67,21 +68,30 @@ public class UserController{
 			log.info(session.toString());
 			log.info("login sucess " + info.toString());
 			info.setAdmin(null);
-			info.setNo(null);
 			info.setPassword(null);
 			return ResponseEntity.ok(info);
 		}else
 			return ResponseEntity.noContent().build();
 	}
 	
+	@GetMapping("/id")
+	private ResponseEntity<?> checkValidId(@RequestParam String userId){
+		boolean res = userService.checkValidID(userId);
+		if(res) return ResponseEntity.status(200).build();
+		else return ResponseEntity.status(409).build();
+	}
+	
 	@PostMapping
 	private ResponseEntity<?> register(@RequestBody UserInfo user){
 		log.info(user.toString());
-		boolean res = userService.registerUser(user);
-
-		if(res)
-			return ResponseEntity.ok().build();
-		else return ResponseEntity.internalServerError().build();
+		try {
+			boolean res = userService.registerUser(user);
+			if(res)
+				return ResponseEntity.ok().build();
+			else return ResponseEntity.internalServerError().build();
+		}catch(DuplicateKeyException e) {
+			return ResponseEntity.status(409).build();
+		}
 	}
 	
 	@GetMapping("/{no}")

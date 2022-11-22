@@ -1,8 +1,6 @@
-
-import Constant from "@/common/Constant.js";
-import restApi from "@/util/http-common.js";
-import { login, logout} from "@/api/user.js";
+import { login, logout, duplicate} from "@/api/user.js";
 import router from "@/router";
+
 
 const userStore = {
   namespaced: true,
@@ -42,7 +40,18 @@ const userStore = {
           console.log(error);
         }
       );
-    }
+    },
+    doLogout: ({ commit }) => {
+      //console.log(payload);
+      logout(
+        (res) => {
+          commit("CLEAR_USER_INFO");
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    },
   },
 };
 

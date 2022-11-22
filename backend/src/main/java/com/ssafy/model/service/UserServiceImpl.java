@@ -28,19 +28,21 @@ public class UserServiceImpl implements UserService {
 		return userInfoDao.updateUser(user) > 0;
 	}
 	@Override
-	public boolean deleteUser(String userId){
-		return userInfoDao.deleteUser(userId) > 0;
+	public boolean deleteUser(Long no){
+		return userInfoDao.deleteUser(no) > 0;
 	}
 	
 	
 	@Override
 	public UserInfo readUser(Long no) {
-		// TODO Auto-generated method stub
-		return null;
+		return userInfoDao.readUser(no);
 	}
 	@Override
 	public List<UserInfo> readUserAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userInfoDao.readUserAll();
+	}
+	@Override
+	public boolean checkValidID(String userId) {
+		return userInfoDao.readUserById(userId) == null;
 	}
 }

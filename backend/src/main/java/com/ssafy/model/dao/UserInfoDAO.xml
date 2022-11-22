@@ -28,6 +28,10 @@
 		select * from userinfo where no = #{no}
 	</select>
 	
+	<select id="readUserById" parameterType = "String" resultType = "UserInfo">
+		select * from userinfo where userId = #{userId}
+	</select>
+	
 	<select id="readUserAll" resultType = "UserInfo">
 		select * from userinfo
 	</select>

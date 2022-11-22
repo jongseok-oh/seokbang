@@ -8,8 +8,8 @@
         <li class="nav-item mx-2"><router-link to="/dealinfo" class="nav-link">실거래가</router-link></li>
         <li class="nav-item mx-2"><router-link to="/board" class="nav-link">지역별 게시판</router-link></li>
       </ul>
+      <user-drop-down/>
     </div>
-    <user-drop-down/>
   </nav>
 
 </template>

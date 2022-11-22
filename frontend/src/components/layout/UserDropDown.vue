@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="userinfo && userinfo.length != 0">
+        <template v-if="userinfo && Object.keys(userinfo).length != 0">
             <div class="dropdown">
                 <b-dropdown id="dropdown-1" dropleft class="m-2" :text="userinfo.userName">
                     <b-dropdown-item>관심 매물</b-dropdown-item>
@@ -10,19 +10,21 @@
                 </b-dropdown>
             </div>
         </template>
+        <template v-else>
+            <b-button @click="goToLoginForm">Log in</b-button>
+        </template>
     </div>
 </template>
 
 <script>
 
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
     name: 'FrontendUserDropDown',
 
     data() {
         return {
-            tUserinfo: {}
         };
     },
     computed: {
@@ -30,7 +32,7 @@ export default {
     },
     watch: {
         userinfo() {
-            this.tUserinfo = this.userinfo;
+            console.log(this.userinfo);
         }
     },
     created() {
@@ -39,8 +41,13 @@ export default {
     mounted() {
     },
     methods: {
+        ...mapActions("userStore",["doLogout"]),
         logout() {
-            
+            this.doLogout();
+            this.goToLoginForm();
+        },
+        goToLoginForm() {
+            this.$router.push("/loginform");
         }
     },
 };

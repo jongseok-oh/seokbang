@@ -10,12 +10,12 @@
                     <div class="form-signin" @keyup.enter="login">
                         <input type="text" class="form-control" placeholder="ID" required autofocus v-model="ID">
                         <input type="password" class="form-control" placeholder="Password" required v-model="Password">
-                        <button class="btn btn-lg btn-primary btn-block" @click="login">로그인</button>
+                        <b-button class="btn btn-lg btn-primary btn-block" @click="login">로그인</b-button>
+                        <b-button class="btn btn-lg btn-primary btn-block" variant="success" @click="goToSignupForm">회원가입</b-button>
                         <br><br>
                         <a href="#">비밀번호 찾기 </a><span class="clearfix"></span>
                     </div>
                 </div>
-                <router-link to="../signupform">Create an account </router-link>
             </div>
             <div class="col"/>
         </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import {mapActions } from "vuex";
 
 const userStore = "userStore";
 
@@ -36,10 +36,6 @@ export default {
             Password:""
         };
     },
-
-    mounted() {
-        
-    },
     methods: {
         ...mapActions(userStore, ["doLogin"]),
         login() {
@@ -48,6 +44,9 @@ export default {
                 password: this.Password
             }
             this.doLogin(payload);
+        },
+        goToSignupForm() {
+            this.$router.push('/signupform');
         }
     },
 };
