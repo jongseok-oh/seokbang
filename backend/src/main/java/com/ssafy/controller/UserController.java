@@ -1,5 +1,6 @@
 package com.ssafy.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -84,6 +85,7 @@ public class UserController{
 	@PostMapping
 	private ResponseEntity<?> register(@RequestBody UserInfo user){
 		log.info(user.toString());
+		user.setJoinDate(new Date());
 		try {
 			boolean res = userService.registerUser(user);
 			if(res)
