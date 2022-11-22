@@ -3,9 +3,8 @@
     <h2 class="">강남구 게시판</h2>
     <hr/>
     
-    <b-button variant="outline-dark" pressed size="sm">전체글</b-button>
-    <b-button variant="outline-dark" size="sm">개념글</b-button>
-    <b-button variant="outline-dark" size="sm">공지</b-button>
+    <b-button variant="outline-dark" :pressed.sync="allToggle" size="sm" @click="allPosts">전체글</b-button>
+    <b-button variant="outline-dark" :pressed.sync="popularToggle" size="sm" @click="popularPosts">인기글</b-button>
     <hr/>
 
     <table class="table table-striped table-hover">
@@ -18,11 +17,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-if="!posts || posts == null || posts.length == 0">
+        <tr v-if="!postList || postList == null || postList.length == 0">
             <td colspan="4">등록된 글 정보가 없습니다.</td>
         </tr>
         <template v-else>
-            <tr v-for="(post) in posts" :key="post.no" @click="movePostDetail(post.no)">
+            <tr :key="post.no" v-for="post in postList" @click="movePostDetail(post.no)">
             <td>{{ post.userNo }}</td>
             <td>{{ post.title }}</td>
             <td>{{ post.hit }}</td>
@@ -32,13 +31,13 @@
         </tbody>
     </table>
 
-    <b-button variant="outline-dark" pressed size="sm">전체글</b-button>
-    <b-button variant="outline-dark" size="sm">개념글</b-button>
+    <b-button variant="outline-dark" :pressed.sync="allToggle" size="sm" @click="allPosts">전체글</b-button>
+    <b-button variant="outline-dark" :pressed.sync="popularToggle" size="sm" @click="popularPosts">인기글</b-button>
     <b-button variant="outline-dark float-end" @click="moveWriteForm" size="sm">글쓰기</b-button>
 
     <b-pagination
         v-model="currentPage"
-        :total-rows="rows"
+        :total-rows="10"
         :per-page="perPage"
         size="sm"
         align="center"
@@ -48,7 +47,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const boardStore = "boardStore";
 
@@ -58,19 +57,19 @@ export default {
             perPage: 10,
             currentPage: 1,
             gugunCode: "1111000000",
+            postList: this.posts,
+            allToggle: true,
+            popularToggle: false,
         };
     },
   computed: {
-    ...mapGetters(boardStore, ["posts"]),
-    rows() {
-      return this.posts.length;
-    },
+    ...mapState(boardStore, ["posts"]),
   },
   methods: {
     ...mapActions(boardStore,["getPosts","hit"]),
     async movePostDetail(no){
       await this.hit(no);
-      await this.$router.push({
+      this.$router.push({
         name: "postdetail",
         params: { postNo: no },
       });
@@ -78,9 +77,20 @@ export default {
     moveWriteForm() {
       this.$router.push({name : "postwriteform"});
     },
+    allPosts(){
+      this.allToggle = true;
+      this.popularToggle = false;
+      this.postList = this.posts;
+    },
+    popularPosts(){
+      this.allToggle = false;
+      this.popularToggle = true;
+      this.postList = this.posts.filter(post => post.hit >= 5);
+    },
   },
   async mounted() {
     await this.getPosts(this.gugunCode);
+    this.allPosts();
   },
 };
 </script>

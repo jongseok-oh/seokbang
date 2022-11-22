@@ -9,7 +9,7 @@
                 <td colspan="4">등록된 댓글 정보가 없습니다.</td>
             </tr>
             <template v-else>
-              <tr v-for="reple in reples" :key="reple.no">
+              <tr :key="reple.no" v-for="reple in reples">
                 <td>{{ reple.content }}</td>
                 <td>{{ reple.userNo }}</td>
                 <td>{{ reple.repleDate }}</td>
@@ -19,8 +19,8 @@
                       {{reple.likesCnt}}
                     </b-button>
                 </td>
-                <td><b-button variant="outline-primary" inline @click="writeReple" size="sm">수정</b-button></td>
-                <td><b-button variant="outline-danger" inline @click="writeReple" size="sm">삭제</b-button></td>
+                <td><b-button variant="outline-primary" inline @click="modifyRepleBtn" size="sm">수정</b-button></td>
+                <td><b-button variant="outline-danger" inline @click="deleteRepleBtn(reple.no)" size="sm">삭제</b-button></td>
               </tr>
             </template>
           </tbody>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 const boardStore = "boardStore";
 
@@ -51,9 +51,9 @@ export default {
     ...mapState("userStore", ["userNo"]),
   },
   methods: {
-    ...mapActions(boardStore, ["getReples", "registReple"]),
-    writeReple(){
-      this.registReple({
+    ...mapActions(boardStore, ["getReples", "registReple", "deleteReple"]),
+    async writeReple(){
+      await this.registReple({
         postNo : this.$route.params.postNo,
         userNo : this.userNo,
         content : this.repleContent,
@@ -68,7 +68,6 @@ export default {
         let repleList = data.data.reples;
         let isLikedList = data.data.isLiked;
         let likesCntList = data.data.likesCnt;
-        console.log(isLikedList);
 
         for (let index = 0; index < repleList.length ; index++) {
           const reple = {
@@ -83,6 +82,13 @@ export default {
         }
       });
     },
+    async deleteRepleBtn(no){
+      await this.deleteReple(no);
+      this.init();
+    },
+    modifyRepleBtn(){
+
+    }
   },
   created() {
     this.init();
