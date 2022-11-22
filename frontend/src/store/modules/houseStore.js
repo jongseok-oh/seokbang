@@ -1,4 +1,5 @@
 import { sidoList, gugunList, houseList, houseDealList } from "@/api/house.js";
+import axios from "axios";
 
 const houseStore = {
   namespaced: true,
@@ -60,6 +61,11 @@ const houseStore = {
           console.log(error);
         }
       );
+      // axios.get(`http://localhost:8080/api/locations/sidocode`, { withCredentials: true }).then(({ data }) => {
+      //   commit("SET_SIDO_LIST", data);
+      // }).catch((error) => {
+      //   console.log(error);
+      // });
     },
     getGugun: ({ commit }, sidoCode) => {
       const params = { sido: sidoCode };

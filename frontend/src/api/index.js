@@ -5,11 +5,12 @@ import router  from "@/router";
 function apiInstance() {
   const instance = axios.create({
     baseURL: process.env.VUE_APP_API_BASE_URL,
+    withCredentials: true,
     headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
   });
-  instance.defaults.withCredentials = true;
+  
   instance.interceptors.response.use(
     function (response) {
       return response;
