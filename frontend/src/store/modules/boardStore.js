@@ -9,6 +9,9 @@ const boardStore = {
     post: {},
   },
   getters: {
+    posts(state) {
+      return state.posts;
+    },
   },
   mutations: {
     setPosts(state, payload) {
@@ -33,6 +36,7 @@ const boardStore = {
       context.commit("clear");
       return restApi.get(`/api/posts/${payload}`).then(({ data }) => {
         context.commit("setPosts", data);
+        console.log("겟포스트");
       });
     },
     getPost(context, payload) {
