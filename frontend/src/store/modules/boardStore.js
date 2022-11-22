@@ -1,4 +1,6 @@
-import restApi from "@/util/http-common.js";
+import { apiInstance } from "@/api/index.js";
+
+let restApi = apiInstance();
 
 const boardStore = {
   namespaced: true,
