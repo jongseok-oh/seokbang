@@ -65,8 +65,6 @@ public class PostController {
 		postLikes.setPostNo(no);
 		res.put("isLiked", postLikesService.getPostLike(postLikes));
 		
-		log.info("" + res.get("likesCnt"));
-		log.info("" + res.get("isLiked"));
 		return ResponseEntity.ok(res);
 	}
 	

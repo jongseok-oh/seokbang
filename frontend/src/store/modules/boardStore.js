@@ -29,14 +29,20 @@ const boardStore = {
     setIsLiked(state, payload) {
       state.post.isLiked = payload;
     },
+    clear(state) {
+      state.posts = [];
+      state.post = {};
+    },
   },
   actions: {
     async getPosts(context, payload) {
+      context.commit("clear");
       return await restApi.get(`/api/posts/${payload}`).then(({ data }) => {
         context.commit("setPosts", data);
       });
     },
     async getPost(context, payload) {
+      context.commit("clear");
       return await restApi.get(`/api/posts/detail/${payload}`).then(({ data }) => {
         context.commit("setPost", data.post);
         context.commit("setLikesCnt", data.likesCnt);
@@ -48,7 +54,6 @@ const boardStore = {
         console.log(`store action registPost`);
       });
     },
-    
     async modifyPost(context, payload) {
       return await restApi.put(`/api/posts`, payload).then(() => {
         console.log(`store action modifyPost`);
@@ -72,7 +77,14 @@ const boardStore = {
         return await restApi.delete(`/api/posts/like/${payload}`).then(() => {
           console.log(`unlike ㅋㅋ`);
         });
-  
+    },
+    async registReple(context, payload) {
+      return await restApi.post(`/api/reples`, payload).then(() => {
+        console.log(`store action regist reple`);
+      });
+    },
+    async getReples(context, payload) {
+      return await restApi.get(`/api/reples/${payload}`);
     },
   },
 };

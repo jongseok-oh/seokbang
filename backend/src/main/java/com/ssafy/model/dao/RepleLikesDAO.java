@@ -1,5 +1,8 @@
 package com.ssafy.model.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.model.dto.RepleLikes;
@@ -10,7 +13,7 @@ public interface RepleLikesDAO {
 
 	int deleteRepleLike(RepleLikes repleLikes);
 	
-	RepleLikes getRepleLike(RepleLikes repleLikes);
+	List<Integer> getRepleIsLiked(Map<String, Long> map);
 	
-	int getRepleLikesCount(Long repleNo);
+	List<Integer> getRepleLikesCount(Long postNo);
 }

@@ -68,9 +68,9 @@ export default {
   },
   methods: {
     ...mapActions(boardStore,["getPosts","hit"]),
-    movePostDetail(no){
-      this.hit(no);
-      this.$router.push({
+    async movePostDetail(no){
+      await this.hit(no);
+      await this.$router.push({
         name: "postdetail",
         params: { postNo: no },
       });

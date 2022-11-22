@@ -25,11 +25,13 @@ public class PostLikesServiceImpl implements PostLikesService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public boolean getPostLike(PostLikes postLikes) {
 		return postLikesDao.getPostLike(postLikes) != null;
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public int getPostLikesCount(Long postNo) {
 		return postLikesDao.getPostLikesCount(postNo);
 	}

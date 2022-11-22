@@ -11,12 +11,12 @@
 		delete from replelikes where userNo = #{userNo} and repleNo = #{repleNo}
 	</delete>
 	
-	<select id="getRepleLike" resultType="RepleLikes" parameterType="RepleLikes">
-		select * from replelikes where userNo = #{userNo} and repleNo = #{repleNo}
+	<select id="getRepleIsLiked" resultType="Integer" parameterType="hashMap">
+		select count(l.userNo) from reple r left join replelikes l on(r.no = l.repleNo and l.userNo = #{userNo}) where postNo = #{postNo} group by r.no;
 	</select>
 	
-	<select id="getRepleLikesConunt" resultType="int" parameterType="Long">
-		select count(*) from replelikes where repleNo = #{repleNo}
+	<select id="getRepleLikesCount" resultType="Integer" parameterType="Long">
+		select count(l.userNo) from reple r left outer join replelikes l on(r.no = l.repleNo) where postNo = #{postNo} group by r.no;
 	</select>
 	
 </mapper>

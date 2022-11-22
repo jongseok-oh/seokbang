@@ -1,5 +1,8 @@
 package com.ssafy.model.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +28,12 @@ public class RepleLikesServiceImpl implements RepleLikesService {
 	}
 
 	@Override
-	public boolean getRepleLike(RepleLikes repleLikes) {
-		return repleLikesDao.getRepleLike(repleLikes) != null;
+	public List<Integer> getRepleIsLiked(Map<String, Long> map) {
+		return repleLikesDao.getRepleIsLiked(map);
 	}
 
 	@Override
-	public int getRepleLikesCount(Long repleNo) {
-		return repleLikesDao.getRepleLikesCount(repleNo);
+	public List<Integer> getRepleLikesCount(Long postNo) {
+		return repleLikesDao.getRepleLikesCount(postNo);
 	}
 }

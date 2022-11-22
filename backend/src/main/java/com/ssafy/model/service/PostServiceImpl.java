@@ -23,11 +23,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Post> getPosts(String gugunCode) {
 		return postDao.getPosts(gugunCode);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Post getPost(Long no) {
 		return postDao.getPost(no);
 	}
