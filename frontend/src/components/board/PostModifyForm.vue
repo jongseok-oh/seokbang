@@ -7,30 +7,31 @@
       rows="20"
       no-resize
       ></b-form-textarea>
-    <b-button class="float-end" @click="onSubmit">수정</b-button>
+    <b-button class="float-end" @click="modifyPostBtn">수정</b-button>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
+
+const boardStore = "boardStore";
+
 export default {
     data() {
         return {
         };
     },
   computed: {
-    ...mapState("boardStore", ["post"]),
+    ...mapState(boardStore, ["post"]),
   },
   methods: {
-    ...mapActions("boardStore",["modifyPost"]),
-    onSubmit(){
-      this.modifyPost(this.post).then(() => {
-        console.log(`modify post success`);
-        this.$router.replace({
+    ...mapActions(boardStore,["modifyPost"]),
+    async modifyPostBtn(){
+      await this.modifyPost(this.post);
+      this.$router.replace({
           name: "postdetail",
           params: { postNo: this.post.no },
         });
-      });
     },
   },
   created() {

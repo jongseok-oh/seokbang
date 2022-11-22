@@ -22,7 +22,7 @@
             <td colspan="4">등록된 글 정보가 없습니다.</td>
         </tr>
         <template v-else>
-            <tr v-for="(post) in posts" :key="post.no" @click="movePostDetail(post.no)">
+            <tr :key="post.no" v-for="post in posts" @click="movePostDetail(post.no)">
             <td>{{ post.userNo }}</td>
             <td>{{ post.title }}</td>
             <td>{{ post.hit }}</td>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const boardStore = "boardStore";
 
@@ -61,7 +61,7 @@ export default {
         };
     },
   computed: {
-    ...mapGetters(boardStore, ["posts"]),
+    ...mapState(boardStore, ["posts"]),
     rows() {
       return this.posts.length;
     },
@@ -70,7 +70,7 @@ export default {
     ...mapActions(boardStore,["getPosts","hit"]),
     async movePostDetail(no){
       await this.hit(no);
-      await this.$router.push({
+      this.$router.push({
         name: "postdetail",
         params: { postNo: no },
       });
@@ -79,8 +79,8 @@ export default {
       this.$router.push({name : "postwriteform"});
     },
   },
-  async mounted() {
-    await this.getPosts(this.gugunCode);
+  mounted() {
+    this.getPosts(this.gugunCode);
   },
 };
 </script>

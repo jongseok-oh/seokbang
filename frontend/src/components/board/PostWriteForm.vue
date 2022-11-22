@@ -7,7 +7,7 @@
       rows="20"
       no-resize
       ></b-form-textarea>
-    <b-button class="float-end" @click="onSubmit">등록</b-button>
+    <b-button class="float-end" @click="writePostBtn">등록</b-button>
   </div>
 </template>
 
@@ -24,12 +24,10 @@ export default {
   },
   methods: {
     ...mapActions("boardStore",["registPost"]),
-    onSubmit(){
-      this.registPost(this.post).then(() => {
-        console.log(`regist post success`);
-        this.clear();
-        this.$router.push("/board");
-      });
+    async writePostBtn(){
+      await this.registPost(this.post);
+      this.clear();
+      this.$router.push("/board");
     },
     clear(){
       this.post = {

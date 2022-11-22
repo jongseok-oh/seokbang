@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 import RepleList from './RepleList.vue';
 
 const boardStore = "boardStore";
@@ -52,13 +52,13 @@ export default {
   },
   data() {
       return {
-        postNo : 0,
-        isLiked : false,
-        likesCnt : 0,
+        postNo : Number,
+        isLiked : Boolean,
+        likesCnt : Number,
       };
   },
   computed: {
-    ...mapGetters(boardStore, ["post"]),
+    ...mapState(boardStore, ["post"]),
     message() {
       if (this.post.content) return this.post.content.split("\n").join("<br>");
       return "";
@@ -72,9 +72,8 @@ export default {
     moveModifyArticle(){
       this.$router.replace({name : "postmodifyform"})
     },
-    clickDelete(){
-      this.deletePost(this.post.no);
-      alert("삭제됨 ㅋ");
+    async clickDelete(){
+      await this.deletePost(this.post.no);
       this.moveList();
     },
     likeBtn(){
@@ -87,20 +86,23 @@ export default {
         this.isLiked = true;
       }
     },
+    async init(){
+      await this.getPost(this.postNo);
+      this.likesCnt = this.post.likesCnt;
+      this.isLiked = this.post.isLiked;
+    }
   },
   destroyed() {
-    if(this.isLiked){
+    if(this.isLiked && !this.post.isLiked){
       this.likePost(this.post.no);
     }
-    else{
+    else if(!this.isLiked && this.post.isLiked){
       this.unlikePost(this.post.no);
     }
   },
-  async mounted() {
+  mounted() {
     this.postNo = this.$route.params.postNo;
-    await this.getPost(this.postNo);
-    this.likesCnt = this.post.likesCnt;
-    this.isLiked = this.post.isLiked;
+    this.init();
   },
 };
 </script>

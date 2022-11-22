@@ -9,12 +9,6 @@ const boardStore = {
     post: {},
   },
   getters: {
-    posts(state) {
-      return state.posts;
-    },
-    post(state) {
-      return state.post;
-    },
   },
   mutations: {
     setPosts(state, payload) {
@@ -35,56 +29,62 @@ const boardStore = {
     },
   },
   actions: {
-    async getPosts(context, payload) {
+    getPosts(context, payload) {
       context.commit("clear");
-      return await restApi.get(`/api/posts/${payload}`).then(({ data }) => {
+      return restApi.get(`/api/posts/${payload}`).then(({ data }) => {
         context.commit("setPosts", data);
       });
     },
-    async getPost(context, payload) {
+    getPost(context, payload) {
       context.commit("clear");
-      return await restApi.get(`/api/posts/detail/${payload}`).then(({ data }) => {
+      return restApi.get(`/api/posts/detail/${payload}`).then(({ data }) => {
         context.commit("setPost", data.post);
         context.commit("setLikesCnt", data.likesCnt);
         context.commit("setIsLiked", data.isLiked);
       });
     },
-    async registPost(context, payload) {
-      return await restApi.post(`/api/posts`, payload).then(() => {
+    registPost(context, payload) {
+      return restApi.post(`/api/posts`, payload).then(() => {
         console.log(`store action registPost`);
       });
     },
-    async modifyPost(context, payload) {
-      return await restApi.put(`/api/posts`, payload).then(() => {
+    modifyPost(context, payload) {
+      return restApi.put(`/api/posts`, payload).then(() => {
         console.log(`store action modifyPost`);
       });
     },
-    async deletePost(context, payload, success) {
-      console.log("delete");
-      return await restApi.delete(`/api/posts/${payload}`).then(success);
+    deletePost(context, payload) {
+      return restApi.delete(`/api/posts/${payload}`).then(() => {
+        console.log("delete post");
+      });
     },
-    async hit(context, payload){
-      return await restApi.put(`/api/posts/${payload}`).then(() => {
+    hit(context, payload){
+      return restApi.put(`/api/posts/${payload}`).then(() => {
         console.log(`hit ㅋㅋ`);
       });
     },
-    async likePost(context, payload){
-        return await restApi.post(`/api/posts/like/${payload}`).then(() => {
+    likePost(context, payload){
+        return restApi.post(`/api/posts/like/${payload}`).then(() => {
           console.log(`like ㅋㅋ`);
         });
       },
-    async unlikePost(context, payload){
-        return await restApi.delete(`/api/posts/like/${payload}`).then(() => {
+    unlikePost(context, payload){
+        return restApi.delete(`/api/posts/like/${payload}`).then(() => {
           console.log(`unlike ㅋㅋ`);
         });
     },
-    async registReple(context, payload) {
-      return await restApi.post(`/api/reples`, payload).then(() => {
+    registReple(context, payload) {
+      return restApi.post(`/api/reples`, payload).then(() => {
         console.log(`store action regist reple`);
       });
     },
-    async getReples(context, payload) {
-      return await restApi.get(`/api/reples/${payload}`);
+    getReples(context, payload) {
+      return restApi.get(`/api/reples/${payload}`);
+    },
+    deleteReple(context, payload) {
+      return restApi.delete(`/api/reples/${payload}`).then(() => {
+        console.log("delete reple");
+      });
     },
   },
 };
