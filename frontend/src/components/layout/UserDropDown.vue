@@ -1,19 +1,19 @@
 <template>
-    <div>
+    <b-navbar-nav class="ms-auto" style="margin-right:100px">
         <template v-if="userinfo && Object.keys(userinfo).length != 0">
-            <div class="dropdown">
-                <b-dropdown id="dropdown-1" dropleft class="m-2" :text="userinfo.userName">
-                    <b-dropdown-item>관심 매물</b-dropdown-item>
-                    <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item @click="userDetailForm">회원 정보 수정</b-dropdown-item>
-                    <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>
-                </b-dropdown>
-            </div>
+            <b-nav-item-dropdown :text="userinfo.userName">
+                <b-dropdown-item>관심 매물</b-dropdown-item>
+                <b-dropdown-divider></b-dropdown-divider>
+                <b-dropdown-item @click="userDetailForm">회원 정보 수정</b-dropdown-item>
+                <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>
+            </b-nav-item-dropdown>
         </template>
         <template v-else>
-            <b-button @click="goToLoginForm">Log in</b-button>
+            <b-nav-form>
+                <b-button style="font-weight:600" variant="light" @click="goToLoginForm">로그인</b-button>
+            </b-nav-form>
         </template>
-    </div>
+    </b-navbar-nav>
 </template>
 
 <script>
@@ -52,6 +52,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>
