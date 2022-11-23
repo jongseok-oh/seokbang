@@ -8,7 +8,8 @@ const houseStore = {
     gugunCode:"",
     houses: [],
     deals: [],
-    aptName:""
+    aptName: "",
+    listState:"",
   },
   getters: {},
   mutations: {
@@ -48,7 +49,10 @@ const houseStore = {
     },
     SET_APT_NAME(state, aptName) {
       state.aptName = aptName;
-    }
+    },
+    SET_LIST_STATE(state, liststate) {
+      state.listState = liststate;
+    },
   },
   actions: {
     getSido: ({ commit }) => {

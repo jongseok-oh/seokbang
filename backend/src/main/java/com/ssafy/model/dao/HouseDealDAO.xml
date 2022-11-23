@@ -14,6 +14,16 @@
 	<select id="getHouseDealByAptCodeLimit" resultType="HouseDeal" parameterType="Map">
 		select * from housedeal where aptCode = #{aptCode} limit #{start}, #{end}
 	</select>
+	
+	<select id="getHouseDealByKeyWord" resultType="HouseDealEntity" parameterType="String">
+		select hd.dealAmount dealAmount, hd.dealYear dealYear, hd.dealMonth dealMonth,
+		hd.dealDay dealDay, hd.area area, hd.floor floor,hi.aptName aptName,
+		hi.dongName dongName, hi.buildYear buildYear
+		from housedeal as hd, houseinfo as hi
+		where hd.aptCode = hi.aptCode
+		and (hi.aptName like concat("%",#{keyword},"%")
+		or hi.dongName like concat("%",#{keyword},"%"));
+	</select>
 </mapper>
 
 

@@ -12,8 +12,12 @@ Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false
 
-new Vue({
+let vue = new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+window.addEventListener('beforeunload', () => {
+  vue.$destroy();
+});

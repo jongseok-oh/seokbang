@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.HouseDeal;
+import com.ssafy.model.dto.HouseDealEntity;
 import com.ssafy.model.dto.HouseInfo;
 import com.ssafy.model.service.ApartService;
 
@@ -51,5 +52,12 @@ public class ApartController{
 			return ResponseEntity.ok(list);
 		}
 		else return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+	
+	@GetMapping("/deals/{keyword}")
+	public ResponseEntity<?> getHouseDealListByKeyword(@PathVariable String keyword) {
+		List<HouseDealEntity> list = apartService.getHouseDealListByKeyword(keyword);
+		log.info("houseDealList by keyword ok");
+		return ResponseEntity.ok(list);
 	}
 }

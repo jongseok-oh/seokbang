@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.model.dao.HouseDealDAO;
 import com.ssafy.model.dao.HouseInfoDAO;
 import com.ssafy.model.dto.HouseDeal;
+import com.ssafy.model.dto.HouseDealEntity;
 import com.ssafy.model.dto.HouseInfo;
 
 @Service
@@ -50,5 +51,10 @@ public class ApartServiceImpl implements ApartService {
 		m.put("end", end);
 		
 		return houseDealDao.getHouseDealByAptCodeLimit(m);
+	}
+
+	@Override
+	public List<HouseDealEntity> getHouseDealListByKeyword(String keyword) {
+		return houseDealDao.getHouseDealByKeyWord(keyword);
 	}
 }

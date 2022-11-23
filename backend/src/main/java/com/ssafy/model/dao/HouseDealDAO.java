@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.model.dto.HouseDeal;
+import com.ssafy.model.dto.HouseDealEntity;
 
 @Mapper
 public interface HouseDealDAO {
@@ -13,7 +14,7 @@ public interface HouseDealDAO {
 	List<HouseDeal> getHouseDealByAptCode(int aptCode);
 	int getAptCnt(int aptCode);
 	
-	List<HouseDeal> getHouseDealByKeyWord(String keyword);
+	List<HouseDealEntity> getHouseDealByKeyWord(String keyword);
 	
 	// int aptCode, int start, int end
 	List<HouseDeal> getHouseDealByAptCodeLimit(Map<String, Object> m);
