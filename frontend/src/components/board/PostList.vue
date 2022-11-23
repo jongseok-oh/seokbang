@@ -1,6 +1,17 @@
 <template>
   <div class="container" id="board">
-    <h2 class="">{{this.gugunName}} 게시판</h2>
+    <b-row cols="11">
+      <b-col sm="10">
+        <h2 class="mx-3">{{this.gugunName}} 게시판</h2>
+      </b-col>
+      <b-col sm="2" class="m-auto">
+        <b-button variant="outline-warning dark" size="md" @click="likeBtn">
+            <b-icon-star color="dark" v-if="!s"></b-icon-star>
+            <b-icon-star-fill color="yellow" v-else></b-icon-star-fill>
+            관심지역
+          </b-button>
+      </b-col>
+    </b-row>
     <hr/>
     
     <b-button variant="outline-dark" :pressed.sync="allToggle" size="sm" @click="allPosts">전체글</b-button>

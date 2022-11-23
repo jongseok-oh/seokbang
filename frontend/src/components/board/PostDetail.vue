@@ -1,5 +1,18 @@
 <template>
   <div class="container">
+    <b-row cols="11">
+      <b-col sm="10">
+        <h2 class="mx-3">{{this.gugunName}} 게시판</h2>
+      </b-col>
+      <b-col sm="2" class="m-auto">
+        <b-button variant="outline-warning dark" size="md" @click="likeBtn">
+            <b-icon-star color="dark" v-if="!s"></b-icon-star>
+            <b-icon-star-fill color="yellow" v-else></b-icon-star-fill>
+            관심지역
+          </b-button>
+      </b-col>
+    </b-row>
+    <hr/>
     <b-container class="mt-3">
       <b-row class="mb-1">
         <b-col>
@@ -55,7 +68,7 @@ export default {
       };
   },
   computed: {
-    ...mapState(boardStore, ["post"]),
+    ...mapState(boardStore, ["post", "gugunName"]),
     message() {
       if (this.post.content) return this.post.content.split("\n").join("<br>");
       return "";
