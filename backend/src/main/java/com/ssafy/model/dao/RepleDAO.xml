@@ -7,12 +7,12 @@
 		insert into reple(postNo,userNo,content,repleDate) values(#{postNo},#{userNo},#{content},#{repleDate})
 	</insert>
 	
-	<select id="getReples" resultType="Reple" parameterType="Long">
-		select * from reple where postNo = #{postNo}
+	<select id="getReples" resultType="RepleDTO" parameterType="Long">
+		select r.*, u.userName from reple r left outer join userinfo u on (u.no = r.userNo) where postNo = #{postNo};
 	</select>
 	
-	<select id="getReple" resultType="Reple" parameterType="Long">
-		select * from reple where no = #{no};
+	<select id="getReple" resultType="RepleDTO" parameterType="Long">
+		select r.*, u.userName from reple r left outer join userinfo u on (u.no = r.userNo) where r.no = #{no};
 	</select>
 	
 	<update id="modifyReple" parameterType="Reple">

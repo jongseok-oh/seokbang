@@ -3,13 +3,14 @@ package com.ssafy.model.service;
 import java.util.List;
 
 import com.ssafy.model.dto.Reple;
+import com.ssafy.model.dto.RepleDTO;
 
 public interface RepleService {
 	boolean insertReple(Reple reple);
 
-	List<Reple> getReples(Long postNo);
+	List<RepleDTO> getReples(Long postNo);
 	
-	Reple getReple(Long no);
+	RepleDTO getReple(Long no);
 	
 	boolean modifyReple(Reple reple);
 	
