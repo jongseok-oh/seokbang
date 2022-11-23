@@ -1,4 +1,4 @@
-import { sidoList, gugunList, houseList, houseDealList } from "@/api/house.js";
+import { sidoList, gugunList, houseList, houseDealList, houseDealListKeyword } from "@/api/house.js";
 
 const houseStore = {
   namespaced: true,
@@ -9,6 +9,7 @@ const houseStore = {
     houses: [],
     deals: [],
     aptName: "",
+    searchkey:"",
     listState:"",
   },
   getters: {},
@@ -49,6 +50,9 @@ const houseStore = {
     },
     SET_APT_NAME(state, aptName) {
       state.aptName = aptName;
+    },
+    SET_SEARCH_KEY(state, keyword) {
+      state.searchkey = keyword;
     },
     SET_LIST_STATE(state, liststate) {
       state.listState = liststate;
@@ -106,6 +110,19 @@ const houseStore = {
         params,
         ({ data }) => {
           commit("SET_DEAL_HOUSE_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    getHouseDealListByKeyword: ({ commit }, keyword) => {
+      commit("SET_SEARCH_KEY", keyword);
+      houseDealListKeyword(
+        keyword,
+        ({ data }) => {
+          commit("SET_DEAL_HOUSE_LIST", data);
+          console.log(data);
         },
         (error) => {
           console.log(error);

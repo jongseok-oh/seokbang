@@ -5,13 +5,7 @@
 </template>
 
 <script>
-import store from "@/store";
 export default {
-  components: {
-  },
-  created() {
-        store.commit('SET_NAV_FOOTER', false)
-  },
 };
 </script>
 

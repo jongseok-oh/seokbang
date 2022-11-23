@@ -2,7 +2,9 @@
     <div id="app">
         <nav-bar v-if="navFooter"></nav-bar>
         <logo-nav v-if="!navFooter"></logo-nav>
-        <router-view></router-view>
+        <div class="mb-5">
+            <router-view></router-view>
+        </div>
         <my-footer v-if="navFooter" />
     </div>
 </template>
@@ -25,13 +27,19 @@ export default {
     computed: {
         ...mapState(["navFooter"]),
     },
-    created() {
-        //console.log("App created..");
-        store.commit("SET_NAV_FOOTER", true);
-    },
-    destroyed() {
-        //alert("App destroyed..");
-    },
+    watch: {
+        $route(to, from) {
+            //console.log(to);
+            //console.log(from);
+            if (to.path !== from.path) {
+                if (to.matched[0].path == '/user') {
+                    store.commit("SET_NAV_FOOTER", false);
+                } else {
+                    store.commit("SET_NAV_FOOTER", true);
+                }
+            }
+        }
+    }
 };
 </script>
 

@@ -18,4 +18,9 @@ function houseDealList(params, success, fail) {
   api.get(`/api/aparts/deals`, { params: params }).then(success).catch(fail);
 }
 
-export { sidoList, gugunList, houseList, houseDealList};
+function houseDealListKeyword(path, success, fail) {
+  api.get(`/api/aparts/deals/${path}`).then(success).catch(fail);
+}
+
+
+export { sidoList, gugunList, houseList, houseDealList, houseDealListKeyword};

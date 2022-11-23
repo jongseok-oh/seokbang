@@ -9,10 +9,10 @@
                             <div class="row">
                                 <b-row>
                                     <b-col cols="10">
-                                        <b-input placeholder="검색하기"></b-input>
+                                        <b-input placeholder="원하시는 지역명, 아파트명을 입력해주세요" @keyup.enter="search" v-model="keyword"></b-input>
                                     </b-col>
                                     <b-col>
-                                        <b-button>Search</b-button>
+                                        <b-button @click="search">검색하기</b-button>
                                     </b-col>
                                 </b-row>
                             </div>
@@ -77,11 +77,12 @@
 
 <script>
 import store from "@/store";
+import {mapActions, mapMutations } from "vuex";
 
 export default {
     data() {
         return {
-            
+            keyword:"",
         };
     },
     created() {
@@ -90,6 +91,13 @@ export default {
     mounted() {
     },
     methods: {
+        ...mapActions('houseStore', ['getHouseDealListByKeyword']),
+        ...mapMutations('houseStore', ['SET_LIST_STATE']),
+        search() {
+            this.getHouseDealListByKeyword(this.keyword);
+            this.SET_LIST_STATE('search');
+            this.$router.push('/dealinfo');
+        }
     },
 };
 </script>

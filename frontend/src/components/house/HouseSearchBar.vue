@@ -12,7 +12,7 @@
 </template>
 
 <script>
-
+import {mapActions, mapMutations } from "vuex";
 
 export default {
     name: 'FrontendHouseSearch',
@@ -26,8 +26,11 @@ export default {
         
     },
     methods: {
+        ...mapActions('houseStore', ['getHouseDealListByKeyword']),
+        ...mapMutations('houseStore', ['SET_LIST_STATE']),
         search() {
-            alert(this.keyword);
+            this.getHouseDealListByKeyword(this.keyword);
+            this.SET_LIST_STATE('search');
         }
     },
 };

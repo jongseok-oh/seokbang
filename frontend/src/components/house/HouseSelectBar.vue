@@ -42,6 +42,7 @@ export default {
             "CLEAR_GUGUN_LIST",
             "CLEAR_APT_LIST",
             "SET_GUGUN_CODE",
+            "SET_LIST_STATE"
         ]),
 
         gugunList() {
@@ -53,6 +54,7 @@ export default {
             if (this.tgugunCode) {
                 this.SET_GUGUN_CODE(this.tgugunCode);
                 this.getHouseList(this.tgugunCode);
+                this.SET_LIST_STATE("gugun");
             }
         },
     },

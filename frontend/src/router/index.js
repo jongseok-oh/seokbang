@@ -10,7 +10,7 @@ import LoginForm from '@/components/user/LoginForm.vue'
 import SignupForm from '@/components/user/SignupForm.vue'
 import PostModifyForm from '@/components/board/PostModifyForm.vue'
 import UserModifyForm from '@/components/user/ModifyForm.vue'
-import UserView from '@/views/UserView.vue';
+import UserView from '@/views/UserView.vue'
 
 Vue.use(VueRouter)
 
