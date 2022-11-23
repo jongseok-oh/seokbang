@@ -64,10 +64,10 @@ export default {
   methods: {
     ...mapActions(boardStore, ["getPost", "deletePost", "likePost", "unlikePost"]),
     moveList(){
-      this.$router.replace({name : "postlist"})
+      this.$router.push({name : "postlist"})
     },
     moveModifyArticle(){
-      this.$router.replace({name : "postmodifyform"})
+      this.$router.push({name : "postmodifyform"})
     },
     async clickDelete(){
       await this.deletePost(this.post.no);

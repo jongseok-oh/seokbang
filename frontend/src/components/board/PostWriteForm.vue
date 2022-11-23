@@ -21,18 +21,19 @@ export default {
     },
   computed: {
     ...mapState("userStore", ["userinfo"]),
+    ...mapState("boardStore", ["gugunCode"]),
   },
   methods: {
     ...mapActions("boardStore",["registPost"]),
     async writePostBtn(){
       await this.registPost(this.post);
       this.clear();
-      this.$router.push("/board");
+      this.$router.push({name : "postlist"});
     },
     clear(){
       this.post = {
             userNo : this.userinfo.no,
-            gugunCode : "1111000000",
+            gugunCode : this.gugunCode,
             title : '',
             content : '',
             hit : 0,
