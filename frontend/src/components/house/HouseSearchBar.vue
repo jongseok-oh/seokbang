@@ -1,5 +1,5 @@
 <template>
-    <b-card class="my-1 mx-1">
+    <b-card class="h-100">
         <b-row>
             <b-col cols="8">
                 <b-input placeholder="원하시는 지역명, 아파트명을 입력해주세요" @keyup.enter="search" v-model="keyword"></b-input>

@@ -20,7 +20,7 @@ export default {
         };
     },
   computed: {
-    ...mapState("userStore", ["userNo"]),
+    ...mapState("userStore", ["userinfo"]),
   },
   methods: {
     ...mapActions("boardStore",["registPost"]),
@@ -31,7 +31,7 @@ export default {
     },
     clear(){
       this.post = {
-            userNo : this.userNo,
+            userNo : this.userinfo.no,
             gugunCode : "1111000000",
             title : '',
             content : '',

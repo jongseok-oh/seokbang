@@ -36,11 +36,20 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+
 #app {
+<<<<<<< HEAD
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+=======
+  font-family: 'Gowun Batang', serif;
+  font-weight: 800;
+  text-align: center;
+  color: #2c3e50;
+>>>>>>> 6107573ddc3fcb749ec4eb2a56be7990c470a9ae
 }
 </style>

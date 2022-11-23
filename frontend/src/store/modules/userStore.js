@@ -3,7 +3,6 @@ import router from "@/router";
 const userStore = {
   namespaced: true,
   state: {
-    userNo: 1,
     userinfo: {}
   },
   getters: {
