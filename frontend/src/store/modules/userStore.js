@@ -1,8 +1,5 @@
 import { login, logout, modifyUser, deleteUser} from "@/api/user.js";
 import router from "@/router";
-import store from "@/store";
-
-
 const userStore = {
   namespaced: true,
   state: {
@@ -16,7 +13,9 @@ const userStore = {
   },
   mutations: {
     SET_USER_INFO(state, userinfo) {
-      state.userinfo = userinfo;
+      for (var key in userinfo) {
+        state.userinfo[key] = userinfo[key];
+      }
       //console.log(state.userinfo);
     },
     CLEAR_USER_INFO(state) {
@@ -53,25 +52,30 @@ const userStore = {
         }
       )
     },
-    doModifyUser:({ commit }, body) => {
+    doModifyUser:({ commit, state }, userInfo) => {
       //console.log(payload);
+      commit('SET_USER_INFO', userInfo);
+      console.log(state);
       modifyUser(
-      body,
+        state.userinfo,
         () => {
-          store.dispatch('doLogout');
+          alert("회원정보 수정 성공!");
+          router.push('/');
         },
         (error) => {
           console.log(error);
         }
       )
     },
-    doDeleteUser:({ commit }, no) => {
+    doDeleteUser:({ state, dispatch  }) => {
       //console.log(payload);
-      let params = { no: no };
-      modifyUser(
+      let params = { no: state.userinfo.no };
+      deleteUser(
       params,
         () => {
-          store.dispatch('doLogout');
+          dispatch('doLogout');
+          alert("탈퇴 성공 ㅜㅜ");
+          router.push('/');
         },
         (error) => {
           console.log(error);

@@ -1,5 +1,5 @@
 <template>
-    <div class="container" >
+    <div class="container mt-5">
         <div class="row">
             <div class="col"/>
             <div class="col mb-3">
@@ -10,9 +10,10 @@
                     <div class="form-signin" @keyup.enter="login">
                         <input type="text" class="form-control" placeholder="ID" required autofocus v-model="ID">
                         <input type="password" class="form-control" placeholder="Password" required v-model="Password">
-                        <b-button class="btn btn-lg btn-primary btn-block" @click="login">로그인</b-button>
-                        <b-button class="btn btn-lg btn-primary btn-block" variant="success" @click="goToSignupForm">회원가입</b-button>
-                        <br><br>
+                        <div class="mt-5 mb-5">
+                            <b-button class="btn btn-lg btn-primary btn-block" @click="login">로그인</b-button>
+                            <b-button class="btn btn-lg btn-primary btn-block" variant="success" @click="goToSignupForm">회원가입</b-button>
+                        </div>
                         <a href="#">비밀번호 찾기 </a><span class="clearfix"></span>
                     </div>
                 </div>

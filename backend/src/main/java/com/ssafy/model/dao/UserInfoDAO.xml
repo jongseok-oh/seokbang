@@ -15,7 +15,7 @@
 	</select>
 	
 	<update id="updateUser" parameterType="UserInfo">
-		update userinfo set passWord=#{passWord}, userName = #{userName}, phoneNumber = #{phoneNumber},
+		update userinfo set passWord=ifnull(#{password},password), userName = ifnull(#{userName},userName),
 		birthYear=#{birthYear}, birthMonth=#{birthMonth}, birthDay=#{birthDay}, gender=#{gender}
 		where no = #{no}
 	</update>
