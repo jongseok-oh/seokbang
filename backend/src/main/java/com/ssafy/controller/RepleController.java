@@ -1,5 +1,6 @@
 package com.ssafy.controller;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ public class RepleController {
 	
 	@PostMapping
 	public ResponseEntity<?> registReple(@RequestBody Reple reple) {
+		reple.setRepleDate(LocalDateTime.now());
 		boolean res = repleService.insertReple(reple);
 
 		if(res)
@@ -49,7 +51,6 @@ public class RepleController {
 	
 	@GetMapping("/{postNo}")
 	public ResponseEntity<?> getRepleListByPostNo(HttpSession session, @PathVariable Long postNo) {
-		log.warn("원!!");
 		List<Integer> likesCnt = repleLikesService.getRepleLikesCount(postNo);
 		List<Reple> reples = repleService.getReples(postNo);
 		
@@ -62,7 +63,6 @@ public class RepleController {
 		res.put("reples", reples);
 		res.put("isLiked", isLiked);
 		res.put("likesCnt", likesCnt);
-		log.info("야야야");
 		return ResponseEntity.ok(res);
 	}
 	
@@ -74,6 +74,7 @@ public class RepleController {
 	
 	@PutMapping
 	private ResponseEntity<?> modifyReple(@RequestBody Reple reple){
+		reple.setRepleDate(LocalDateTime.now());
 		boolean res = repleService.modifyReple(reple);
 		
 		if(res)

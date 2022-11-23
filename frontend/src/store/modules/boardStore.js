@@ -7,6 +7,7 @@ const boardStore = {
   state: {
     posts: [],
     post: {},
+    currentPage: 1,
   },
   getters: {
     posts(state) {

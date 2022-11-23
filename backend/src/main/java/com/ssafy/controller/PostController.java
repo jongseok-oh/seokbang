@@ -1,5 +1,6 @@
 package com.ssafy.controller;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ public class PostController {
 	@PostMapping
 	public ResponseEntity<?> registPost(@RequestBody Post post) {
 		log.info("regist post");
+		post.setPostDate(LocalDateTime.now());
 		boolean res = postService.insertPost(post);
 
 		if(res)
@@ -71,6 +73,7 @@ public class PostController {
 	@PutMapping
 	private ResponseEntity<?> modifyPost(@RequestBody Post post){
 		boolean res = postService.modifyPost(post);
+		post.setPostDate(LocalDateTime.now());
 		
 		if(res)
 			return ResponseEntity.ok(post);
