@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <div class="container-fluid">
       <router-link to="/" class="navbar-brand px-2">
-        <div style="background:lightgrey; border-radius: 10px; padding:5px 5px; text; font-size: x-large ; font-weight: bold; width: 150px">
+        <div id="seokbang-logo">
           <img alt="logo" src="@/assets/logo.png" style="height:40px" />
           석 방
         </div>
@@ -37,11 +37,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
-
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
 
 ul a{
   border-radius: 10px;
@@ -60,4 +57,14 @@ ul a.router-link-exact-active {
 ul a:hover {
   background: grey;
 }
+
+#seokbang-logo {
+  border-radius: 10px;
+  padding:5px 5px;
+  font-family: 'Hi Melody', cursive;
+  font-weight: bold;
+  font-size: x-large;
+  width: 150px
+}
+
 </style>
