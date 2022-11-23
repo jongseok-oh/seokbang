@@ -45,6 +45,7 @@ const userStore = {
       logout(
         () => {
           commit("CLEAR_USER_INFO");
+          router.push('/');
         },
         (error) => {
           console.log(error);

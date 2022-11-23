@@ -122,7 +122,6 @@ const houseStore = {
         keyword,
         ({ data }) => {
           commit("SET_DEAL_HOUSE_LIST", data);
-          console.log(data);
         },
         (error) => {
           console.log(error);

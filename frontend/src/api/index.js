@@ -20,11 +20,12 @@ function apiInstance() {
         switch (error.response.status) {
           // status code가 401인 경우 `logout`을 커밋하고 `/login` 페이지로 리다이렉트
           case 401:
+            //console.log("로그인 해 이자식아 ㅋㅋ");
             store.commit('userStore/CLEAR_USER_INFO');
             alert("로그인 후 이용해 주세요");
             router.push('/loginform');
             // 이행되지 않는 Promise를 반환하여 Promise Chaining 끊어주기
-            return new Promise(() => { });
+            return new Promise(() => {});
           case 406:
             alert("권한 없는 사용자 입니다.");
             router.push('/');

@@ -93,8 +93,11 @@ export default {
     methods: {
         ...mapActions('houseStore', ['getHouseDealListByKeyword']),
         ...mapMutations('houseStore', ['SET_LIST_STATE']),
-        search() {
-            this.getHouseDealListByKeyword(this.keyword);
+        async search() {
+            if(!await this.getHouseDealListByKeyword(this.keyword).then(() => {
+                console.log("then");
+                return false;
+            })) return;
             this.SET_LIST_STATE('search');
             this.$router.push('/dealinfo');
         }
