@@ -1,25 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <b-card class="my-2 mx-2">
-        <b-row>
-            <b-col>지역 선택</b-col>
-            <b-col>
-                <b-form-select
-                    v-model="sidoCode"
-                    :options="sidos"
-                    @change="gugunList"
-                ></b-form-select>
-            </b-col>
-            <b-col>
-                <b-form-select
-                    v-model="tgugunCode"
-                    :options="guguns"
-                    @change="searchApt"
-                ></b-form-select>
-            </b-col>
-        </b-row>
-    </b-card>
-=======
   <b-card class="h-100 pt-2">
     <b-row>
       <b-col>지역 선택</b-col>
@@ -31,7 +10,6 @@
       </b-col>
     </b-row>
   </b-card>
->>>>>>> 6107573ddc3fcb749ec4eb2a56be7990c470a9ae
 </template>
 
 <script>
