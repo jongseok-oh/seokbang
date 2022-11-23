@@ -10,25 +10,10 @@
     </b-navbar-brand>
     <b-navbar-nav>
       <b-nav-item to="/dealinfo">실거래가</b-nav-item>
-      <b-nav-item to="/board">지역별 게시판</b-nav-item>
       <b-nav-item-dropdown text="지역별 게시판" dropright >
-        <b-dropdown-item>강원도</b-dropdown-item>
-        <b-dropdown-item>경기도</b-dropdown-item>
-        <b-dropdown-item>경상남도</b-dropdown-item>
-        <b-dropdown-item>경상북도</b-dropdown-item>
-        <b-dropdown-item>광주광역시</b-dropdown-item>
-        <b-dropdown-item>대구광역시</b-dropdown-item>
-        <b-dropdown-item>대전광역시</b-dropdown-item>
-        <b-dropdown-item>부산광역시</b-dropdown-item>
-        <b-dropdown-item>서울특별시</b-dropdown-item>
-        <b-dropdown-item>세종특별자치시</b-dropdown-item>
-        <b-dropdown-item>울산광역시</b-dropdown-item>
-        <b-dropdown-item>인천광역시</b-dropdown-item>
-        <b-dropdown-item>전라남도</b-dropdown-item>
-        <b-dropdown-item>전라북도</b-dropdown-item>
-        <b-dropdown-item>제주특별자치도</b-dropdown-item>
-        <b-dropdown-item>충청남도</b-dropdown-item>
-        <b-dropdown-item>충청북도</b-dropdown-item>
+        <template v-for="gugun in guguns">
+          <b-dropdown-item :key="gugun.value" v-if="gugun.value != null" @click="moveBoard(gugun.value, gugun.text)">{{gugun.text}}</b-dropdown-item>
+        </template>
       </b-nav-item-dropdown>
     </b-navbar-nav>
     <user-drop-down/>
@@ -36,7 +21,10 @@
 </template>
 
 <script>
+import { mapActions, mapMutations, mapState } from "vuex";
 import UserDropDown from "./UserDropDown.vue";
+
+const houseStore = "houseStore";
 
 export default {
   name: 'FrontendNavBar',
@@ -48,9 +36,23 @@ export default {
     return {
     };
   },
-  mounted() {
+  computed:{
+    ...mapState(houseStore, ["guguns"])
   },
   methods: {
+    ...mapActions(houseStore, ["getGugun"]),
+    ...mapActions("boardStore", ["getPosts"]),
+    ...mapMutations(houseStore, ["CLEAR_GUGUN_LIST"]),
+    ...mapMutations("boardStore", ["setGugunCode", "setGugunName"]),
+    async moveBoard(gugunCode, gugunName){
+      this.setGugunCode(gugunCode);
+      this.setGugunName(gugunName);
+      this.$router.push({name : "postlist"});
+    }
+  },
+  mounted() {
+    this.CLEAR_GUGUN_LIST();
+    this.getGugun("11");
   },
 };
 </script>

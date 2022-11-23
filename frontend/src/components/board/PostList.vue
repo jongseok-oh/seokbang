@@ -1,6 +1,6 @@
 <template>
   <div class="container" id="board">
-    <h2 class="">강남구 게시판</h2>
+    <h2 class="">{{this.gugunName}} 게시판</h2>
     <hr/>
     
     <b-button variant="outline-dark" :pressed.sync="allToggle" size="sm" @click="allPosts">전체글</b-button>
@@ -60,7 +60,6 @@ export default {
         return {
             perPage: 10,
             currentPage: 1,
-            gugunCode: "1111000000",
             postList: this.posts,
             allToggle: true,
             popularToggle: false,
@@ -95,11 +94,18 @@ export default {
         };
     },
   computed: {
-    ...mapState(boardStore, ["posts"]),
+    ...mapState(boardStore, ["posts", "gugunCode", "gugunName"]),
     rows(){
       if(!this.postList)
         return 0;
       return this.postList.length;
+    }
+  },
+  watch:{
+    async gugunCode(){
+      console.log("구군코드 와치");
+      await this.getPosts(this.gugunCode);
+      this.allPosts();
     }
   },
   methods: {

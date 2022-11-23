@@ -7,7 +7,8 @@ const boardStore = {
   state: {
     posts: [],
     post: {},
-    currentPage: 1,
+    gugunCode: String,
+    gugunName: String,
   },
   getters: {
     posts(state) {
@@ -20,6 +21,12 @@ const boardStore = {
     },
     setPost(state, payload) {
       state.post = payload;
+    },
+    setGugunCode(state, payload) {
+      state.gugunCode = payload;
+    },
+    setGugunName(state, payload) {
+      state.gugunName = payload;
     },
     setIsLiked(state, payload) {
       state.post.isLiked = payload;
