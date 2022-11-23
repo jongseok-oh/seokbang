@@ -1,11 +1,10 @@
 import { sidoList, gugunList, houseList, houseDealList } from "@/api/house.js";
-import axios from "axios";
 
 const houseStore = {
   namespaced: true,
   state: {
-    sidos: [{ value: null, text: "선택하세요" }],
-    guguns: [{ value: null, text: "선택하세요" }],
+    sidos: [{ value: null, text: "시/도" }],
+    guguns: [{ value: null, text: "구/군" }],
     gugunCode:"",
     houses: [],
     deals: [],
@@ -14,10 +13,10 @@ const houseStore = {
   getters: {},
   mutations: {
     CLEAR_SIDO_LIST(state) {
-      state.sidos = [{ value: null, text: "선택하세요" }];
+      state.sidos = [{ value: null, text: "시/도" }];
     },
     CLEAR_GUGUN_LIST(state) {
-      state.guguns = [{ value: null, text: "선택하세요" }];
+      state.guguns = [{ value: null, text: "구/군" }];
     },
     CLEAR_APT_LIST(state) {
       state.houses = [];

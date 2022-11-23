@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <nav-bar v-if="navFooter"></nav-bar>
+    <logo-nav v-if="!navFooter"></logo-nav>
     <router-view></router-view>
     <my-footer v-if="navFooter"/>
   </div>
@@ -9,6 +10,7 @@
 <script>
 import NavBar from "./components/layout/NavBar.vue";
 import MyFooter from "./components/layout/MyFooter.vue";
+import LogoNav from "./components/layout/LogoNav.vue";
 
 import store from "@/store";
 import {mapState} from "vuex";
@@ -18,6 +20,7 @@ export default {
   components: {
     NavBar,
     MyFooter,
+    LogoNav
   },
   computed: {
     ...mapState(['navFooter']),

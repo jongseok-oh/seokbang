@@ -1,14 +1,15 @@
 <template>
-  <b-row class="mt-4 mb-4 text-center">
-    <b-col>지역 선택</b-col>
-    <b-col>
-      <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
-    </b-col>
-    <b-col>
-      <b-form-select v-model="tgugunCode" :options="guguns" @change="searchApt"></b-form-select>
-    </b-col>
-    <b-col cols="6"></b-col>
-  </b-row>
+  <b-card class="my-2 mx-2">
+    <b-row>
+      <b-col>지역 선택</b-col>
+      <b-col>
+        <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
+      </b-col>
+      <b-col>
+        <b-form-select v-model="tgugunCode" :options="guguns" @change="searchApt"></b-form-select>
+      </b-col>
+    </b-row>
+  </b-card>
 </template>
 
 <script>

@@ -7,12 +7,14 @@
                         <div class="text-center text-white">
                             <h1 class="mb-3" id = "subject">Where is My Home</h1>
                             <div class="row">
-                                <div class="col">
-                                    <input class="form-control form-control-lg" type="text" placeholder="검색하기"/>
-                                </div>
-                                <div class="col-auto"><button class="btn btn-primary btn-lg">
-                                    <i class="bi bi-search"></i> Search
-                                </button></div>
+                                <b-row>
+                                    <b-col cols="10">
+                                        <b-input placeholder="검색하기"></b-input>
+                                    </b-col>
+                                    <b-col>
+                                        <b-button>Search</b-button>
+                                    </b-col>
+                                </b-row>
                             </div>
                         </div>
                     </div>
