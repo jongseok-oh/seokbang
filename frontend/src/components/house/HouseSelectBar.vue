@@ -1,5 +1,5 @@
 <template>
-  <b-card class="my-2 mx-2">
+  <b-card class="h-100 pt-2">
     <b-row>
       <b-col>지역 선택</b-col>
       <b-col>

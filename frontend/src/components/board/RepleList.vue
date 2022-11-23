@@ -48,14 +48,14 @@ export default {
         };
     },
   computed: {
-    ...mapState("userStore", ["userNo"]),
+    ...mapState("userStore", ["userinfo"]),
   },
   methods: {
     ...mapActions(boardStore, ["getReples", "registReple", "deleteReple"]),
     async writeReple(){
       await this.registReple({
         postNo : this.$route.params.postNo,
-        userNo : this.userNo,
+        userNo : this.userinfo.no,
         content : this.repleContent,
         repleDate : new Date()
       })

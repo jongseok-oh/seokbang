@@ -122,7 +122,7 @@ export default {
     popularPosts(){
       this.allToggle = false;
       this.popularToggle = true;
-      this.postList = this.posts.filter(post => post.likesCnt >= 1);
+      this.postList = this.posts.filter(post => post.likesCnt >= 3);
     },
   },
   async mounted() {

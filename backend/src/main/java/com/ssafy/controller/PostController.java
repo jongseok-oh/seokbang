@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.model.dto.Post;
 import com.ssafy.model.dto.PostDTO;
 import com.ssafy.model.dto.PostLikes;
+import com.ssafy.model.dto.UserInfo;
 import com.ssafy.model.service.PostLikesService;
 import com.ssafy.model.service.PostService;
 
@@ -62,8 +63,7 @@ public class PostController {
 		res.put("post", postService.getPost(no));
 		
 		PostLikes postLikes = new PostLikes();
-//		postLikes.setUserNo(((UserInfo) session.getAttribute("user")).getNo());
-		postLikes.setUserNo(1L);
+		postLikes.setUserNo(((UserInfo) session.getAttribute("user")).getNo());
 		postLikes.setPostNo(no);
 		res.put("isLiked", postLikesService.getPostLike(postLikes));
 		
@@ -104,8 +104,7 @@ public class PostController {
 	@PostMapping("/like/{postNo}")
 	private ResponseEntity<?> likePost(HttpSession session, @PathVariable Long postNo){ 
 		PostLikes postLikes = new PostLikes();
-//		postLikes.setUserNo(((UserInfo)session.getAttribute("user")).getNo());
-		postLikes.setUserNo(1L);
+		postLikes.setUserNo(((UserInfo)session.getAttribute("user")).getNo());
 		postLikes.setPostNo(postNo);
 		
 		boolean res = postLikesService.insertPostLike(postLikes);
@@ -118,8 +117,7 @@ public class PostController {
 	@DeleteMapping("/like/{postNo}")
 	private ResponseEntity<?> unlikePost(HttpSession session, @PathVariable Long postNo){ 
 		PostLikes postLikes = new PostLikes();
-//		postLikes.setUserNo(((UserInfo)session.getAttribute("user")).getNo());
-		postLikes.setUserNo(1L);
+		postLikes.setUserNo(((UserInfo)session.getAttribute("user")).getNo());
 		postLikes.setPostNo(postNo);
 		
 		boolean res = postLikesService.deletePostLike(postLikes);
