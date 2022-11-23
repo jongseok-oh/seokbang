@@ -11,11 +11,11 @@ function login(body, success, fail) {
 }
 
 function modifyUser(body, success, fail) {
-  api.put(`/api/users/login`, body).then(success).catch(fail);
+  api.put(`/api/users`, body).then(success).catch(fail);
 }
 
 function deleteUser(params, success, fail) {
-  api.delete(`/api/users/login`, params).then(success).catch(fail);
+  api.delete(`/api/users`, {params:params}).then(success).catch(fail);
 }
 
 

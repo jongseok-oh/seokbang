@@ -106,6 +106,9 @@
                 <b-col sm="3">
                   <b-button variant="success" @click="modify">수정하기</b-button>
                 </b-col>
+                <b-col sm="3">
+                  <b-button variant="success" @click="quit">회원탈퇴</b-button>
+                </b-col>
               </b-row>
             </b-col>
             <b-col sm="1"></b-col>
@@ -119,8 +122,7 @@
 
 <script>
 import { apiInstance } from "@/api/index.js";
-import router from "@/router";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 let axios = apiInstance();
 
@@ -188,15 +190,12 @@ export default {
       this.validate.userName = this.isValidName();
     },
     "birthDay.year": async function () {
-      console.log("year");
       this.validate.birthDay = await this.isValidBirthDay();
     },
     "birthDay.month": async function () {
-      console.log("month");
       this.validate.birthDay = await this.isValidBirthDay();
     },
     "birthDay.day": async function () {
-      console.log("day");
       this.validate.birthDay = await this.isValidBirthDay();
     },
     "form.gender": function (newval, oldval) {
@@ -204,6 +203,8 @@ export default {
     },
   },
   methods: {
+    ...mapMutations('userStore', ['SET_USER_INFO']),
+    ...mapActions('userStore',['doModifyUser', 'doDeleteUser']),
     isValidName() {
       let nameck = this.form.userName;
       if (!nameck || nameck.length == 0) {
@@ -218,12 +219,10 @@ export default {
     },
     async isValidBirthDay() {
       let birthDaychk = this.birthDay;
-      console.log(birthDaychk.year);
       // year check
-      if (!birthDaychk.year || birthDaychk.year.length != 4 || !numberTest.test(birthDaychk.year)) {
+      if (!birthDaychk.year || String(birthDaychk.year).length != 4 || !numberTest.test(String(birthDaychk.year))) {
         this.validate.birthDay = false;
         this.feedBack.birthDay = "태어난 년도 4자리를 정확하게 입력하세요.";
-        console.log("zz");
         return false;
       }
       if (Number(birthDaychk.year) < 1900) {
@@ -247,7 +246,8 @@ export default {
         !birthDaychk.day ||
         birthDaychk.day.length == 0 ||
         !numberTest.test(birthDaychk.day) ||
-        Number(birthDaychk.day) > maxDay
+        Number(birthDaychk.day) > maxDay ||
+        Number(birthDaychk.day) <= 0
       ) {
         this.validate.birthDay = false;
         this.feedBack.birthDay = "태어난 일(날짜)을 정확하게 입력하세요.";
@@ -265,15 +265,15 @@ export default {
           return false;
         });
 
-        let flag = true;
+      let flag = true;
 
-        if (Number(curtime.year) < Number(this.birthDay.year)) {
+        if (Number(curtime[0]) < Number(this.birthDay.year)) {
             flag = false;
-        } else if (Number(curtime.year) == Number(this.birthDay.year)) {
-            if (Number(curtime.month) < Number(this.birthDay.month)) {
+        } else if (Number(curtime[0]) == Number(this.birthDay.year)) {
+            if (Number(curtime[1]) < Number(this.birthDay.month)) {
                 flag = false;
-            } else if (Number(curtime.month) == Number(this.birthDay.month)) {
-                if (Number(curtime.day) < Number(this.birthDay.day)) {
+            } else if (Number(curtime[1]) == Number(this.birthDay.month)) {
+                if (Number(curtime[2]) < Number(this.birthDay[2])) {
                     flag = false;
                 }
             }
@@ -292,33 +292,27 @@ export default {
         this.birthDay.year % 400 == 0
       );
     },
-    async modify() {
+    modify() {
       if (this.chkValidate()) {
-        let body = {
-          userName: this.form.name,
+        let userInfo = {
+          userId: this.form.userId,
+          userName: this.form.userName,
           birthYear: this.birthDay.year,
           birthMonth: this.birthDay.month,
           birthDay: this.birthDay.day,
-          gender: this.form.gender,
-        };
-
-        await axios
-          .post("/api/users", body)
-          .then(() => {
-            alert("회원가입 성공!");
-            router.push("/loginform");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          gender: this.form.gender
+        }
+        this.doModifyUser(userInfo);
       }
+    },
+    quit() {
+      this.doDeleteUser();
     },
     chkValidate() {
       let res = true;
-      let key;
-      for (key in this.validate) {
+      for (var key in this.validate) {
         res &= this.validate[key];
-        if (!res) {
+        if (!this.validate[key]) {
           this.validate[key] = false;
         }
       }

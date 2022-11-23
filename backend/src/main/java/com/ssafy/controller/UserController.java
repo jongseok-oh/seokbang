@@ -46,6 +46,7 @@ public class UserController{
 	
 	@PutMapping
 	private ResponseEntity<?> modify(@RequestBody UserInfo user){
+		log.info(user.toString());
 		boolean res = userService.modifyUser(user);
 		
 		if(res) return ResponseEntity.ok(user);

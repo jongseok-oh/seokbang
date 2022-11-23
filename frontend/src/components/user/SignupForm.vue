@@ -370,7 +370,8 @@ export default {
         !birthDaychk.day ||
         birthDaychk.day.length == 0 ||
         !numberTest.test(birthDaychk.day) ||
-        Number(birthDaychk.day) > maxDay
+        Number(birthDaychk.day) > maxDay||
+        Number(birthDaychk.day) <= 0
       ) {
         this.validate.birthDay = false;
         this.feedBack.birthDay = "태어난 일(날짜)을 정확하게 입력하세요.";
@@ -390,13 +391,13 @@ export default {
 
         let flag = true;
 
-        if (Number(curtime.year) < Number(this.birthDay.year)) {
+        if (Number(curtime[0]) < Number(this.birthDay.year)) {
             flag = false;
-        } else if (Number(curtime.year) == Number(this.birthDay.year)) {
-            if (Number(curtime.month) < Number(this.birthDay.month)) {
+        } else if (Number(curtime[0]) == Number(this.birthDay.year)) {
+            if (Number(curtime[1]) < Number(this.birthDay[1])) {
                 flag = false;
-            } else if (Number(curtime.month) == Number(this.birthDay.month)) {
-                if (Number(curtime.day) < Number(this.birthDay.day)) {
+            } else if (Number(curtime[1]) == Number(this.birthDay[1])) {
+                if (Number(curtime[2]) < Number(this.birthDay[2])) {
                     flag = false;
                 }
             }
