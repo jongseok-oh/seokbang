@@ -6,9 +6,11 @@ import DealInfoView from '@/views/DealInfoView.vue'
 import PostList from '@/components/board/PostList.vue'
 import PostDetail from '@/components/board/PostDetail.vue'
 import PostWriteForm from '@/components/board/PostWriteForm.vue'
-import loginForm from '@/components/user/LoginForm.vue'
-import signupForm from '@/components/user/SignupForm.vue'
+import LoginForm from '@/components/user/LoginForm.vue'
+import SignupForm from '@/components/user/SignupForm.vue'
 import PostModifyForm from '@/components/board/PostModifyForm.vue'
+import UserModifyForm from '@/components/user/ModifyForm.vue'
+import UserView from '@/views/UserView.vue';
 
 Vue.use(VueRouter)
 
@@ -24,15 +26,29 @@ const routes = [
     component: DealInfoView,
   },
   {
-    path: '/loginform',
-    name: 'loginform',
-    component: loginForm,
+    path: '/user',
+    name: 'user',
+    component: UserView,
+
+    children: [
+      {
+        path: '/loginForm',
+        name: 'loginForm',
+        component: LoginForm
+      },
+      {
+        path: '/signupform',
+        name: 'signupform',
+        component: SignupForm
+      },
+      {
+        path: '/usermodifyform',
+        name: 'usermodifyform',
+        component: UserModifyForm
+      },
+    ]
   },
-  {
-    path: '/signupform',
-    name: 'signupform',
-    component: signupForm,
-  },
+
   {
     path: '/board',
     name: 'board',

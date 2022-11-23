@@ -10,12 +10,13 @@ function login(body, success, fail) {
     api.post(`/api/users/login`, body).then(success).catch(fail);
 }
 
-// function houseList(params, success, fail) {
-//   api.get(`/api/aparts`, { params: params }).then(success).catch(fail);
-// }
+function modifyUser(body, success, fail) {
+  api.put(`/api/users/login`, body).then(success).catch(fail);
+}
 
-// function houseDealList(params, success, fail) {
-//   api.get(`/api/aparts/deals`, { params: params }).then(success).catch(fail);
-// }
+function deleteUser(params, success, fail) {
+  api.delete(`/api/users/login`, params).then(success).catch(fail);
+}
 
-export {login, logout};
+
+export {login, logout, modifyUser, deleteUser};

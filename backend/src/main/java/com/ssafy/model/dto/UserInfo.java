@@ -15,7 +15,6 @@ public class UserInfo {
 	private String userId;
 	private String password;
 	private String userName;
-	private String phoneNumber;
 	private int birthYear;
 	private int birthMonth;
 	private int birthDay;

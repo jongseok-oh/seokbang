@@ -7,7 +7,7 @@
 		insert into userinfo(userId,password,userName, birthYear,
 		birthMonth, birthDay, gender, joinDate)
 		values(#{userId}, #{password}, #{userName}, #{birthYear},
-		#{birthMonth},#{birthDay}, #{gender}, NOW())
+		#{birthMonth},#{birthDay}, #{gender}, #{joinDate})
 	</insert>
 	
 	<select id="login" resultType="UserInfo" parameterType="map">

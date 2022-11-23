@@ -5,7 +5,7 @@
                 <b-dropdown id="dropdown-1" dropleft class="m-2" :text="userinfo.userName">
                     <b-dropdown-item>관심 매물</b-dropdown-item>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-item>회원 정보 수정</b-dropdown-item>
+                    <b-dropdown-item @click="userDetailForm">회원 정보 수정</b-dropdown-item>
                     <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>
                 </b-dropdown>
             </div>
@@ -35,19 +35,18 @@ export default {
             console.log(this.userinfo);
         }
     },
-    created() {
-        
-    },
     mounted() {
     },
     methods: {
         ...mapActions("userStore",["doLogout"]),
         logout() {
             this.doLogout();
-            this.goToLoginForm();
         },
         goToLoginForm() {
             this.$router.push("/loginform");
+        },
+        userDetailForm() {
+            this.$router.push("/usermodifyform");
         }
     },
 };

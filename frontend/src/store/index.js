@@ -14,10 +14,14 @@ export default new Vuex.Store({
     userStore,
   },
   state: {
+    navFooter : false,
   },
   getters: {
   },
   mutations: {
+    SET_NAV_FOOTER(state, flag) {
+      state.navFooter = flag;
+    },
   },
   actions: {
   },

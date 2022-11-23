@@ -1,5 +1,6 @@
-import { login, logout, duplicate} from "@/api/user.js";
+import { login, logout, modifyUser, deleteUser} from "@/api/user.js";
 import router from "@/router";
+import store from "@/store";
 
 
 const userStore = {
@@ -44,8 +45,33 @@ const userStore = {
     doLogout: ({ commit }) => {
       //console.log(payload);
       logout(
-        (res) => {
+        () => {
           commit("CLEAR_USER_INFO");
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    },
+    doModifyUser:({ commit }, body) => {
+      //console.log(payload);
+      modifyUser(
+      body,
+        () => {
+          store.dispatch('doLogout');
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    },
+    doDeleteUser:({ commit }, no) => {
+      //console.log(payload);
+      let params = { no: no };
+      modifyUser(
+      params,
+        () => {
+          store.dispatch('doLogout');
         },
         (error) => {
           console.log(error);

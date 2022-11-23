@@ -1,5 +1,6 @@
 package com.ssafy.controller;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
@@ -86,6 +87,7 @@ public class UserController{
 	@PostMapping
 	private ResponseEntity<?> register(@RequestBody UserInfo user){
 		log.info(user.toString());
+		user.setJoinDate(LocalDateTime.now());
 		try {
 			boolean res = userService.registerUser(user);
 			if(res)

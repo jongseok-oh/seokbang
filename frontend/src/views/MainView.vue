@@ -74,6 +74,7 @@
 </style>
 
 <script>
+import store from "@/store";
 
 export default {
     data() {
@@ -81,12 +82,12 @@ export default {
             
         };
     },
-
+    created() {
+        store.commit('SET_NAV_FOOTER', true);
+    },
     mounted() {
-        
     },
     methods: {
-        
     },
 };
 </script>
