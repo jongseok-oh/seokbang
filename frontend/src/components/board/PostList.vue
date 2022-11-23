@@ -7,9 +7,24 @@
     <b-button variant="outline-dark" :pressed.sync="popularToggle" size="sm" @click="popularPosts">인기글</b-button>
     <hr/>
 
-    <b-table striped hover bordered
+    <b-table-simple v-if="rows == 0" striped hover bordered>
+      <b-thead>
+        <b-tr>
+          <b-th class="w70">제목</b-th>
+          <b-th>작성자</b-th>
+          <b-th>작성일</b-th>
+          <b-th>조회수</b-th>
+          <b-th>좋아요</b-th>
+        </b-tr>
+      </b-thead>
+      <b-tbody>
+        <b-tr>
+          <b-td colspan="5">등록된 글이 없습니다.</b-td>
+        </b-tr>
+      </b-tbody>
+    </b-table-simple>
+    <b-table v-else striped hover bordered
       id="my-table"
-      ref="table"
       :items="postList"
       :fields="fields"
       :per-page="perPage"
@@ -57,21 +72,24 @@ export default {
                 tdClass: 'w70',
               },
               {
-                key: 'userNo',
+                key: 'userName',
                 label: '작성자',
-                thClass: 'w10',
               },
               {
                 key: 'postDate',
                 label: '작성일',
-                thClass: 'w10',
               },
               {
                 key: 'hit',
                 label: '조회수',
                 sortable: true,
                 sortDirection: "desc",
-                thClass: 'w10',
+              },
+              {
+                key: 'likesCnt',
+                label: '좋아요',
+                sortable: true,
+                sortDirection: "desc",
               },
             ],
         };
@@ -100,13 +118,11 @@ export default {
       this.allToggle = true;
       this.popularToggle = false;
       this.postList = this.posts;
-      this.$refs.table.refresh();
     },
     popularPosts(){
       this.allToggle = false;
       this.popularToggle = true;
-      this.postList = this.posts.filter(post => post.hit >= 5);
-      this.$refs.table.refresh();
+      this.postList = this.posts.filter(post => post.likesCnt >= 1);
     },
   },
   async mounted() {
@@ -118,6 +134,6 @@ export default {
 
 <style>
 .w70 {
-  width: 65%;
+  width: 60%;
 }
 </style>

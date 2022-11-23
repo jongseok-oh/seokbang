@@ -21,9 +21,6 @@ const boardStore = {
     setPost(state, payload) {
       state.post = payload;
     },
-    setLikesCnt(state, payload) {
-      state.post.likesCnt = payload;
-    },
     setIsLiked(state, payload) {
       state.post.isLiked = payload;
     },
@@ -37,14 +34,13 @@ const boardStore = {
       context.commit("clear");
       return restApi.get(`/api/posts/${payload}`).then(({ data }) => {
         context.commit("setPosts", data);
-        console.log("겟포스트");
+        console.log(data);
       });
     },
     getPost(context, payload) {
       context.commit("clear");
       return restApi.get(`/api/posts/detail/${payload}`).then(({ data }) => {
         context.commit("setPost", data.post);
-        context.commit("setLikesCnt", data.likesCnt);
         context.commit("setIsLiked", data.isLiked);
       });
     },

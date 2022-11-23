@@ -10,7 +10,7 @@
         <b-col>
           <b-card
             :header-html="`<h3>${post.no}.
-            ${post.title} [${post.hit}]</h3><div><h6>${post.userNo}</div><div>${post.postDate}</h6></div>`"
+            ${post.title} [${post.hit}]</h3><div><h6>${post.userName}</div><div>${post.postDate}</h6></div>`"
             class="mb-2"
             border-variant="dark"
             no-body
@@ -92,13 +92,15 @@ export default {
       this.isLiked = this.post.isLiked;
     }
   },
-  destroyed() {
+  async destroyed() {
+    console.log("destroy!!");
     if(this.isLiked && !this.post.isLiked){
-      this.likePost(this.post.no);
+      await this.likePost(this.post.no);
     }
     else if(!this.isLiked && this.post.isLiked){
-      this.unlikePost(this.post.no);
+      await this.unlikePost(this.post.no);
     }
+    console.log("destroy end!!");
   },
   mounted() {
     this.postNo = this.$route.params.postNo;
