@@ -1,6 +1,6 @@
 package com.ssafy.model.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +20,6 @@ public class UserInfo {
 	private int birthMonth;
 	private int birthDay;
 	private String gender;
-	private Date joinDate;
+	private LocalDateTime joinDate;
 	private Boolean admin;
 }

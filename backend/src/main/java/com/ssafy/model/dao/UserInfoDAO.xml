@@ -4,10 +4,10 @@
 <mapper namespace="com.ssafy.model.dao.UserInfoDAO">
 	
 	<insert id="insertUser" parameterType="UserInfo" >
-		insert into userinfo(userId,password,userName,phoneNumber, birthYear,
+		insert into userinfo(userId,password,userName, birthYear,
 		birthMonth, birthDay, gender, joinDate)
-		values(#{userId}, #{password}, #{userName}, #{phoneNumber}, #{birthYear},
-		#{birthMonth},#{birthDay}, #{gender}, #{joinDate})
+		values(#{userId}, #{password}, #{userName}, #{birthYear},
+		#{birthMonth},#{birthDay}, #{gender}, NOW())
 	</insert>
 	
 	<select id="login" resultType="UserInfo" parameterType="map">

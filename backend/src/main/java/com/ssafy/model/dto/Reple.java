@@ -1,6 +1,6 @@
 package com.ssafy.model.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,5 +14,5 @@ public class Reple {
 	private Long postNo;
 	private Long userNo;
 	private String content;
-	private Timestamp repleDate;
+	private LocalDateTime repleDate;
 }
