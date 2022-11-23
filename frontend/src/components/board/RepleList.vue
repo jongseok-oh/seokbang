@@ -10,8 +10,8 @@
             </tr>
             <template v-else>
               <tr :key="reple.no" v-for="reple in reples">
-                <td>{{ reple.content }}</td>
-                <td>{{ reple.userNo }}</td>
+                <td class="w70">{{ reple.content }}</td>
+                <td>{{ reple.userName }}</td>
                 <td>{{ reple.repleDate }}</td>
                 <td><b-button variant="outline-danger" size="sm">
                       <b-icon-heart color="red" v-if="!reple.isLiked"></b-icon-heart>
@@ -73,7 +73,7 @@ export default {
           const reple = {
             no : repleList[index].no,
             content : repleList[index].content,
-            userNo : repleList[index].userNo,
+            userName : repleList[index].userName,
             repleDate : repleList[index].repleDate,
             likesCnt : likesCntList[index],
             isLiked : isLikedList[index] > 0 ? true : false
@@ -96,5 +96,5 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 </style>

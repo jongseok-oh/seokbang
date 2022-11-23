@@ -1,8 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <div class="container-fluid">
-      <router-link to="/" class="navbar-brand px-5">
-        <img alt="Vue logo" src="@/assets/logo.png" style="height:25px;" />
+      <router-link to="/" class="navbar-brand px-2">
+        <div style="background:lightgrey; border-radius: 10px; padding:5px 5px; text; font-size: x-large ; font-weight: bold; width: 150px">
+          <img alt="logo" src="@/assets/logo.png" style="height:40px" />
+          석 방
+        </div>
       </router-link>
       <ul class="navbar-nav me-auto">
         <li class="nav-item mx-2"><router-link to="/dealinfo" class="nav-link">실거래가</router-link></li>
@@ -25,16 +28,11 @@ export default {
   },
   data() {
     return {
-      
     };
   },
-
   mounted() {
-    
   },
-
   methods: {
-    
   },
 };
 </script>

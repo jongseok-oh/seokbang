@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.model.dao.RepleDAO;
 import com.ssafy.model.dto.Reple;
+import com.ssafy.model.dto.RepleDTO;
 
 @Transactional
 @Service
@@ -22,12 +23,12 @@ public class RepleServiceImpl implements RepleService {
 	}
 
 	@Override
-	public List<Reple> getReples(Long postNo) {
+	public List<RepleDTO> getReples(Long postNo) {
 		return repleDao.getReples(postNo);
 	}
 
 	@Override
-	public Reple getReple(Long no) {
+	public RepleDTO getReple(Long no) {
 		return repleDao.getReple(no);
 	}
 

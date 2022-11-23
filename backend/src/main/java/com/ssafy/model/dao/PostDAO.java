@@ -5,14 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.model.dto.Post;
+import com.ssafy.model.dto.PostDTO;
 
 @Mapper
 public interface PostDAO {
 	int insertPost(Post post);
 
-	List<Post> getPosts(String gugunCode);
+	List<PostDTO> getPosts(String gugunCode);
 	
-	Post getPost(Long no);
+	PostDTO getPost(Long no);
 	
 	int modifyPost(Post post);
 	

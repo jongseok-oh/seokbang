@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.Post;
+import com.ssafy.model.dto.PostDTO;
 import com.ssafy.model.dto.PostLikes;
 import com.ssafy.model.service.PostLikesService;
 import com.ssafy.model.service.PostService;
@@ -50,7 +51,7 @@ public class PostController {
 	
 	@GetMapping("/{gugunCode}")
 	public ResponseEntity<?> getPostListByGugunCode(@PathVariable String gugunCode) {
-		List<Post> posts = postService.getPosts(gugunCode);
+		List<PostDTO> posts = postService.getPosts(gugunCode);
 		return ResponseEntity.ok(posts);
 	}
 	
@@ -59,7 +60,6 @@ public class PostController {
 		Map<String, Object> res = new HashMap<>();
 		
 		res.put("post", postService.getPost(no));
-		res.put("likesCnt", (Integer)postLikesService.getPostLikesCount(no));
 		
 		PostLikes postLikes = new PostLikes();
 //		postLikes.setUserNo(((UserInfo) session.getAttribute("user")).getNo());

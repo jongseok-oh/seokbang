@@ -7,12 +7,12 @@
 		insert into post(userNo,gugunCode,title,content,hit,postDate) values(#{userNo},#{gugunCode},#{title},#{content},#{hit},#{postDate})
 	</insert>
 	
-	<select id="getPosts" resultType="Post" parameterType="String">
-		select * from post where gugunCode like #{gugunCode}
+	<select id="getPosts" resultType="PostDTO" parameterType="String">
+		select p.*, u.userName, count(l.userNo) as `likesCnt` from post p left outer join userinfo u on(p.userNo = u.no) left outer join postlikes l on(l.postNo = p.no) where gugunCode like #{gugunCode} group by p.no;
 	</select>
 	
-	<select id="getPost" resultType="Post" parameterType="Long">
-		select * from post where no = #{no};
+	<select id="getPost" resultType="PostDTO" parameterType="Long">
+		select p.*, u.userName, count(l.userNo) as `likesCnt` from post p left outer join userinfo u on(p.userNo = u.no) left outer join postlikes l on(l.postNo = p.no) where p.no = #{postNo};
 	</select>
 	
 	<update id="modifyPost" parameterType="Post">

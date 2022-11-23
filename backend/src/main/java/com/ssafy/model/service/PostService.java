@@ -3,13 +3,14 @@ package com.ssafy.model.service;
 import java.util.List;
 
 import com.ssafy.model.dto.Post;
+import com.ssafy.model.dto.PostDTO;
 
 public interface PostService {
 	boolean insertPost(Post post);
 
-	List<Post> getPosts(String gugunCode);
+	List<PostDTO> getPosts(String gugunCode);
 	
-	Post getPost(Long no);
+	PostDTO getPost(Long no);
 	
 	boolean modifyPost(Post post);
 	

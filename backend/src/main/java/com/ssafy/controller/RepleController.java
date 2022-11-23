@@ -9,8 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.Reple;
+import com.ssafy.model.dto.RepleDTO;
 import com.ssafy.model.dto.UserInfo;
 import com.ssafy.model.service.RepleLikesService;
 import com.ssafy.model.service.RepleService;
@@ -52,7 +51,7 @@ public class RepleController {
 	@GetMapping("/{postNo}")
 	public ResponseEntity<?> getRepleListByPostNo(HttpSession session, @PathVariable Long postNo) {
 		List<Integer> likesCnt = repleLikesService.getRepleLikesCount(postNo);
-		List<Reple> reples = repleService.getReples(postNo);
+		List<RepleDTO> reples = repleService.getReples(postNo);
 		
 		Map<String, Long> params = new HashMap<>();
 		params.put("userNo", ((UserInfo)session.getAttribute("user")).getNo());
@@ -68,7 +67,7 @@ public class RepleController {
 	
 	@GetMapping("/detail/{no}")
 	public ResponseEntity<?> getRepleByRepleNo(@PathVariable Long no) {
-		Reple reple = repleService.getReple(no);
+		RepleDTO reple = repleService.getReple(no);
 		return ResponseEntity.ok(reple);
 	}
 	

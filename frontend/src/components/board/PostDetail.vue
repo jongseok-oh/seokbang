@@ -1,21 +1,18 @@
 <template>
   <div class="container">
-    <b-container class="bv-example-row mt-3">
-      <b-row>
-        <b-col>
-          <b-alert show><h3>글보기</h3></b-alert>
-        </b-col>
-      </b-row>
+    <b-container class="mt-3">
       <b-row class="mb-1">
         <b-col>
           <b-card
-            :header-html="`<h3>${post.no}.
-            ${post.title} [${post.hit}]</h3><div><h6>${post.userNo}</div><div>${post.postDate}</h6></div>`"
+            :header-html="`<h3>${post.title}</h3>
+            <h6 class='float-end'>${post.postDate}</h6>`"
             class="mb-2"
             border-variant="dark"
             no-body
           >
-            <b-card-body class="text-left">
+            <b-card-body>
+              <div v-html="`${post.userName}<div class='float-end'>조회수 ${post.hit}</div>`"></div>
+              <hr/>
               <div v-html="message"></div>
             </b-card-body>
           </b-card>
@@ -92,13 +89,15 @@ export default {
       this.isLiked = this.post.isLiked;
     }
   },
-  destroyed() {
+  async destroyed() {
+    console.log("destroy!!");
     if(this.isLiked && !this.post.isLiked){
-      this.likePost(this.post.no);
+      await this.likePost(this.post.no);
     }
     else if(!this.isLiked && this.post.isLiked){
-      this.unlikePost(this.post.no);
+      await this.unlikePost(this.post.no);
     }
+    console.log("destroy end!!");
   },
   mounted() {
     this.postNo = this.$route.params.postNo;
