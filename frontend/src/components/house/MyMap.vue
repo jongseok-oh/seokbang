@@ -7,6 +7,7 @@
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 import { apiInstance } from "@/api/index.js";
+import store from "@/store";
 
 let mapLevel = 6;
 let houseStore = "houseStore";
@@ -100,6 +101,7 @@ export default {
             return () => {
                 this.aptObj = aptObj;
                 //console.log(this.aptObj);
+                store.commit("houseStore/SET_LIST_STATE", "gugun");
             };
         },
         addMarker() {

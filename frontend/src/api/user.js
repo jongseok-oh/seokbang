@@ -18,5 +18,13 @@ function deleteUser(params, success, fail) {
   api.delete(`/api/users`, {params:params}).then(success).catch(fail);
 }
 
+function deleteInterestArea(path, success, fail) {
+  api.delete(`/api/interests/${path}`).then(success).catch(fail);
+}
 
-export {login, logout, modifyUser, deleteUser};
+function insertInterestArea(path, success, fail) {
+  api.post(`/api/interests/${path}`).then(success).catch(fail);
+}
+
+
+export {login, logout, modifyUser, deleteUser, deleteInterestArea, insertInterestArea};

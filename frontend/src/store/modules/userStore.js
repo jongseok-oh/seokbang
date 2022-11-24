@@ -1,4 +1,4 @@
-import { login, logout, modifyUser, deleteUser} from "@/api/user.js";
+import { login, logout, modifyUser, deleteUser, deleteInterestArea, insertInterestArea} from "@/api/user.js";
 import { apiInstance } from "@/api/index.js";
 import router from "@/router";
 
@@ -27,20 +27,27 @@ const userStore = {
     },
     CLEAR_USER_INFO(state) {
       state.userinfo = {}
-    }
+    },
+    DELET_INTEREST(state, gugunCode) {
+      const idx = state.interestList.indexOf(gugunCode);
+      if (idx > -1) state.interestList.splice(idx, 1);
+    },
+    INSERT_INTEREST(state, gugunCode) {
+      state.interestList.push(gugunCode);
+    },
   },
   actions: {
     doLogin: ({ commit, dispatch }, payload) => {
       //console.log(payload);
       login(
         payload
-        ,(res) => {
-          if (res.status == 204) {
+        , ({status, data}) => {
+          if (status == 204) {
             alert("로그인 정보를 확인해 주세요");
-          } else if(res.status == 200){
-            commit("SET_USER_INFO", res.data);
+          } else if(status == 200){
+            commit("SET_USER_INFO", data);
             dispatch("getInterestAreas");
-            alert(`반갑습니다 ${res.data.userName}님!`);
+            alert(`반갑습니다 ${data.userName}님!`);
             router.push({name: "main"});
           }
         },
@@ -76,7 +83,7 @@ const userStore = {
         }
       )
     },
-    doDeleteUser:({ state, dispatch  }) => {
+    doDeleteUser:({ state, dispatch }) => {
       //console.log(payload);
       let params = { no: state.userinfo.no };
       deleteUser(
@@ -91,10 +98,34 @@ const userStore = {
         }
       )
     },
-    getInterestAreas(context) {
-      return restApi.get(`/api/interest`).then(( data ) => {
-        context.commit("SET_INTEREST_LIST", data.data);
+    getInterestAreas({commit}) {
+      return restApi.get(`/api/interests`).then(({data}) => {
+        commit("SET_INTEREST_LIST", data);
       });
+    },
+    doDeleteInterestArea:({commit}, path) => {
+      //console.log(payload);
+      deleteInterestArea(
+        path,
+        () => {
+          commit('DELET_INTEREST', path);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    },
+    doInsertInterestArea:({commit}, path) => {
+      //console.log(payload);
+      insertInterestArea(
+        path,
+        () => {
+          commit('INSERT_INTEREST', path);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
     },
   },
 };

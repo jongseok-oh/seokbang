@@ -9,5 +9,5 @@ public interface InterestAreaService {
 	
 	public List<String> getUserAreaListByUserNo(Long userNo);
 	
-	public boolean deleteUserArea(Long userNo, String gugunCode);
+	public boolean deleteUserArea(InterestArea interestArea);
 }

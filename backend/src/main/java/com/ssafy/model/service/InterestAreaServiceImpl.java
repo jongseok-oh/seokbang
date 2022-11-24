@@ -20,8 +20,8 @@ public class InterestAreaServiceImpl implements InterestAreaService {
 	}
 
 	@Override
-	public boolean deleteUserArea(Long userNo, String gugunCode) {
-		return interestAreaDAO.remove(userNo, gugunCode) > 0;
+	public boolean deleteUserArea(InterestArea interestArea) {
+		return interestAreaDAO.remove(interestArea) > 0;
 	}
 
 	@Override

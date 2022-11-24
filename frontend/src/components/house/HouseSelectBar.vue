@@ -1,15 +1,23 @@
 <template>
-  <b-card class="h-100 pt-2">
-    <b-row>
-      <b-col>지역 선택</b-col>
-      <b-col>
-        <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
-      </b-col>
-      <b-col>
-        <b-form-select v-model="tgugunCode" :options="guguns" @change="searchApt"></b-form-select>
-      </b-col>
-    </b-row>
-  </b-card>
+    <b-card class="h-100 pt-2">
+        <b-row>
+            <b-col>지역 선택</b-col>
+            <b-col>
+                <b-form-select
+                    v-model="sidoCode"
+                    :options="sidos"
+                    @change="gugunList"
+                ></b-form-select>
+            </b-col>
+            <b-col>
+                <b-form-select
+                    v-model="tgugunCode"
+                    :options="guguns"
+                    @change="searchApt"
+                ></b-form-select>
+            </b-col>
+        </b-row>
+    </b-card>
 </template>
 
 <script>
@@ -42,7 +50,6 @@ export default {
             "CLEAR_GUGUN_LIST",
             "CLEAR_APT_LIST",
             "SET_GUGUN_CODE",
-            "SET_LIST_STATE"
         ]),
 
         gugunList() {
@@ -54,7 +61,6 @@ export default {
             if (this.tgugunCode) {
                 this.SET_GUGUN_CODE(this.tgugunCode);
                 this.getHouseList(this.tgugunCode);
-                this.SET_LIST_STATE("gugun");
             }
         },
     },

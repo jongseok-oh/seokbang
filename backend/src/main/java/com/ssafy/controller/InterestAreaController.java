@@ -21,7 +21,7 @@ import com.ssafy.model.service.InterestAreaServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping("/api/interest")
+@RequestMapping("/api/interests")
 @RestController
 public class InterestAreaController{
 	@Autowired
@@ -32,7 +32,7 @@ public class InterestAreaController{
 		
 		UserInfo user = (UserInfo) session.getAttribute("user");
 		
-		boolean res = areaService.deleteUserArea(user.getNo(), gugunCode);
+		boolean res = areaService.deleteUserArea(new InterestArea(user.getNo(), gugunCode));
 		if(res) {
 			log.info("area delete sucess");
 			return ResponseEntity.noContent().build();

@@ -12,5 +12,5 @@ public interface InterestAreaDAO {
 	
 	List<String> getInterestAreaListByUserNo(Long userNo);
 	
-	int remove(Long userNo, String gugunCode);
+	int remove(InterestArea interestArea);
 }
