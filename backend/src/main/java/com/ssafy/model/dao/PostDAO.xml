@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="getPosts" resultType="PostDTO" parameterType="String">
-		select p.*, u.userName, count(l.userNo) as `likesCnt` from post p left outer join userinfo u on(p.userNo = u.no) left outer join postlikes l on(l.postNo = p.no) where gugunCode like #{gugunCode} group by p.no;
+		select p.*, u.userName, count(l.userNo) as `likesCnt` from post p left outer join userinfo u on(p.userNo = u.no) left outer join postlikes l on(l.postNo = p.no) where gugunCode like #{gugunCode} group by p.no order by postDate DESC;
 	</select>
 	
 	<select id="getPost" resultType="PostDTO" parameterType="Long">
@@ -28,7 +28,7 @@
 	</update>
 	
 	<select id="getNotices" resultType="PostDTO">
-		SELECT * FROM housedb.post where gugunCode = '99' limit 6;
+		SELECT * FROM housedb.post where gugunCode = '99' order by postDate DESC limit 7;
 	</select>
 	
 </mapper>
