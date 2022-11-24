@@ -85,7 +85,6 @@ h1 {
 
 <script>
 import store from "@/store";
-import { mapActions, mapMutations } from "vuex";
 import HouseSearchBar from "../components/house/HouseSearchBar.vue";
 
 export default {
