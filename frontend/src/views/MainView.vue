@@ -7,7 +7,7 @@
                 </b-row>
                 <b-row>
                     <b-col md="4" offset-md="4">
-                        <house-search-bar></house-search-bar>
+                        <house-search-bar :mainSearch="true"></house-search-bar>
                     </b-col>
                 </b-row>
             </b-container>
@@ -39,35 +39,23 @@
                     <a href="#" class="list-group-item list-group-item-action"
                         >계약 및 잔금 치르기</a
                     >
-                    <a href="#" class="list-group-item list-group-item-action"
-                        >소유권 이전등기</a
-                    >
-                    <a href="#" class="list-group-item list-group-item-action"
-                        >인테리어 공사</a
-                    >
+                    <a href="#" class="list-group-item list-group-item-action">소유권 이전등기</a>
+                    <a href="#" class="list-group-item list-group-item-action">인테리어 공사</a>
                 </div>
             </b-col>
             <b-col class="p-5" md="3">
                 <h2 class="h5">부동산 뉴스</h2>
                 <div class="list-group">
-                    <a
-                        href="#"
-                        class="list-group-item list-group-item-action list-group-item-light"
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light"
                         >서울 입주 2년차 아파트 전셋값 1억400만원 올라</a
                     >
-                    <a
-                        href="#"
-                        class="list-group-item list-group-item-action list-group-item-light"
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light"
                         >12:16 거래한파...매수자가 사라졌다</a
                     >
-                    <a
-                        href="#"
-                        class="list-group-item list-group-item-action list-group-item-light"
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light"
                         >재건축 대안 또는 수직증축 리모델링... 추진 속...</a
                     >
-                    <a
-                        href="#"
-                        class="list-group-item list-group-item-action list-group-item-light"
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light"
                         >고가기준 9억, 서울 아파트 중간값 됐다</a
                     >
                 </div>
@@ -77,7 +65,7 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
 
 .bg-img {
     height: 80vh;
@@ -90,18 +78,18 @@
 }
 
 h1 {
-  font-family: 'Hi Melody', cursive;
-  color: white;
+    font-family: "Hi Melody", cursive;
+    color: white;
 }
 </style>
 
 <script>
 import store from "@/store";
 import { mapActions, mapMutations } from "vuex";
-import HouseSearchBar from '../components/house/HouseSearchBar.vue';
+import HouseSearchBar from "../components/house/HouseSearchBar.vue";
 
 export default {
-  components: { HouseSearchBar },
+    components: { HouseSearchBar },
     data() {
         return {
             keyword: "",
@@ -111,26 +99,6 @@ export default {
         store.commit("SET_NAV_FOOTER", true);
     },
     mounted() {},
-    methods: {
-        ...mapActions("houseStore", ["getHouseDealListByKeyword"]),
-        ...mapMutations("houseStore", ["SET_LIST_STATE"]),
-        async search() {
-            //console.log("프로미스 나인! ㅋㅋ");
-            if (
-                !(await this.getHouseDealListByKeyword(this.keyword)
-                    .then(() => {
-                        //console.log("프로미스 나인! ㅋㅋ 덴");
-                        return true;
-                    })
-                    .catch(() => {
-                        //console.log("프로미스 나인! ㅋㅋ 캐치");
-                        return false;
-                    }))
-            )
-                return;
-            this.SET_LIST_STATE("search");
-            this.$router.push("/dealinfo");
-        },
-    },
+    methods: {},
 };
 </script>
