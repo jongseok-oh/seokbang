@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h5 @click="moveNoticeList" style="cursor: pointer" :hover="grey">공지사항</h5>
+      <h5 @click="moveNoticeList" style="cursor: pointer">공지사항</h5>
       <div class="list-group">
         <div @click="moveNoticeDetail(notice.no)" class="overflow-hidden list-group-item list-group-item-action" :key="notice.no" v-for="notice in notices">
           {{notice.title}}
