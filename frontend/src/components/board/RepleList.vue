@@ -3,28 +3,39 @@
     <hr/>
     <h5>댓글 ({{reples.length}})</h5>
     <b-row>
-      <table class="table table-striped table-hover mx-3">
-          <tbody>
-            <tr v-if="reples.length == 0">
-                <td colspan="4">등록된 댓글 정보가 없습니다.</td>
-            </tr>
-            <template v-else>
-              <tr :key="reple.no" v-for="reple in reples">
-                <td class="w70">{{ reple.content }}</td>
-                <td>{{ reple.userName }}</td>
-                <td>{{ reple.repleDate }}</td>
-                <td><b-button variant="outline-danger" size="sm">
+      <b-col>
+        <table class="table">
+            <tbody>
+              <tr v-if="reples.length == 0">
+                  <td colspan="4">등록된 댓글 정보가 없습니다.</td>
+              </tr>
+              <template v-else>
+                <tr :key="reple.no" v-for="reple in reples">
+                  <td class="w70">{{ reple.content }}</td>
+                  <td>{{ reple.userName }}</td>
+                  <td>{{ reple.repleDate }}</td>
+                  <template v-if="reple.userNo == userinfo.no">
+                    <td><b-button variant="outline-primary" inline @click="modifyRepleBtn" size="sm">수정</b-button></td>
+                    <td><b-button variant="outline-danger" inline @click="deleteRepleBtn(reple.no)" size="sm">삭제</b-button></td>
+                  </template>
+                  <template v-else>
+                    <td></td>
+                    <td></td>
+                  </template>
+                  <td>
+                    <b-button variant="outline-danger" size="sm">
                       <b-icon-heart color="red" v-if="!reple.isLiked"></b-icon-heart>
                       <b-icon-heart-fill color="red" v-else></b-icon-heart-fill>
                       {{reple.likesCnt}}
                     </b-button>
-                </td>
-                <td><b-button variant="outline-primary" inline @click="modifyRepleBtn" size="sm">수정</b-button></td>
-                <td><b-button variant="outline-danger" inline @click="deleteRepleBtn(reple.no)" size="sm">삭제</b-button></td>
-              </tr>
-            </template>
-          </tbody>
-      </table>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+        </table>
+      </b-col>
+    </b-row>
+    <b-row>
       <b-col sm="11">
         <b-form-input v-model="repleContent" placeholder="댓글 작성"></b-form-input>
       </b-col>
@@ -73,6 +84,7 @@ export default {
           const reple = {
             no : repleList[index].no,
             content : repleList[index].content,
+            userNo : repleList[index].userNo,
             userName : repleList[index].userName,
             repleDate : repleList[index].repleDate,
             likesCnt : likesCntList[index],
