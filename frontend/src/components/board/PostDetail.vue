@@ -5,8 +5,8 @@
         <h2 class="mx-3">{{this.gugunName}} 게시판</h2>
       </b-col>
       <b-col sm="2" class="m-auto">
-        <b-button variant="outline-warning dark" size="md" @click="likeBtn">
-            <b-icon-star color="dark" v-if="!s"></b-icon-star>
+        <b-button variant="outline-warning dark" size="md" @click="interestBtn">
+            <b-icon-star color="dark" v-if="!isLiked"></b-icon-star>
             <b-icon-star-fill color="yellow" v-else></b-icon-star-fill>
             관심지역
           </b-button>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import RepleList from './RepleList.vue';
 
 export default {
@@ -64,14 +64,13 @@ export default {
   },
   data() {
       return {
-        postNo : Number,
         isLiked : Boolean,
         likesCnt : Number,
       };
   },
   computed: {
-    ...mapState("boardStore", ["post", "gugunName"]),
-    ...mapState("userStore", ["userinfo"]),
+    ...mapState("boardStore", ["post", "postNo", "gugunName"]),
+    ...mapState("userStore", ["userinfo", "interestList"]),
     message() {
       if (this.post.content) return this.post.content.split("\n").join("<br>");
       return "";
@@ -86,7 +85,7 @@ export default {
       this.$router.push({name : "postmodifyform"})
     },
     async clickDelete(){
-      await this.deletePost(this.post.no);
+      await this.deletePost(this.postNo);
       this.moveList();
     },
     likeBtn(){
@@ -99,24 +98,26 @@ export default {
         this.isLiked = true;
       }
     },
+    interestBtn(){
+      console.log(this.postNo);
+    },
     async init(){
       await this.getPost(this.postNo);
       this.likesCnt = this.post.likesCnt;
       this.isLiked = this.post.isLiked;
     }
   },
-  async destroyed() {
+  async beforeDestroy() {
     console.log("destroy!!");
     if(this.isLiked && !this.post.isLiked){
-      await this.likePost(this.post.no);
+      await this.likePost(this.postNo);
     }
     else if(!this.isLiked && this.post.isLiked){
-      await this.unlikePost(this.post.no);
+      await this.unlikePost(this.postNo);
     }
     console.log("destroy end!!");
   },
   mounted() {
-    this.postNo = this.$route.params.postNo;
     this.init();
   },
 };

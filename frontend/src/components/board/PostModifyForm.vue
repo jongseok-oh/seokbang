@@ -28,10 +28,7 @@ export default {
     ...mapActions(boardStore,["modifyPost"]),
     async modifyPostBtn(){
       await this.modifyPost(this.post);
-      this.$router.replace({
-          name: "postdetail",
-          params: { postNo: this.post.no },
-        });
+      this.$router.push({name : "postdetail"});
     },
   },
   created() {

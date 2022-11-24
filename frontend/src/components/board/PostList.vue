@@ -5,8 +5,8 @@
         <h2 class="mx-3">{{this.gugunName}} 게시판</h2>
       </b-col>
       <b-col sm="2" class="m-auto">
-        <b-button variant="outline-warning dark" size="md" @click="likeBtn">
-            <b-icon-star color="dark" v-if="!s"></b-icon-star>
+        <b-button variant="outline-warning dark" size="md" @click="interestBtn">
+            <b-icon-star color="dark" v-if="!interestList.includes(gugunCode)"></b-icon-star>
             <b-icon-star-fill color="yellow" v-else></b-icon-star-fill>
             관심지역
           </b-button>
@@ -46,12 +46,13 @@
       label-sort-clear="">
     </b-table>
 
-    <b-pagination small
+    <b-pagination
         v-model="currentPage"
         :total-rows= "rows"
         :per-page="perPage"
         aria-controls="my-table"
         align="center"
+        size="sm"
         class="mt-4">
     </b-pagination>
 
@@ -62,7 +63,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 const boardStore = "boardStore";
 
@@ -105,7 +106,8 @@ export default {
         };
     },
   computed: {
-    ...mapState(boardStore, ["posts", "gugunCode", "gugunName"]),
+    ...mapState("boardStore", ["posts", "gugunCode", "gugunName"]),
+    ...mapState("userStore", ["interestList"]),
     rows(){
       if(!this.postList)
         return 0;
@@ -117,16 +119,17 @@ export default {
       console.log("구군코드 와치");
       await this.getPosts(this.gugunCode);
       this.allPosts();
+      console.log(this.gugunCode);
+      console.log(this.interestList);
     }
   },
   methods: {
+    ...mapMutations("boardStore",["setPostNo"]),
     ...mapActions(boardStore,["getPosts","hit"]),
     async movePostDetail(post){
       await this.hit(post.no);
-      this.$router.push({
-        name: "postdetail",
-        params: { postNo: post.no },
-      });
+      await this.setPostNo(post.no);
+      this.$router.push({name : "postdetail"});
     },
     moveWriteForm() {
       this.$router.push({name : "postwriteform"});
@@ -141,6 +144,9 @@ export default {
       this.popularToggle = true;
       this.postList = this.posts.filter(post => post.likesCnt >= 3);
     },
+    interestBtn(){
+
+    }
   },
   async mounted() {
     await this.getPosts(this.gugunCode);

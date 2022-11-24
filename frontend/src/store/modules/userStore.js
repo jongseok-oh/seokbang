@@ -1,9 +1,14 @@
 import { login, logout, modifyUser, deleteUser} from "@/api/user.js";
+import { apiInstance } from "@/api/index.js";
 import router from "@/router";
+
+const restApi = apiInstance();
+
 const userStore = {
   namespaced: true,
   state: {
-    userinfo: {}
+    userinfo: {},
+    interestList: [],
   },
   getters: {
     userNo(state) {
@@ -17,12 +22,15 @@ const userStore = {
       }
       //console.log(state.userinfo);
     },
+    SET_INTEREST_LIST(state, payload) {
+      state.interestList = payload;
+    },
     CLEAR_USER_INFO(state) {
       state.userinfo = {}
     }
   },
   actions: {
-    doLogin: ({ commit }, payload) => {
+    doLogin: ({ commit, dispatch }, payload) => {
       //console.log(payload);
       login(
         payload
@@ -31,6 +39,7 @@ const userStore = {
             alert("로그인 정보를 확인해 주세요");
           } else if(res.status == 200){
             commit("SET_USER_INFO", res.data);
+            dispatch("getInterestAreas");
             alert(`반갑습니다 ${res.data.userName}님!`);
             router.push({name: "main"});
           }
@@ -81,6 +90,11 @@ const userStore = {
           console.log(error);
         }
       )
+    },
+    getInterestAreas(context) {
+      return restApi.get(`/api/interest`).then(( data ) => {
+        context.commit("SET_INTEREST_LIST", data.data);
+      });
     },
   },
 };

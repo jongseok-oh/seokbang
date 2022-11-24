@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InterestArea {
 	private Long userNo;
-	private String dongCode;
+	private String gugunCode;
 }

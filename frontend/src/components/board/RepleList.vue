@@ -59,13 +59,14 @@ export default {
         };
     },
   computed: {
+    ...mapState("boardStore", ["postNo"]),
     ...mapState("userStore", ["userinfo"]),
   },
   methods: {
     ...mapActions(boardStore, ["getReples", "registReple", "deleteReple"]),
     async writeReple(){
       await this.registReple({
-        postNo : this.$route.params.postNo,
+        postNo : this.postNo,
         userNo : this.userinfo.no,
         content : this.repleContent,
         repleDate : new Date()
@@ -75,7 +76,7 @@ export default {
     },
     init(){
       this.reples = [];
-      this.getReples(this.$route.params.postNo).then((data) => {
+      this.getReples(this.postNo).then((data) => {
         let repleList = data.data.reples;
         let isLikedList = data.data.isLiked;
         let likesCntList = data.data.likesCnt;

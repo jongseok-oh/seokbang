@@ -1,12 +1,13 @@
 import { apiInstance } from "@/api/index.js";
 
-let restApi = apiInstance();
+const restApi = apiInstance();
 
 const boardStore = {
   namespaced: true,
   state: {
     posts: [],
     post: {},
+    postNo: Number,
     gugunCode: String,
     gugunName: String,
   },
@@ -21,6 +22,9 @@ const boardStore = {
     },
     setPost(state, payload) {
       state.post = payload;
+    },
+    setPostNo(state, payload) {
+      state.postNo = payload;
     },
     setGugunCode(state, payload) {
       state.gugunCode = payload;

@@ -15,13 +15,13 @@ public class InterestAreaServiceImpl implements InterestAreaService {
 	private InterestAreaDAO interestAreaDAO;
 
 	@Override
-	public List<InterestArea> getUserAreaListByUserNo(Long userNo) {
+	public List<String> getUserAreaListByUserNo(Long userNo) {
 		return interestAreaDAO.getInterestAreaListByUserNo(userNo);
 	}
 
 	@Override
-	public boolean deleteUserArea(Long userNo, String dongCode) {
-		return interestAreaDAO.remove(userNo, dongCode) > 0;
+	public boolean deleteUserArea(Long userNo, String gugunCode) {
+		return interestAreaDAO.remove(userNo, gugunCode) > 0;
 	}
 
 	@Override

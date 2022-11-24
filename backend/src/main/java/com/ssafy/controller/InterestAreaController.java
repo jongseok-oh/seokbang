@@ -21,18 +21,18 @@ import com.ssafy.model.service.InterestAreaServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping("/api/interestareas")
+@RequestMapping("/api/interest")
 @RestController
 public class InterestAreaController{
 	@Autowired
 	private InterestAreaServiceImpl areaService;
 	
-	@DeleteMapping("/{dongCode}")
-	private ResponseEntity<?> gwansimDelete(HttpSession session, @PathVariable String dongCode){
+	@DeleteMapping("/{gugunCode}")
+	private ResponseEntity<?> removeInterest(HttpSession session, @PathVariable String gugunCode){
 		
 		UserInfo user = (UserInfo) session.getAttribute("user");
 		
-		boolean res = areaService.deleteUserArea(user.getNo(), dongCode);
+		boolean res = areaService.deleteUserArea(user.getNo(), gugunCode);
 		if(res) {
 			log.info("area delete sucess");
 			return ResponseEntity.noContent().build();
@@ -43,17 +43,17 @@ public class InterestAreaController{
 		}
 	}
 	
-	@PostMapping("/{dongCode}")
-	private ResponseEntity<?> gwansimRegist(HttpSession session, @PathVariable String dongCode){
+	@PostMapping("/{gugunCode}")
+	private ResponseEntity<?> registInterest(HttpSession session, @PathVariable String gugunCode){
 		UserInfo user = (UserInfo) session.getAttribute("user");
 		log.info(user.toString());
-		log.info("gwansimRegist dongCode = " + dongCode);
+		log.info("gwansimRegist dongCode = " + gugunCode);
 		
-		boolean res = areaService.registerUserArea(new InterestArea(user.getNo(),dongCode));
+		boolean res = areaService.registerUserArea(new InterestArea(user.getNo(),gugunCode));
 		
 		if(res) {
 			log.info("area insert sucess");
-			return ResponseEntity.created(URI.create("api/areas" + dongCode)).build();
+			return ResponseEntity.created(URI.create("api/areas" + gugunCode)).build();
 		}
 		else {
 			log.info("area insert fail");
@@ -62,13 +62,13 @@ public class InterestAreaController{
 	}
 	
 	@GetMapping
-	private ResponseEntity<?> getUserAreaListByUserId(HttpSession session) {
+	private ResponseEntity<?> getInterestAreaListByUserNo(HttpSession session) {
 		UserInfo user = (UserInfo) session.getAttribute("user");
 		log.info("userId : "+user);
-		List<InterestArea> userareas = areaService.getUserAreaListByUserNo(user.getNo());
+		List<String> interestareas = areaService.getUserAreaListByUserNo(user.getNo());
 		
-		if(!userareas.isEmpty())
-			return ResponseEntity.ok(userareas);
+		if(!interestareas.isEmpty())
+			return ResponseEntity.ok(interestareas);
 		else return ResponseEntity.noContent().build();
 	}
 }

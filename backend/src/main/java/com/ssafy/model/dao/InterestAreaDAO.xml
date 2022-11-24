@@ -4,15 +4,15 @@
 <mapper namespace="com.ssafy.model.dao.InterestAreaDAO">
 	
 	<insert id="registerInterestArea" parameterType="InterestArea" >
-		insert into interestarea(userNo,dongCode) values(#{userNo}, #{dongCode})	
+		insert into interestarea(userNo,gugunCode) values(#{userNo}, #{gugunCode})	
 	</insert>
 	
-	<select id="getInterestAreaListByUserNo" resultType="InterestArea" parameterType="Long">
-		select userNo, dongCode from interestarea where userNo = #{userNo}
+	<select id="getInterestAreaListByUserNo" resultType="String" parameterType="Long">
+		select gugunCode from interestarea where userNo = #{userNo}
 	</select>
 	
 	<delete id="remove" parameterType="InterestArea">
-		delete from interestarea where userNo = #{userNo} and dongCode=#{dongCode}
+		delete from interestarea where userNo = #{userNo} and gugunCode=#{gugunCode}
 	</delete>
 	
 </mapper>

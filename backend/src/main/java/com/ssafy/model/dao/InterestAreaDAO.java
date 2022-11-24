@@ -10,7 +10,7 @@ import com.ssafy.model.dto.InterestArea;
 public interface InterestAreaDAO {
 	int registerInterestArea(InterestArea interestArea);
 	
-	List<InterestArea> getInterestAreaListByUserNo(Long userNo);
+	List<String> getInterestAreaListByUserNo(Long userNo);
 	
-	int remove(Long userNo, String dongCode);
+	int remove(Long userNo, String gugunCode);
 }
