@@ -155,7 +155,7 @@ export default {
         popularPosts() {
             this.allToggle = false;
             this.popularToggle = true;
-            this.postList = this.posts.filter((post) => post.likesCnt >= 3);
+            this.postList = this.posts.filter((post) => post.likesCnt >= 2);
         },
         interestBtn() {},
     },

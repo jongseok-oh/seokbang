@@ -27,4 +27,8 @@
 		update post set hit = hit + 1 where no = #{no}
 	</update>
 	
+	<select id="getNotices" resultType="PostDTO">
+		SELECT * FROM housedb.post where gugunCode = '99' limit 6;
+	</select>
+	
 </mapper>

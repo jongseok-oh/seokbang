@@ -100,6 +100,11 @@ const boardStore = {
         console.log("delete reple");
       });
     },
+    getNotices(context) {
+      return restApi.get(`/api/posts/notices`).then(({ data }) => {
+        return data;
+      });
+    }
   },
 };
 

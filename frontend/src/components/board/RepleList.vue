@@ -14,15 +14,9 @@
                   <td class="w70">{{ reple.content }}</td>
                   <td>{{ reple.userName }}</td>
                   <td>{{ reple.dateString }}</td>
-                  <template v-if="reple.userNo == userinfo.no">
-                    <td>
-                      <b-button variant="outline-primary mx-1" inline @click="modifyRepleBtn" size="sm">수정</b-button>
-                      <b-button variant="outline-danger mx-1" inline @click="deleteRepleBtn(reple.no)" size="sm">삭제</b-button>
-                    </td>
-                  </template>
-                  <template v-else>
-                    <td></td>
-                  </template>
+                  <td>
+                    <b-button v-if="reple.userNo == userinfo.no" variant="outline-danger mx-1" inline @click="deleteRepleBtn(reple.no)" size="sm">삭제</b-button>
+                  </td>
                 </tr>
               </template>
             </tbody>
@@ -75,9 +69,6 @@ export default {
       await this.deleteReple(no);
       this.init();
     },
-    modifyRepleBtn(){
-
-    }
   },
   created() {
     this.init();

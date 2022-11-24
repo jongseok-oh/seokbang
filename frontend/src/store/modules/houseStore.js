@@ -55,6 +55,7 @@ const houseStore = {
       state.searchkey = keyword;
     },
     SET_LIST_STATE(state, liststate) {
+      console.log("@313");
       state.listState = liststate;
     },
   },
@@ -118,6 +119,7 @@ const houseStore = {
     },
     getHouseDealListByKeyword ({ commit }, keyword){
       commit("SET_SEARCH_KEY", keyword);
+      console.log("23142");
       return new Promise((resolve, reject) => {
         houseDealListKeyword(
           keyword,

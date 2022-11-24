@@ -20,4 +20,6 @@ public interface PostDAO {
 	int deletePost(Long no);
 	
 	int hit(Long no);
+	
+	List<PostDTO> getNotices();
 }

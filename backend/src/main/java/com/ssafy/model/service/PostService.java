@@ -17,4 +17,6 @@ public interface PostService {
 	boolean deletePost(Long no);
 	
 	boolean hit(Long no);
+	
+	List<PostDTO> getNotices();
 }

@@ -53,8 +53,6 @@
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 
-const boardStore = "boardStore";
-
 export default {
     data() {
         return {
@@ -100,7 +98,7 @@ export default {
   },
   methods: {
     ...mapMutations("boardStore",["setPostNo"]),
-    ...mapActions(boardStore,["getPosts","hit"]),
+    ...mapActions("boardStore",["getPosts","hit"]),
     async movePostDetail(post){
       await this.hit(post.no);
       await this.setPostNo(post.no);
@@ -117,7 +115,7 @@ export default {
     popularPosts(){
       this.allToggle = false;
       this.popularToggle = true;
-      this.postList = this.posts.filter(post => post.likesCnt >= 3);
+      this.postList = this.posts.filter(post => post.likesCnt >= 2);
     },
   },
   async mounted() {

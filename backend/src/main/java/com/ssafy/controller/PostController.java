@@ -145,4 +145,10 @@ public class PostController {
 		else
 			return ResponseEntity.internalServerError().build();
 	}
+	
+	@GetMapping("/notices")
+	public ResponseEntity<?> getNoticeList() {
+		List<PostDTO> notices = postService.getNotices();
+		return ResponseEntity.ok(notices);
+	}
 }

@@ -48,29 +48,7 @@
                 </div>
             </b-col>
             <b-col class="p-5" md="3">
-                <h2 class="h5">부동산 뉴스</h2>
-                <div class="list-group">
-                    <a
-                        href="#"
-                        class="list-group-item list-group-item-action list-group-item-light"
-                        >서울 입주 2년차 아파트 전셋값 1억400만원 올라</a
-                    >
-                    <a
-                        href="#"
-                        class="list-group-item list-group-item-action list-group-item-light"
-                        >12:16 거래한파...매수자가 사라졌다</a
-                    >
-                    <a
-                        href="#"
-                        class="list-group-item list-group-item-action list-group-item-light"
-                        >재건축 대안 또는 수직증축 리모델링... 추진 속...</a
-                    >
-                    <a
-                        href="#"
-                        class="list-group-item list-group-item-action list-group-item-light"
-                        >고가기준 9억, 서울 아파트 중간값 됐다</a
-                    >
-                </div>
+                <notice-card></notice-card>
             </b-col>
         </b-row>
     </div>
@@ -98,10 +76,11 @@ h1 {
 <script>
 import store from "@/store";
 import { mapActions, mapMutations } from "vuex";
-import HouseSearchBar from '../components/house/HouseSearchBar.vue';
+import NoticeCard from '@/components/notice/NoticeCard.vue';
+import HouseSearchBar from '@/components/house/HouseSearchBar.vue';
 
 export default {
-  components: { HouseSearchBar },
+  components: { HouseSearchBar, NoticeCard },
     data() {
         return {
             keyword: "",

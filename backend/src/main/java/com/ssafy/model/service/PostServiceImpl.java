@@ -50,5 +50,10 @@ public class PostServiceImpl implements PostService {
 		return postDao.hit(no) > 0;
 	}
 
+	@Override
+	public List<PostDTO> getNotices() {
+		return postDao.getNotices();
+	}
+
 
 }

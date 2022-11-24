@@ -58,8 +58,8 @@ export default {
       };
   },
   computed: {
-    ...mapState("boardStore", ["post", "postNo", "gugunName"]),
-    ...mapState("userStore", ["userinfo", "interestList"]),
+    ...mapState("boardStore", ["post", "postNo"]),
+    ...mapState("userStore", ["userinfo"]),
     message() {
       if (this.post.content) return this.post.content.split("\n").join("<br>");
       return "";
@@ -86,9 +86,6 @@ export default {
         this.likesCnt += 1;
         this.isLiked = true;
       }
-    },
-    interestBtn(){
-      console.log(this.postNo);
     },
     async init(){
       await this.getPost(this.postNo);

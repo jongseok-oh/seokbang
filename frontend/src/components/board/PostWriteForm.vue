@@ -1,11 +1,12 @@
 <template>
   <div class="container" id="postwriteform">
-    <b-form-input v-model="post.title" placeholder="제목"></b-form-input>
+    <b-form-input class="m-1" v-model="post.title" placeholder="제목"></b-form-input>
     <b-form-textarea 
       v-model="post.content"
       placeholder="내용"
       rows="20"
       no-resize
+      class="m-1"
       ></b-form-textarea>
     <b-button class="float-end" @click="writePostBtn">등록</b-button>
   </div>
