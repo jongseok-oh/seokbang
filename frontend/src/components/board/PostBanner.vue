@@ -61,7 +61,8 @@ export default {
         },
     },
     beforeDestroy() {
-        this.applyInterest(this.gugunCode);
+        if(this.gugunCode != '99')
+            this.applyInterest(this.gugunCode);
     },
 };
 </script>
