@@ -124,12 +124,14 @@ const houseStore = {
         houseDealListKeyword(
           keyword,
           ({ data }) => {
+            console.log("설치 키 성공");
             commit("SET_DEAL_HOUSE_LIST", data);
             resolve();
           },
           (error) => {
             console.log(error);
             console.log("에러러러러러");
+            console.log("설치 키 실패");
             reject(error);
           }
         );

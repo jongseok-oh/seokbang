@@ -7,7 +7,7 @@
                 </b-row>
                 <b-row>
                     <b-col md="4" offset-md="4">
-                        <house-search-bar></house-search-bar>
+                        <house-search-bar :mainSearch="true"></house-search-bar>
                     </b-col>
                 </b-row>
             </b-container>
@@ -39,12 +39,8 @@
                     <a href="#" class="list-group-item list-group-item-action"
                         >계약 및 잔금 치르기</a
                     >
-                    <a href="#" class="list-group-item list-group-item-action"
-                        >소유권 이전등기</a
-                    >
-                    <a href="#" class="list-group-item list-group-item-action"
-                        >인테리어 공사</a
-                    >
+                    <a href="#" class="list-group-item list-group-item-action">소유권 이전등기</a>
+                    <a href="#" class="list-group-item list-group-item-action">인테리어 공사</a>
                 </div>
             </b-col>
             <b-col class="p-5" md="3">
@@ -55,7 +51,7 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
 
 .bg-img {
     height: 80vh;
@@ -68,8 +64,8 @@
 }
 
 h1 {
-  font-family: 'Hi Melody', cursive;
-  color: white;
+    font-family: "Hi Melody", cursive;
+    color: white;
 }
 </style>
 
@@ -90,26 +86,6 @@ export default {
         store.commit("SET_NAV_FOOTER", true);
     },
     mounted() {},
-    methods: {
-        ...mapActions("houseStore", ["getHouseDealListByKeyword"]),
-        ...mapMutations("houseStore", ["SET_LIST_STATE"]),
-        async search() {
-            //console.log("프로미스 나인! ㅋㅋ");
-            if (
-                !(await this.getHouseDealListByKeyword(this.keyword)
-                    .then(() => {
-                        //console.log("프로미스 나인! ㅋㅋ 덴");
-                        return true;
-                    })
-                    .catch(() => {
-                        //console.log("프로미스 나인! ㅋㅋ 캐치");
-                        return false;
-                    }))
-            )
-                return;
-            this.SET_LIST_STATE("search");
-            this.$router.push("/dealinfo");
-        },
-    },
+    methods: {},
 };
 </script>

@@ -21,6 +21,9 @@ import { mapActions, mapMutations } from "vuex";
 export default {
     name: "FrontendHouseSearch",
 
+    props: {
+        mainSearch: Boolean,
+    },
     data() {
         return {
             keyword: "",
@@ -30,9 +33,21 @@ export default {
     methods: {
         ...mapActions("houseStore", ["getHouseDealListByKeyword"]),
         ...mapMutations("houseStore", ["SET_LIST_STATE"]),
-        search() {
+        async search() {
+            if (
+                !(await this.getHouseDealListByKeyword(this.keyword)
+                    .then(() => {
+                        console.log("프로미스 나인! ㅋㅋ 덴");
+                        return true;
+                    })
+                    .catch(() => {
+                        console.log("프로미스 나인! ㅋㅋ 캐치");
+                        return false;
+                    }))
+            )
+                return;
             this.SET_LIST_STATE("search");
-            this.getHouseDealListByKeyword(this.keyword);
+            if (this.mainSearch) this.$router.push("/dealinfo");
         },
     },
 };
