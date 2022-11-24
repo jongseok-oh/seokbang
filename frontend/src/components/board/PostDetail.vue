@@ -35,14 +35,18 @@
         <b-col class="text-left">
           <b-button variant="outline-dark mx-1" size="sm" @click="moveList">목록</b-button>
         </b-col>
-        <b-col class="text-right">
-          <b-button variant="outline-danger float-end mx-1" size="sm" @click="clickDelete">글삭제</b-button>
-          <b-button variant="outline-primary float-end mx-1" size="sm" @click="moveModifyArticle">글수정</b-button>
+        <b-col class="text-center">
           <b-button variant="outline-danger" size="sm" @click="likeBtn">
             <b-icon-heart color="red" v-if="!isLiked"></b-icon-heart>
             <b-icon-heart-fill color="red" v-else></b-icon-heart-fill>
             {{likesCnt}}
           </b-button>
+        </b-col>
+        <b-col class="text-right">
+          <template v-if="post.userNo == userinfo.no" >
+            <b-button variant="outline-danger float-end mx-1" size="sm" @click="clickDelete">글삭제</b-button>
+            <b-button variant="outline-primary float-end mx-1" size="sm" @click="moveModifyArticle">글수정</b-button>
+          </template>
         </b-col>
       </b-row>
     </b-container>
@@ -53,8 +57,6 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import RepleList from './RepleList.vue';
-
-const boardStore = "boardStore";
 
 export default {
   components:{
@@ -68,14 +70,15 @@ export default {
       };
   },
   computed: {
-    ...mapState(boardStore, ["post", "gugunName"]),
+    ...mapState("boardStore", ["post", "gugunName"]),
+    ...mapState("userStore", ["userinfo"]),
     message() {
       if (this.post.content) return this.post.content.split("\n").join("<br>");
       return "";
     },
   },
   methods: {
-    ...mapActions(boardStore, ["getPost", "deletePost", "likePost", "unlikePost"]),
+    ...mapActions("boardStore", ["getPost", "deletePost", "likePost", "unlikePost"]),
     moveList(){
       this.$router.push({name : "postlist"})
     },
