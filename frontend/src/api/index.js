@@ -24,8 +24,9 @@ function apiInstance() {
             store.commit('userStore/CLEAR_USER_INFO');
             alert("로그인 후 이용해 주세요");
             router.push('/loginform');
+            return Promise.reject(error);
             // 이행되지 않는 Promise를 반환하여 Promise Chaining 끊어주기
-            return new Promise(() => {});
+            //return new Promise(() => { });
           case 406:
             alert("권한 없는 사용자 입니다.");
             router.push('/');

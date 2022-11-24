@@ -116,17 +116,22 @@ const houseStore = {
         }
       );
     },
-    getHouseDealListByKeyword: ({ commit }, keyword) => {
+    getHouseDealListByKeyword ({ commit }, keyword){
       commit("SET_SEARCH_KEY", keyword);
-      houseDealListKeyword(
-        keyword,
-        ({ data }) => {
-          commit("SET_DEAL_HOUSE_LIST", data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      return new Promise((resolve, reject) => {
+        houseDealListKeyword(
+          keyword,
+          ({ data }) => {
+            commit("SET_DEAL_HOUSE_LIST", data);
+            resolve();
+          },
+          (error) => {
+            console.log(error);
+            console.log("에러러러러러");
+            reject(error);
+          }
+        );
+      })
     },
   },
 };
