@@ -32,7 +32,7 @@ export default {
     ...mapActions("userStore", ["doDeleteInterestArea"]),
     ...mapMutations("boardStore", ["setGugunCode", "setGugunName"]),
     remove() {
-      console.log(`remove ${this.interest.value}`);
+      // console.log(`remove ${this.interest.value}`);
       this.doDeleteInterestArea(this.interest.value);
       this.hide();
     },

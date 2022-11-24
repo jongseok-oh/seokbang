@@ -22,13 +22,14 @@ export default {
     ...mapState("boardStore", ["postNo", "gugunCode"]),
   },
   methods: {
-    ...mapMutations("boardStore", ["setPostNo"]),
+    ...mapMutations("boardStore", ["setGugunCode", "setPostNo"]),
     ...mapActions("boardStore", ["getNotices", "hit"]),
-    moveNoticeList(){
-      this.gugunCode = "99";
+    async moveNoticeList(){
+      await this.setGugunCode("99");
       this.$router.push({name : "notice"});
     },
     async moveNoticeDetail(no){
+      await this.setGugunCode("99");
       await this.setPostNo(no);
       await this.hit(no);
       this.$router.push({name : "noticedetail"});

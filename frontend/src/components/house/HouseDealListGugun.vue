@@ -11,7 +11,6 @@
 import { mapState, mapMutations } from "vuex";
 import HouseDealListItemGugun from "@/components/house/HouseDealListItemGugun.vue";
 
-const houseStore = "houseStore";
 export default {
     name: "FrontendHouseDealListGugun",
     components: {
@@ -21,11 +20,11 @@ export default {
         return {};
     },
     computed: {
-        ...mapState(houseStore, ["aptName", "deals"]),
+        ...mapState("houseStore", ["aptName", "deals"]),
     },
     mounted() {},
     methods: {
-        ...mapMutations(houseStore, ["CLEAR_DEAL_HOUSE_LIST"]),
+        ...mapMutations("houseStore", ["CLEAR_DEAL_HOUSE_LIST"]),
     },
     destroyed() {
         //alert("이잏 파괘");

@@ -13,7 +13,7 @@
   <script>
 import HouseDealListGugun from "@/components/house/HouseDealListGugun.vue";
 import HouseDealListSearch from "@/components/house/HouseDealListSearch.vue";
- import { mapState } from "vuex";
+import { mapState } from "vuex";
   
   export default {
     name: "HouseList",

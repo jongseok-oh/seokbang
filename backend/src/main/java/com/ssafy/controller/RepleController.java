@@ -3,9 +3,7 @@ package com.ssafy.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,11 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.model.dto.PostDTO;
 import com.ssafy.model.dto.Reple;
 import com.ssafy.model.dto.RepleDTO;
-import com.ssafy.model.dto.UserInfo;
-import com.ssafy.model.service.RepleLikesService;
 import com.ssafy.model.service.RepleService;
 
 import lombok.extern.slf4j.Slf4j;

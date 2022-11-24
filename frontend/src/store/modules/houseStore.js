@@ -55,7 +55,6 @@ const houseStore = {
       state.searchkey = keyword;
     },
     SET_LIST_STATE(state, liststate) {
-      console.log("@313");
       state.listState = liststate;
     },
   },
@@ -119,19 +118,18 @@ const houseStore = {
     },
     getHouseDealListByKeyword ({ commit }, keyword){
       commit("SET_SEARCH_KEY", keyword);
-      console.log("23142");
       return new Promise((resolve, reject) => {
         houseDealListKeyword(
           keyword,
           ({ data }) => {
-            console.log("설치 키 성공");
+            // console.log("설치 키 성공");
             commit("SET_DEAL_HOUSE_LIST", data);
             resolve();
           },
           (error) => {
             console.log(error);
-            console.log("에러러러러러");
-            console.log("설치 키 실패");
+            // console.log("에러러러러러");
+            // console.log("설치 키 실패");
             reject(error);
           }
         );

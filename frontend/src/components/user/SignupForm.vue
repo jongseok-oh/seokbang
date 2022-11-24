@@ -230,9 +230,9 @@ export default {
   },
   watch: {
     "form.userId": async function () {
-      console.log(this.form.userId);
+      // console.log(this.form.userId);
       this.validate.id = await this.isValidId();
-      console.log(this.validate);
+      // console.log(this.validate);
     },
     "form.password": function () {
       this.validate.password = this.isValidPassword();

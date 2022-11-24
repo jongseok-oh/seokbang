@@ -10,7 +10,6 @@ import { apiInstance } from "@/api/index.js";
 import store from "@/store";
 
 let mapLevel = 6;
-let houseStore = "houseStore";
 
 export default {
     data() {
@@ -24,7 +23,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(houseStore, ["houses", "gugunCode"]),
+        ...mapState("houseStore", ["houses", "gugunCode"]),
     },
     watch: {
         houses() {
@@ -47,8 +46,8 @@ export default {
         this.CLEAR_DEAL_HOUSE_LIST();
     },
     methods: {
-        ...mapMutations(houseStore, ["SET_DETAIL_HOUSE", "SET_APT_CODE", "CLEAR_DEAL_HOUSE_LIST"]),
-        ...mapActions(houseStore, ["getHouseDealList"]),
+        ...mapMutations("houseStore", ["SET_DETAIL_HOUSE", "SET_APT_CODE", "CLEAR_DEAL_HOUSE_LIST"]),
+        ...mapActions("houseStore", ["getHouseDealList"]),
         initMap() {
             //console.log("initmap start");
             if (this.mapContainer == null) this.mapContainer = document.getElementById("map");
@@ -74,7 +73,7 @@ export default {
                     //console.log("중심 좌표가져오기 성공");
                 })
                 .catch(() => {
-                    console.log("지도 중심 좌표 에러");
+                    // console.log("지도 중심 좌표 에러");
                 });
         },
         movemap() {

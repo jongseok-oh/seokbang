@@ -13,7 +13,7 @@
               <p>
                 <span>고객센터  02-3429-5100  |  평일 상담시간  09:00 ~ 18:00</span><br/>
                 <span>본 사이트의 콘텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</span><br/>
-                <span>Copyright &copy; HAPPYHOUSE All Rights Reserved.</span>
+                <span>Copyright &copy; SEOKBANG All Rights Reserved.</span>
               </p>
             </footer>
           </div>

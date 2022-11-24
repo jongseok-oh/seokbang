@@ -75,7 +75,7 @@ const userStore = {
     doModifyUser:({ commit, state }, userInfo) => {
       //console.log(payload);
       commit('SET_USER_INFO', userInfo);
-      console.log(state);
+      // console.log(state);
       modifyUser(
         state.userinfo,
         () => {

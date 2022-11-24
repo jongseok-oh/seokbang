@@ -3,7 +3,7 @@
     <b-form-input class="m-1" v-model="post.title" placeholder="제목"></b-form-input>
     <b-form-textarea 
       v-model="post.content"
-      placeholder="내용"
+      placeholder="내용을 입력해주세요."
       rows="20"
       no-resize
       class="m-1"
