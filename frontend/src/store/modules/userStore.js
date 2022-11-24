@@ -9,6 +9,7 @@ const userStore = {
   state: {
     userinfo: {},
     interestList: [],
+    modalToggle: 0
   },
   getters: {
     userNo(state) {
@@ -34,6 +35,9 @@ const userStore = {
     },
     INSERT_INTEREST(state, gugunCode) {
       state.interestList.push(gugunCode);
+    },
+    TOGGLE_MODAL(state) {
+      state.modalToggle ^= 1;
     },
   },
   actions: {

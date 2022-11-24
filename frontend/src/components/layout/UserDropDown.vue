@@ -2,7 +2,7 @@
     <b-navbar-nav class="ms-auto" style="margin-right: 100px">
         <template v-if="userinfo && Object.keys(userinfo).length != 0">
             <b-nav-item-dropdown :text="userinfo.userName">
-                <b-dropdown-item @click="ttest">관심 지역 목록</b-dropdown-item>
+                <b-dropdown-item @click="show">관심 지역 목록</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 <b-dropdown-item @click="userDetailForm">회원 정보 수정</b-dropdown-item>
                 <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>
@@ -15,12 +15,12 @@
                 >
             </b-nav-form>
         </template>
-        <interest-modal :interestList="interestList" />
+        <interest-modal/>
     </b-navbar-nav>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import InterestModal from "./InterestModal.vue";
 
 export default {
@@ -32,16 +32,12 @@ export default {
         return {};
     },
     computed: {
-        ...mapState("userStore", ["userinfo", "interestList"]),
-    },
-    watch: {
-        userinfo() {
-            console.log(this.userinfo);
-        },
+        ...mapState("userStore", ["userinfo", "modalToggle"]),
     },
     mounted() {},
     methods: {
-        ...mapActions("userStore", ["doLogout", "getInterestAreas"]),
+        ...mapActions("userStore", ["doLogout"]),
+        ...mapMutations("userStore", ["TOGGLE_MODAL"]),
         logout() {
             this.doLogout();
         },
@@ -51,8 +47,8 @@ export default {
         userDetailForm() {
             this.$router.push("/usermodifyform");
         },
-        ttest() {
-            this.getInterestAreas();
+        show() {
+            this.TOGGLE_MODAL();
         },
     },
 };

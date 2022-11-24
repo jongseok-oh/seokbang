@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import InterestListItem from "./InterestLIstItem.vue";
 
 export default {
@@ -27,24 +27,25 @@ export default {
     components: {
         InterestListItem,
     },
-    props: {
-        interestList: Array,
-    },
     data() {
         return {};
     },
     watch: {
-        interestList() {
-            console.log(this.guguns);
+        modalToggle() {
+            //console.log(this.guguns);
+            //console.log("show modal");
+            this.getInterestAreas();
             this.$bvModal.show("modal-1");
         },
     },
     computed: {
         ...mapState("houseStore", ["guguns"]),
+        ...mapState("userStore", ["interestList", "modalToggle"]),
     },
     methods: {
+        ...mapActions("userStore", ["getInterestAreas"]),
         modalClose() {
-            console.log("close!");
+            //console.log("close!");
             this.$bvModal.hide("modal-1");
         },
     },
