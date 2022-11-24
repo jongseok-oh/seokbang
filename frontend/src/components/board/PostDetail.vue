@@ -6,7 +6,7 @@
                 <b-col>
                     <b-card
                         :header-html="`<h3>${post.title}</h3>
-            <h6 class='float-end'>${post.postDate}</h6>`"
+            <h6 class='float-end'>${post.dateString}</h6>`"
                         class="mb-2"
                         border-variant="dark"
                         no-body

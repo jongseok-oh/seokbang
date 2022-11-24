@@ -17,4 +17,5 @@ public class RepleDTO {
 	private LocalDateTime repleDate;
 	
 	private String userName;
+	private String dateString;
 }

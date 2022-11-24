@@ -12,11 +12,10 @@
             >인기글</b-button
         >
         <hr />
-
         <b-table-simple v-if="rows == 0" striped hover bordered>
             <b-thead>
                 <b-tr>
-                    <b-th class="w70">제목</b-th>
+                    <b-th class="w60">제목</b-th>
                     <b-th>작성자</b-th>
                     <b-th>작성일</b-th>
                     <b-th>조회수</b-th>
@@ -95,14 +94,14 @@ export default {
                 {
                     key: "title",
                     label: "제목",
-                    tdClass: "w70",
+                    tdClass: "w65",
                 },
                 {
                     key: "userName",
                     label: "작성자",
                 },
                 {
-                    key: "postDate",
+                    key: "dateString",
                     label: "작성일",
                 },
                 {
@@ -167,8 +166,4 @@ export default {
 };
 </script>
 
-<style>
-.w70 {
-    width: 60%;
-}
-</style>
+<style></style>

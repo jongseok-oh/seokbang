@@ -71,7 +71,6 @@ public class UserController{
 			session.setAttribute("user", info);
 			log.info(session.toString());
 			log.info("login sucess " + info.toString());
-			info.setAdmin(null);
 			info.setPassword(null);
 			return ResponseEntity.ok(info);
 		}else

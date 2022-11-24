@@ -1,6 +1,8 @@
 package com.ssafy.controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.model.dto.PostDTO;
 import com.ssafy.model.dto.Reple;
 import com.ssafy.model.dto.RepleDTO;
 import com.ssafy.model.dto.UserInfo;
@@ -34,9 +37,6 @@ public class RepleController {
 	@Autowired
 	private RepleService repleService;
 
-	@Autowired
-	private RepleLikesService repleLikesService;
-	
 	@PostMapping
 	public ResponseEntity<?> registReple(@RequestBody Reple reple) {
 		reple.setRepleDate(LocalDateTime.now());
@@ -50,19 +50,23 @@ public class RepleController {
 	
 	@GetMapping("/{postNo}")
 	public ResponseEntity<?> getRepleListByPostNo(HttpSession session, @PathVariable Long postNo) {
-		List<Integer> likesCnt = repleLikesService.getRepleLikesCount(postNo);
 		List<RepleDTO> reples = repleService.getReples(postNo);
 		
-		Map<String, Long> params = new HashMap<>();
-		params.put("userNo", ((UserInfo)session.getAttribute("user")).getNo());
-		params.put("postNo", postNo);
-		List<Integer> isLiked = repleLikesService.getRepleIsLiked(params);
+		for(RepleDTO reple : reples) {
+			LocalDateTime date1 = LocalDateTime.now();
+			LocalDateTime date2 = reple.getRepleDate();
+			
+			LocalDateTime dayDate1 = date1.truncatedTo(ChronoUnit.DAYS);
+	        LocalDateTime dayDate2 = date2.truncatedTo(ChronoUnit.DAYS);
+	 
+	        int compareResult = dayDate1.compareTo(dayDate2);
+	        if(compareResult != 0)
+	        	reple.setDateString(date2.format(DateTimeFormatter.ofPattern("MM-dd")));
+	        else
+	        	reple.setDateString(date2.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+		}
 		
-		Map<String, Object> res = new HashMap<>();
-		res.put("reples", reples);
-		res.put("isLiked", isLiked);
-		res.put("likesCnt", likesCnt);
-		return ResponseEntity.ok(res);
+		return ResponseEntity.ok(reples);
 	}
 	
 	@GetMapping("/detail/{no}")
