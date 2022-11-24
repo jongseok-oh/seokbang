@@ -10,6 +10,10 @@ import LoginForm from '@/components/user/LoginForm.vue'
 import SignupForm from '@/components/user/SignupForm.vue'
 import PostModifyForm from '@/components/board/PostModifyForm.vue'
 import UserModifyForm from '@/components/user/ModifyForm.vue'
+import NoticeBoard from '@/components/notice/NoticeBoard.vue'
+import NoticeDetail from '@/components/notice/NoticeDetail.vue'
+import NoticeWriteForm from '@/components/notice/NoticeWriteForm.vue'
+import NoticeModifyForm from '@/components/notice/NoticeModifyForm.vue'
 import UserView from '@/views/UserView.vue'
 
 Vue.use(VueRouter)
@@ -48,7 +52,6 @@ const routes = [
       },
     ]
   },
-
   {
     path: '/board',
     name: 'board',
@@ -74,6 +77,26 @@ const routes = [
         path: '/postmodifyform',
         name: 'postmodifyform',
         component: PostModifyForm
+      },
+      {
+        path: '/notice',
+        name: 'notice',
+        component: NoticeBoard
+      },
+      {
+        path: '/noticedetail',
+        name: 'noticedetail',
+        component: NoticeDetail
+      },
+      {
+        path: '/noticewriteform',
+        name: 'noticewriteform',
+        component: NoticeWriteForm
+      },
+      {
+        path: '/noticemodifyform',
+        name: 'noticemodifyform',
+        component: NoticeModifyForm
       },
     ]
   }

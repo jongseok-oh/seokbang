@@ -9,6 +9,7 @@
       </div>
     </b-navbar-brand>
     <b-navbar-nav>
+      <b-nav-item @click="moveNotice">공지사항</b-nav-item>
       <b-nav-item to="/dealinfo">실거래가</b-nav-item>
       <b-nav-item-dropdown text="지역별 게시판" dropright >
         <template v-for="gugun in guguns">
@@ -24,8 +25,6 @@
 import { mapActions, mapMutations, mapState } from "vuex";
 import UserDropDown from "./UserDropDown.vue";
 
-const houseStore = "houseStore";
-
 export default {
   name: 'FrontendNavBar',
 
@@ -37,17 +36,21 @@ export default {
     };
   },
   computed:{
-    ...mapState(houseStore, ["guguns"])
+    ...mapState("houseStore", ["guguns"])
   },
   methods: {
-    ...mapActions(houseStore, ["getGugun"]),
+    ...mapActions("houseStore", ["getGugun"]),
     ...mapActions("boardStore", ["getPosts"]),
-    ...mapMutations(houseStore, ["CLEAR_GUGUN_LIST"]),
+    ...mapMutations("houseStore", ["CLEAR_GUGUN_LIST"]),
     ...mapMutations("boardStore", ["setGugunCode", "setGugunName"]),
-    async moveBoard(gugunCode, gugunName){
+    moveBoard(gugunCode, gugunName){
       this.setGugunCode(gugunCode);
       this.setGugunName(gugunName);
       this.$router.push({name : "postlist"});
+    },
+    moveNotice(){
+      this.setGugunCode('99');
+      this.$router.push({name : "notice"});
     }
   },
   mounted() {
