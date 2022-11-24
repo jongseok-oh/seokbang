@@ -1,6 +1,8 @@
 package com.ssafy.controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +55,19 @@ public class PostController {
 	@GetMapping("/{gugunCode}")
 	public ResponseEntity<?> getPostListByGugunCode(@PathVariable String gugunCode) {
 		List<PostDTO> posts = postService.getPosts(gugunCode);
+		for(PostDTO post : posts) {
+			LocalDateTime date1 = LocalDateTime.now();
+			LocalDateTime date2 = post.getPostDate();
+			
+			LocalDateTime dayDate1 = date1.truncatedTo(ChronoUnit.DAYS);
+	        LocalDateTime dayDate2 = date2.truncatedTo(ChronoUnit.DAYS);
+	 
+	        int compareResult = dayDate1.compareTo(dayDate2);
+	        if(compareResult != 0)
+	        	post.setDateString(date2.format(DateTimeFormatter.ofPattern("MM-dd")));
+	        else
+	        	post.setDateString(date2.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+		}
 		return ResponseEntity.ok(posts);
 	}
 	
@@ -60,13 +75,17 @@ public class PostController {
 	public ResponseEntity<?> getPostByPostNo(HttpSession session, @PathVariable Long no) {
 		Map<String, Object> res = new HashMap<>();
 		
-		res.put("post", postService.getPost(no));
+		PostDTO post = postService.getPost(no);
+		post.setDateString(post.getPostDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+		
+		res.put("post", post);
 		
 		PostLikes postLikes = new PostLikes();
 		postLikes.setUserNo(((UserInfo) session.getAttribute("user")).getNo());
 		postLikes.setPostNo(no);
 		res.put("isLiked", postLikesService.getPostLike(postLikes));
 		
+		log.info(res.get("post").toString());
 		return ResponseEntity.ok(res);
 	}
 	

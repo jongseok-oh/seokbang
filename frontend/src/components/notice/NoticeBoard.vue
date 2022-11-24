@@ -71,7 +71,7 @@ export default {
                 tdClass: 'w70',
               },
               {
-                key: 'postDate',
+                key: 'dateString',
                 label: '작성일',
               },
               {
@@ -128,7 +128,4 @@ export default {
 </script>
 
 <style>
-.w70 {
-  width: 60%;
-}
 </style>

@@ -2,13 +2,12 @@
   <div class="container">
     <h2 class="mx-3">공지사항</h2>
     <hr/>
-    <hr/>
     <b-container class="mt-3">
       <b-row class="mb-1">
         <b-col>
           <b-card
             :header-html="`<h3>${post.title}</h3>
-            <h6 class='float-end'>${post.postDate}</h6>`"
+            <h6 class='float-end'>${post.dateString}</h6>`"
             class="mb-2"
             border-variant="dark"
             no-body
@@ -46,7 +45,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-import RepleList from './RepleList.vue';
+import RepleList from '@/components/board/RepleList.vue';
 
 export default {
   components:{

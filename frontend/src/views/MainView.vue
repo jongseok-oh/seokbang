@@ -3,10 +3,10 @@
         <b-row class="bg-img">
             <b-container class="pt70">
                 <b-row>
-                    <h1 class="mb-3 text-white">Where is My Home</h1>
+                    <h1 class="mb-3">Where Is My Home</h1>
                 </b-row>
                 <b-row>
-                    <b-col md="6" offset-md="3">
+                    <b-col md="4" offset-md="4">
                         <house-search-bar></house-search-bar>
                     </b-col>
                 </b-row>
@@ -77,6 +77,8 @@
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
+
 .bg-img {
     height: 80vh;
     background-image: url("../assets/RaffinaJ_contents_1__01.webp");
@@ -85,6 +87,11 @@
 
 .pt70 {
     padding-top: 56vh;
+}
+
+h1 {
+  font-family: 'Hi Melody', cursive;
+  color: white;
 }
 </style>
 

@@ -20,5 +20,5 @@ public class PostDTO {
 	
 	private String userName;
 	private int likesCnt;
-	private boolean isLiked;
+	private String dateString;
 }

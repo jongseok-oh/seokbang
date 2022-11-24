@@ -17,4 +17,11 @@ export default {
   text-align: left;
   margin: 40px;
 }
+
+.w65 {
+  width: 65%;
+}
+.w70 {
+  width: 70%;
+}
 </style>

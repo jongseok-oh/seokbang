@@ -91,7 +91,9 @@ const boardStore = {
       });
     },
     getReples(context, payload) {
-      return restApi.get(`/api/reples/${payload}`);
+      return restApi.get(`/api/reples/${payload}`).then(({data}) => {
+        console.log(data);
+        return data;});
     },
     deleteReple(context, payload) {
       return restApi.delete(`/api/reples/${payload}`).then(() => {

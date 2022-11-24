@@ -13,22 +13,16 @@
                 <tr :key="reple.no" v-for="reple in reples">
                   <td class="w70">{{ reple.content }}</td>
                   <td>{{ reple.userName }}</td>
-                  <td>{{ reple.repleDate }}</td>
+                  <td>{{ reple.dateString }}</td>
                   <template v-if="reple.userNo == userinfo.no">
-                    <td><b-button variant="outline-primary" inline @click="modifyRepleBtn" size="sm">수정</b-button></td>
-                    <td><b-button variant="outline-danger" inline @click="deleteRepleBtn(reple.no)" size="sm">삭제</b-button></td>
+                    <td>
+                      <b-button variant="outline-primary mx-1" inline @click="modifyRepleBtn" size="sm">수정</b-button>
+                      <b-button variant="outline-danger mx-1" inline @click="deleteRepleBtn(reple.no)" size="sm">삭제</b-button>
+                    </td>
                   </template>
                   <template v-else>
                     <td></td>
-                    <td></td>
                   </template>
-                  <td>
-                    <b-button variant="outline-danger" size="sm">
-                      <b-icon-heart color="red" v-if="!reple.isLiked"></b-icon-heart>
-                      <b-icon-heart-fill color="red" v-else></b-icon-heart-fill>
-                      {{reple.likesCnt}}
-                    </b-button>
-                  </td>
                 </tr>
               </template>
             </tbody>
@@ -75,25 +69,7 @@ export default {
       this.init();
     },
     init(){
-      this.reples = [];
-      this.getReples(this.postNo).then((data) => {
-        let repleList = data.data.reples;
-        let isLikedList = data.data.isLiked;
-        let likesCntList = data.data.likesCnt;
-
-        for (let index = 0; index < repleList.length ; index++) {
-          const reple = {
-            no : repleList[index].no,
-            content : repleList[index].content,
-            userNo : repleList[index].userNo,
-            userName : repleList[index].userName,
-            repleDate : repleList[index].repleDate,
-            likesCnt : likesCntList[index],
-            isLiked : isLikedList[index] > 0 ? true : false
-          }
-          this.reples.push(reple);
-        }
-      });
+      this.getReples(this.postNo).then((data) => {this.reples = data;});
     },
     async deleteRepleBtn(no){
       await this.deleteReple(no);
@@ -105,7 +81,7 @@ export default {
   },
   created() {
     this.init();
-  },
+  }, 
 };
 </script>
 
