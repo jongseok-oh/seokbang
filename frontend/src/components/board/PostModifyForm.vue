@@ -15,18 +15,16 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 
-const boardStore = "boardStore";
-
 export default {
     data() {
         return {
         };
     },
   computed: {
-    ...mapState(boardStore, ["post"]),
+    ...mapState("boardStore", ["post"]),
   },
   methods: {
-    ...mapActions(boardStore,["modifyPost"]),
+    ...mapActions("boardStore",["modifyPost"]),
     async modifyPostBtn(){
       await this.modifyPost(this.post);
       this.$router.push({name : "postdetail"});

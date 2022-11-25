@@ -29,7 +29,7 @@ export default {
     },
     computed: {
         ...mapState("boardStore", ["gugunCode", "gugunName"]),
-        ...mapState("userStore", ["interestList"]),
+        ...mapState("userStore", ["interestList", "modalToggle"]),
     },
     created() {
         this.tempClicked = this.interestList.includes(this.gugunCode);
@@ -41,6 +41,9 @@ export default {
             this.tempClicked = this.interestList.includes(newval);
             this.firstState = this.tempClicked;
         },
+        modalToggle() {
+            this.applyInterest(this.gugunCode);
+        }
     },
     methods: {
         ...mapActions("userStore", ["doDeleteInterestArea", "doInsertInterestArea"]),
@@ -58,7 +61,8 @@ export default {
         },
     },
     beforeDestroy() {
-        this.applyInterest(this.gugunCode);
+        if(this.gugunCode != '99')
+            this.applyInterest(this.gugunCode);
     },
 };
 </script>

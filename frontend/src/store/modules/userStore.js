@@ -9,6 +9,7 @@ const userStore = {
   state: {
     userinfo: {},
     interestList: [],
+    modalToggle: 0
   },
   getters: {
     userNo(state) {
@@ -34,6 +35,9 @@ const userStore = {
     },
     INSERT_INTEREST(state, gugunCode) {
       state.interestList.push(gugunCode);
+    },
+    TOGGLE_MODAL(state) {
+      state.modalToggle ^= 1;
     },
   },
   actions: {
@@ -71,7 +75,7 @@ const userStore = {
     doModifyUser:({ commit, state }, userInfo) => {
       //console.log(payload);
       commit('SET_USER_INFO', userInfo);
-      console.log(state);
+      // console.log(state);
       modifyUser(
         state.userinfo,
         () => {

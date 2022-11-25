@@ -71,7 +71,6 @@ h1 {
 
 <script>
 import store from "@/store";
-import { mapActions, mapMutations } from "vuex";
 import NoticeCard from '@/components/notice/NoticeCard.vue';
 import HouseSearchBar from '@/components/house/HouseSearchBar.vue';
 
@@ -79,7 +78,6 @@ export default {
   components: { HouseSearchBar, NoticeCard },
     data() {
         return {
-            keyword: "",
         };
     },
     created() {

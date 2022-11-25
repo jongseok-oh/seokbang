@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.model.dao.InterestAreaDAO;
 import com.ssafy.model.dto.InterestArea;
 
+@Transactional
 @Service
 public class InterestAreaServiceImpl implements InterestAreaService {
 	
@@ -15,6 +17,7 @@ public class InterestAreaServiceImpl implements InterestAreaService {
 	private InterestAreaDAO interestAreaDAO;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<String> getUserAreaListByUserNo(Long userNo) {
 		return interestAreaDAO.getInterestAreaListByUserNo(userNo);
 	}

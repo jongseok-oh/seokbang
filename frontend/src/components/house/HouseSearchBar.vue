@@ -37,11 +37,11 @@ export default {
             if (
                 !(await this.getHouseDealListByKeyword(this.keyword)
                     .then(() => {
-                        console.log("프로미스 나인! ㅋㅋ 덴");
+                        // console.log("프로미스 나인! ㅋㅋ 덴");
                         return true;
                     })
                     .catch(() => {
-                        console.log("프로미스 나인! ㅋㅋ 캐치");
+                        // console.log("프로미스 나인! ㅋㅋ 캐치");
                         return false;
                     }))
             )

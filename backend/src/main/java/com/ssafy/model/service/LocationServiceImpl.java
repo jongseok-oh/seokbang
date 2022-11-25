@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.model.dao.BaseAddressDAO;
 import com.ssafy.model.dao.GugunAddressDAO;
 import com.ssafy.model.dao.GugunCodeDAO;
 import com.ssafy.model.dao.SidoCodeDAO;
@@ -15,9 +14,6 @@ import com.ssafy.model.dto.SidoCode;
 
 @Service
 public class LocationServiceImpl implements LocationService {
-	
-	@Autowired
-	private BaseAddressDAO baseAddressDAO;
 	
 	@Autowired
 	private SidoCodeDAO sidoCodeDAO;

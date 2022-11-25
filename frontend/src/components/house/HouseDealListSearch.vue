@@ -11,7 +11,6 @@
 import { mapState, mapMutations } from "vuex";
 import HouseDealListItemSearch from "@/components/house/HouseDealListItemSearch.vue";
 
-const houseStore = "houseStore";
 export default {
     name: "FrontendHouseDealListSearch",
     components: {
@@ -21,11 +20,11 @@ export default {
         return {};
     },
     computed: {
-        ...mapState(houseStore, ["searchkey", "deals"]),
+        ...mapState("houseStore", ["searchkey", "deals"]),
     },
     mounted() {},
     methods: {
-        ...mapMutations(houseStore, ["CLEAR_DEAL_HOUSE_LIST"]),
+        ...mapMutations("houseStore", ["CLEAR_DEAL_HOUSE_LIST"]),
     },
     destroyed() {
         //alert("이잏 파괘");

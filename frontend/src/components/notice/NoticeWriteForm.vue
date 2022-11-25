@@ -4,7 +4,7 @@
     <b-form-textarea
       class="m-1"
       v-model="post.content"
-      placeholder="내용"
+      placeholder="내용을 입력해주세요."
       rows="20"
       no-resize
       ></b-form-textarea>

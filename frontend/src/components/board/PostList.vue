@@ -76,8 +76,6 @@
 import { mapState, mapActions, mapMutations } from "vuex";
 import PostBanner from "@/components/board/PostBanner.vue";
 
-const boardStore = "boardStore";
-
 export default {
     components: {
         PostBanner,
@@ -132,13 +130,13 @@ export default {
             //console.log("구군코드 와치");
             await this.getPosts(this.gugunCode);
             this.allPosts();
-            console.log(this.gugunCode);
-            console.log(this.interestList);
+            // console.log(this.gugunCode);
+            // console.log(this.interestList);
         },
     },
     methods: {
         ...mapMutations("boardStore", ["setPostNo"]),
-        ...mapActions(boardStore, ["getPosts", "hit"]),
+        ...mapActions("boardStore", ["getPosts", "hit"]),
         async movePostDetail(post) {
             await this.hit(post.no);
             await this.setPostNo(post.no);
@@ -155,7 +153,7 @@ export default {
         popularPosts() {
             this.allToggle = false;
             this.popularToggle = true;
-            this.postList = this.posts.filter((post) => post.likesCnt >= 2);
+            this.postList = this.posts.filter((post) => post.likesCnt >= 3);
         },
         interestBtn() {},
     },

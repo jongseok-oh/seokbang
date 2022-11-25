@@ -176,14 +176,14 @@ export default {
     ...mapState('userStore', ['userinfo'])
   },
   created() {
-    console.log("created!");
+    // console.log("created!");
     this.birthDay.year = this.userinfo.birthYear;
     this.birthDay.month = this.userinfo.birthMonth;
     this.birthDay.day = this.userinfo.birthDay;
     this.form.userId = this.userinfo.userId;
     this.form.userName = this.userinfo.userName;
     this.form.gender = this.userinfo.gender;
-    console.log("create finish!");
+    // console.log("create finish!");
   },
   watch: {
     "form.userName": function () {

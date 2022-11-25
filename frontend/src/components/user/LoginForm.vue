@@ -26,8 +26,6 @@
 <script>
 import { mapActions } from "vuex";
 
-const userStore = "userStore";
-
 export default {
     name: 'FrontendLoginForm',
 
@@ -38,7 +36,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(userStore, ["doLogin"]),
+        ...mapActions("userStore", ["doLogin"]),
         login() {
             let payload = {
                 userId: this.ID,

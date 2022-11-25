@@ -2,7 +2,6 @@ package com.ssafy.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -18,6 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginIntercepter).addPathPatterns("/api/**")
 		.excludePathPatterns("/api/users/**").excludePathPatterns("/api/times/**")
-		.excludePathPatterns("/api/locations/guguncode");
+		.excludePathPatterns("/api/locations/guguncode")
+		.excludePathPatterns("/api/posts/notices");
 	}
 }

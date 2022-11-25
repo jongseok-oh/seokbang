@@ -37,8 +37,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
 
-const boardStore = "boardStore";
-
 export default {
     data() {
         return {
@@ -51,7 +49,7 @@ export default {
     ...mapState("userStore", ["userinfo"]),
   },
   methods: {
-    ...mapActions(boardStore, ["getReples", "registReple", "deleteReple"]),
+    ...mapActions("boardStore", ["getReples", "registReple", "deleteReple"]),
     async writeReple(){
       await this.registReple({
         postNo : this.postNo,

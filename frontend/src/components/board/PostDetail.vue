@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapState, mapActions } from "vuex";
 import RepleList from "./RepleList.vue";
 import PostBanner from "@/components/board/PostBanner.vue";
 
@@ -103,9 +103,6 @@ export default {
                 this.isLiked = true;
             }
         },
-        interestBtn() {
-            console.log(this.postNo);
-        },
         async init() {
             await this.getPost(this.postNo);
             this.likesCnt = this.post.likesCnt;
@@ -113,13 +110,13 @@ export default {
         },
     },
     async beforeDestroy() {
-        console.log("destroy!!");
+        // console.log("destroy!!");
         if (this.isLiked && !this.post.isLiked) {
             await this.likePost(this.postNo);
         } else if (!this.isLiked && this.post.isLiked) {
             await this.unlikePost(this.postNo);
         }
-        console.log("destroy end!!");
+        // console.log("destroy end!!");
     },
     mounted() {
         this.init();
