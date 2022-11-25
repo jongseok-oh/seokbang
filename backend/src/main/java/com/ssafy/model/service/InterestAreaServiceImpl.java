@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.model.dao.InterestAreaDAO;
 import com.ssafy.model.dto.InterestArea;
 
-@Transactional
+@Transactional(isolation = Isolation.SERIALIZABLE)
 @Service
 public class InterestAreaServiceImpl implements InterestAreaService {
 	

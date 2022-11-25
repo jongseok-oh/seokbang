@@ -11,7 +11,7 @@ import com.ssafy.model.dao.PostDAO;
 import com.ssafy.model.dto.Post;
 import com.ssafy.model.dto.PostDTO;
 
-@Transactional
+@Transactional(isolation = Isolation.SERIALIZABLE)
 @Service
 public class PostServiceImpl implements PostService {
 	
@@ -24,7 +24,6 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public List<PostDTO> getPosts(String gugunCode) {
 		return postDao.getPosts(gugunCode);
 	}

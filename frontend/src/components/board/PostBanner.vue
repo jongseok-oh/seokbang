@@ -41,8 +41,10 @@ export default {
             this.tempClicked = this.interestList.includes(newval);
             this.firstState = this.tempClicked;
         },
-        modalToggle() {
-            this.applyInterest(this.gugunCode);
+        async modalToggle() {
+            console.log(this.firstState);
+            console.log(this.tempClicked);
+            await this.applyInterest(this.gugunCode);
         }
     },
     methods: {
@@ -57,6 +59,7 @@ export default {
                 } else {
                     this.doInsertInterestArea(val);
                 }
+                this.firstState = this.tempClicked;
             }
         },
     },

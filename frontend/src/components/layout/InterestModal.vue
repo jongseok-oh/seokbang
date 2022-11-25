@@ -31,10 +31,10 @@ export default {
         return {};
     },
     watch: {
-        modalToggle() {
+        async modalToggle() {
             //console.log(this.guguns);
             //console.log("show modal");
-            this.getInterestAreas();
+            await this.getInterestAreas();
             this.$bvModal.show("modal-1");
         },
     },

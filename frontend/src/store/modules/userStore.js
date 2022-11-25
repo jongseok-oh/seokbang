@@ -34,6 +34,8 @@ const userStore = {
       if (idx > -1) state.interestList.splice(idx, 1);
     },
     INSERT_INTEREST(state, gugunCode) {
+      if(state.interestList.length == 0)
+        state.interestList = [];
       state.interestList.push(gugunCode);
     },
     TOGGLE_MODAL(state) {

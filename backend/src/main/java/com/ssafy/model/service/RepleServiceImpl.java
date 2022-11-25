@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.model.dao.RepleDAO;
 import com.ssafy.model.dto.Reple;
 import com.ssafy.model.dto.RepleDTO;
 
-@Transactional
+@Transactional(isolation = Isolation.SERIALIZABLE)
 @Service
 public class RepleServiceImpl implements RepleService {
 	
