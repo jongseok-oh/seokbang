@@ -7,6 +7,10 @@
 		select * from gugunaddress where gugunCode=#{gugunCode}
 	</select>
 	
+	<select id="getGugunAddressAll" resultType="GugunAddress">
+		select * from gugunaddress;
+	</select>
+	
 </mapper>
 
 

@@ -9,4 +9,5 @@ import com.ssafy.model.dto.GugunCode;
 @Mapper
 public interface GugunCodeDAO {
 	public List<GugunCode> readAllBySidoCode(String sidoCodeSub);
+	List<GugunCode> getGugunCodeAll();
 }

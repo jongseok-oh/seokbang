@@ -24,8 +24,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/interests")
 @RestController
 public class InterestAreaController{
-	@Autowired
+	
 	private InterestAreaServiceImpl areaService;
+	
+	public InterestAreaController(InterestAreaServiceImpl areaService) {
+		this.areaService = areaService; 
+	}
+	
 	
 	@DeleteMapping("/{gugunCode}")
 	private ResponseEntity<?> removeInterest(HttpSession session, @PathVariable String gugunCode){

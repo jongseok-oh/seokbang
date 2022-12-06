@@ -5,4 +5,8 @@
 	<select id="readAllBySidoCode" resultType="GugunCode" parameterType = "String">
 		select * from guguncode where gugunCode like concat(#{sidoCodeSub}, '%')
 	</select>
+	
+	<select id="getGugunCodeAll" resultType="GugunCode">
+		select * from guguncode
+	</select>
 </mapper>

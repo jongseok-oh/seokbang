@@ -12,7 +12,7 @@ import com.ssafy.model.dto.GugunAddress;
 import com.ssafy.model.dto.GugunCode;
 import com.ssafy.model.dto.SidoCode;
 
-@Service
+//@Service
 public class LocationServiceImpl implements LocationService {
 	
 	@Autowired
